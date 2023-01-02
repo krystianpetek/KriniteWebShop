@@ -1,6 +1,7 @@
 ﻿using KriniteWebShop.Catalog.API.Data.SqlContext;
 using KriniteWebShop.Catalog.API.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace KriniteWebShop.Catalog.API.Repositories;
 
@@ -23,10 +24,9 @@ public class ProductRepository : IProductRepository
         return await _productDbContext.Products.ToListAsync();
     }
 
-    public async Task<IReadOnlyCollection<Product>> GetProductsWithFilter(Func<Product, bool> filter)
+    public async Task<IReadOnlyCollection<Product>> GetProductsWithFilter(Expression<Func<Product, bool>> filter)
     {
-        IQueryable<Product> query = _productDbContext.Products.Where(filter).AsQueryable();
-        return await query.ToListAsync();
+        return await _productDbContext.Products.Where(filter).ToListAsync();
     }
 
     public async Task CreateProduct(Product product)
