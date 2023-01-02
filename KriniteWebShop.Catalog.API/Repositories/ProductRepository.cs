@@ -18,18 +18,15 @@ public class ProductRepository : IProductRepository
         return await _productDbContext.Products.FirstOrDefaultAsync(product => product.Id == id);
     }
 
-    public IAsyncEnumerable<Product> GetProducts()
+    public async Task<IReadOnlyCollection<Product>> GetProducts()
     {
-        return _productDbContext.Products.AsAsyncEnumerable();
-    }
-    public IAsyncEnumerable<Product> GetProductsByName(string name)
-    {
-        return _productDbContext.Products.Where(product => product.Category == name).AsAsyncEnumerable();
+        return await _productDbContext.Products.ToListAsync();
     }
 
-    public IAsyncEnumerable<Product> GetProductsByCategory(string categoryName)
+    public async Task<IReadOnlyCollection<Product>> GetProductsWithFilter(Func<Product, bool> filter)
     {
-        return _productDbContext.Products.Where(product => product.Category == categoryName).AsAsyncEnumerable();
+        IQueryable<Product> query = _productDbContext.Products.Where(filter).AsQueryable();
+        return await query.ToListAsync();
     }
 
     public async Task CreateProduct(Product product)
