@@ -1,7 +1,9 @@
+using KriniteWebShop.Catalog.API.Data.SqlContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace KriniteWebShop.Catalog.API;
 
-public class Program
+public static class Program
 {
     public static void Main(string[] args)
     {
@@ -13,6 +15,13 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddDbContext<ProductDbContext>(
+            (DbContextOptionsBuilder context) =>
+            {
+                var connectionString = builder.Configuration.GetConnectionString("ProductsConnection");
+                context.UseSqlServer(connectionString);
+            });
 
         var app = builder.Build();
 
@@ -27,8 +36,9 @@ public class Program
 
         app.UseAuthorization();
 
-
         app.MapControllers();
+
+        app.SeedData();
 
         app.Run();
     }
