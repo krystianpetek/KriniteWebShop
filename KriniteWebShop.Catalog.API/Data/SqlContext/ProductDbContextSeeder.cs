@@ -83,3 +83,4 @@ public static class ProductDbContextSeeder
             context.SaveChanges();
         }
     }
+}
