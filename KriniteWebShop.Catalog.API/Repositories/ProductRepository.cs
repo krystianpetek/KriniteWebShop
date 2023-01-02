@@ -14,7 +14,7 @@ public class ProductRepository : IProductRepository
         _productDbContext = productDbContext ?? throw new ArgumentNullException(nameof(productDbContext));
     }
 
-    public async Task<Product?> GetProduct(Guid id)
+    public async Task<Product?> GetProductById(Guid id)
     {
         return await _productDbContext.Products.FirstOrDefaultAsync(product => product.Id == id);
     }
