@@ -1,4 +1,5 @@
 using KriniteWebShop.Catalog.API.Data.SqlContext;
+using KriniteWebShop.Catalog.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace KriniteWebShop.Catalog.API;
@@ -17,11 +18,13 @@ public static class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddDbContext<ProductDbContext>(
-            (DbContextOptionsBuilder context) =>
+            (DbContextOptionsBuilder options) =>
             {
                 var connectionString = builder.Configuration.GetConnectionString("ProductsConnection");
-                context.UseSqlServer(connectionString);
+                options.UseSqlServer(connectionString);
             });
+
+        builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
         var app = builder.Build();
 
