@@ -13,10 +13,7 @@ public static class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
-
         builder.Services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen((swagger) =>
         {
@@ -24,7 +21,7 @@ public static class Program
                 name: "v1",
                 info: new OpenApiInfo
                 {
-                    Title = "Catalog.API",
+                    Title = "ProductCatalog.API",
                     Version = "v1"
                 });
         });
@@ -50,7 +47,7 @@ public static class Program
             {
                 swaggerUi.SwaggerEndpoint(
                     url: "/swagger/v1/swagger.json",
-                    name: "Product.API v1");
+                    name: "ProductCatalog.API v1");
             });
         }
 
