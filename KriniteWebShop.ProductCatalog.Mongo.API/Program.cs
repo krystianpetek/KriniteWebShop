@@ -1,3 +1,5 @@
+using KriniteWebShop.ProductCatalog.Mongo.API.Data;
+using KriniteWebShop.ProductCatalog.Mongo.API.Repositories;
 using Microsoft.OpenApi.Models;
 
 namespace KriniteWebShop.ProductCatalog.Mongo.API;
@@ -21,6 +23,10 @@ public static class Program
                 });
         });
 
+        builder.Services.AddScoped<IProductDbContext, ProductDbContext>();
+        builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+        builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
         var app = builder.Build();
 
         if (app.Environment.IsDevelopment())
@@ -39,6 +45,8 @@ public static class Program
         app.UseAuthorization();
 
         app.MapControllers();
+
+        app.SeedData();
 
         app.Run();
     }

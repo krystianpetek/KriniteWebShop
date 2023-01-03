@@ -1,12 +1,11 @@
 ﻿using KriniteWebShop.ProductCatalog.Mongo.API.Entities;
 using MongoDB.Bson.Serialization.Attributes;
-using System.Text.Json.Serialization;
 
 namespace KriniteWebShop.ProductCatalog.Mongo.API.Entities;
 
 public class RestProduct : IProduct<string>
 {
-    [JsonIgnore]
+    [BsonIgnore]
     public string Id { get; set; }
 
     [BsonElement("Name")]
