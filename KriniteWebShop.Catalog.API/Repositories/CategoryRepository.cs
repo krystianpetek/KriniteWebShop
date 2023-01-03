@@ -1,7 +1,7 @@
-﻿using KriniteWebShop.Catalog.API.Data.SqlContext;
+﻿using KriniteWebShop.ProductCatalog.API.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace KriniteWebShop.Catalog.API.Repositories;
+namespace KriniteWebShop.ProductCatalog.API.Repositories;
 
 public class CategoryRepository : ICategoryRepository
 {

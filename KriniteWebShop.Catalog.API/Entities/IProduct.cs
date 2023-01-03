@@ -1,8 +1,8 @@
 ﻿namespace KriniteWebShop.ProductCatalog.API.Entities;
 
-public class Product : IProduct<Guid>
+public interface IProduct<T>
 {
-    public Guid Id { get; set; }
+    public T Id { get; set; }
 
     public string Name { get; set; }
 

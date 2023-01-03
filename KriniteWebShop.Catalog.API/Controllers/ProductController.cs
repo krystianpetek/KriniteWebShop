@@ -1,9 +1,9 @@
-﻿using KriniteWebShop.Catalog.API.Entities;
-using KriniteWebShop.Catalog.API.Repositories;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using KriniteWebShop.ProductCatalog.API.Entities;
+using KriniteWebShop.ProductCatalog.API.Repositories;
 
-namespace KriniteWebShop.Catalog.API.Controllers;
+namespace KriniteWebShop.ProductCatalog.API.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
@@ -62,9 +62,9 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
-    [Consumes(typeof(PostProduct), "application/json")]
+    [Consumes(typeof(RestProduct), "application/json")]
     [ProducesResponseType(typeof(Product), StatusCodes.Status201Created)]
-    public async Task<ActionResult<Product>> CreateProduct(PostProduct createProduct)
+    public async Task<ActionResult<Product>> CreateProduct(RestProduct createProduct)
     {
         Product product = createProduct.ToProduct();
         await _productRepository.CreateProduct(product);

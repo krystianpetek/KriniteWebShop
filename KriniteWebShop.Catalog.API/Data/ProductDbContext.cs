@@ -1,7 +1,7 @@
-﻿using KriniteWebShop.Catalog.API.Entities;
+﻿using KriniteWebShop.ProductCatalog.API.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace KriniteWebShop.Catalog.API.Data.SqlContext;
+namespace KriniteWebShop.ProductCatalog.API.Data;
 
 public class ProductDbContext : DbContext
 {

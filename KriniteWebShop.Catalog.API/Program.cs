@@ -1,8 +1,11 @@
-using KriniteWebShop.Catalog.API.Data.SqlContext;
-using KriniteWebShop.Catalog.API.Repositories;
+using KriniteWebShop.ProductCatalog.API.Data;
+using KriniteWebShop.ProductCatalog.API.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace KriniteWebShop.Catalog.API;
+namespace KriniteWebShop.ProductCatalog.API;
 
 public static class Program
 {
@@ -15,10 +18,19 @@ public static class Program
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen((swagger) =>
+        {
+            swagger.SwaggerDoc(
+                name: "v1",
+                info: new OpenApiInfo
+                {
+                    Title = "Catalog.API",
+                    Version = "v1"
+                });
+        });
 
         builder.Services.AddDbContext<ProductDbContext>(
-            (DbContextOptionsBuilder options) =>
+            (options) =>
             {
                 var connectionString = builder.Configuration.GetConnectionString("ProductsConnection");
                 options.UseSqlServer(connectionString);
@@ -34,7 +46,12 @@ public static class Program
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI((swaggerUi) =>
+            {
+                swaggerUi.SwaggerEndpoint(
+                    url: "/swagger/v1/swagger.json",
+                    name: "Product.API v1");
+            });
         }
 
         app.UseHttpsRedirection();

@@ -1,4 +1,4 @@
-﻿namespace KriniteWebShop.Catalog.API.Repositories;
+﻿namespace KriniteWebShop.ProductCatalog.API.Repositories;
 
 public interface ICategoryRepository
 {

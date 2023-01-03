@@ -1,9 +1,9 @@
-﻿using KriniteWebShop.Catalog.API.Data.SqlContext;
-using KriniteWebShop.Catalog.API.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using KriniteWebShop.ProductCatalog.API.Entities;
+using KriniteWebShop.ProductCatalog.API.Data;
 
-namespace KriniteWebShop.Catalog.API.Repositories;
+namespace KriniteWebShop.ProductCatalog.API.Repositories;
 
 public class ProductRepository : IProductRepository
 {

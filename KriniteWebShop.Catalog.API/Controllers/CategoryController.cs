@@ -1,8 +1,7 @@
-﻿using KriniteWebShop.Catalog.API.Data.SqlContext;
-using KriniteWebShop.Catalog.API.Repositories;
+﻿using KriniteWebShop.ProductCatalog.API.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KriniteWebShop.Catalog.API.Controllers;
+namespace KriniteWebShop.ProductCatalog.API.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
