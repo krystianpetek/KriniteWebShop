@@ -21,10 +21,10 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(IReadOnlyCollection<Product>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<IReadOnlyCollection<Product>>> GetProducts()
+    [ProducesResponseType(typeof(IEnumerable<Product>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
     {
-        IReadOnlyCollection<Product> products = await _productRepository.GetProducts();
+        IEnumerable<Product> products = await _productRepository.GetProducts();
         return Ok(products);
     }
 
@@ -45,19 +45,19 @@ public class ProductController : ControllerBase
 
     [HttpGet(template: "[action]/{name}", Name = "GetProductByName")]
     [Consumes(typeof(string), "application/json")]
-    [ProducesResponseType(typeof(IReadOnlyCollection<Product>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<IReadOnlyCollection<Product>>> GetProductByName(string name)
+    [ProducesResponseType(typeof(IEnumerable<Product>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<Product>>> GetProductByName(string name)
     {
-        IReadOnlyCollection<Product> products = await _productRepository.GetProductsWithFilter(product => product.Name.Contains(name));
+        IEnumerable<Product> products = await _productRepository.GetProductsWithFilter(product => product.Name.Contains(name));
         return Ok(products);
     }
 
     [HttpGet(template: "[action]/{category}", Name = "GetProductByCategory")]
     [Consumes(typeof(string), "application/json")]
-    [ProducesResponseType(typeof(IReadOnlyCollection<Product>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<IReadOnlyCollection<Product>>> GetProductByCategory(string category)
+    [ProducesResponseType(typeof(IEnumerable<Product>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<Product>>> GetProductByCategory(string category)
     {
-        IReadOnlyCollection<Product> products = await _productRepository.GetProductsWithFilter(product => product.Category.Contains(category));
+        IEnumerable<Product> products = await _productRepository.GetProductsWithFilter(product => product.Category.Contains(category));
         return Ok(products);
     }
 

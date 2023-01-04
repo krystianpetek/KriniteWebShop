@@ -12,9 +12,9 @@ public class CategoryRepository : ICategoryRepository
         _productDbContext = productDbContext ?? throw new ArgumentNullException(nameof(productDbContext));
     }
 
-    public async Task<IReadOnlyCollection<string>> GetCategories()
+    public async Task<IEnumerable<string>> GetCategories()
     {
-        IReadOnlyCollection<string> categories = await _productDbContext.Products.Select(product => product.Category).Distinct().ToListAsync();
+        IEnumerable<string> categories = await _productDbContext.Products.AsNoTracking().Select(product => product.Category).Distinct().ToListAsync();
         return categories;
     }
 }

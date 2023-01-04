@@ -15,7 +15,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IReadOnlyCollection<string>> GetCategories()
+    public async Task<IEnumerable<string>> GetCategories()
     {
         return await _categoryRepository.GetCategories();
     }

@@ -2,5 +2,5 @@
 
 public interface ICategoryRepository
 {
-    Task<IReadOnlyCollection<string>> GetCategories();
+    Task<IEnumerable<string>> GetCategories();
 }

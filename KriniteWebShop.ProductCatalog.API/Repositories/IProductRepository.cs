@@ -6,8 +6,8 @@ namespace KriniteWebShop.ProductCatalog.API.Repositories;
 public interface IProductRepository
 {
     Task<Product> GetProductById(Guid id);
-    Task<IReadOnlyCollection<Product>> GetProducts();
-    Task<IReadOnlyCollection<Product>> GetProductsWithFilter(Expression<Func<Product, bool>> filter);
+    Task<IEnumerable<Product>> GetProducts();
+    Task<IEnumerable<Product>> GetProductsWithFilter(Expression<Func<Product, bool>> filter);
 
     Task CreateProduct(Product product);
     Task<bool> UpdateProduct(Product product);

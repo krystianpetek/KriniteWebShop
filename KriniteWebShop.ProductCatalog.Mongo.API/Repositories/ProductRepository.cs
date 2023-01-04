@@ -19,12 +19,12 @@ public class ProductRepository : IProductRepository
         return await _productDbContext.Products.Find(product => product.Id == id).FirstOrDefaultAsync();
     }
 
-    public async Task<IReadOnlyCollection<Product>> GetProducts()
+    public async Task<IEnumerable<Product>> GetProducts()
     {
         return await _productDbContext.Products.Find(product => true).ToListAsync();
     }
 
-    public async Task<IReadOnlyCollection<Product>> GetProductsWithFilter(Expression<Func<Product, bool>> filter)
+    public async Task<IEnumerable<Product>> GetProductsWithFilter(Expression<Func<Product, bool>> filter)
     {
         return await _productDbContext.Products.Find(filter).ToListAsync();
 

@@ -16,17 +16,17 @@ public class ProductRepository : IProductRepository
 
     public async Task<Product?> GetProductById(Guid id)
     {
-        return await _productDbContext.Products.FirstOrDefaultAsync(product => product.Id == id);
+        return await _productDbContext.Products.AsNoTracking().FirstOrDefaultAsync(product => product.Id == id);
     }
 
-    public async Task<IReadOnlyCollection<Product>> GetProducts()
+    public async Task<IEnumerable<Product>> GetProducts()
     {
-        return await _productDbContext.Products.ToListAsync();
+        return await _productDbContext.Products.AsNoTracking().ToListAsync();
     }
 
-    public async Task<IReadOnlyCollection<Product>> GetProductsWithFilter(Expression<Func<Product, bool>> filter)
+    public async Task<IEnumerable<Product>> GetProductsWithFilter(Expression<Func<Product, bool>> filter)
     {
-        return await _productDbContext.Products.Where(filter).ToListAsync();
+        return await _productDbContext.Products.Where(filter).AsNoTracking().ToListAsync();
     }
 
     public async Task CreateProduct(Product product)
