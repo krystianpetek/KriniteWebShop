@@ -2,7 +2,7 @@ KriniteWebShop.ProductCatalog.API
 
 docker pull mcr.microsoft.com/mssql/server
 
-docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=NotAll0wedForPublic" -p 8720:1433 -d --name webshop-catalog-sql mcr.microsoft.com/mssql/server:latest
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=NotAll0wedForPublic" -p 8720:1433 -d --name webshop-productcatalog-sql mcr.microsoft.com/mssql/server:latest
 
 dotnet ef migrations add Initial
 
@@ -11,7 +11,7 @@ dotnet ef migrations add Initial
 KriniteWebShop.ProductCatalog.Mongo.API
 
 docker pull mongo
-docker run -d -p 27001:27017 --name webshop-catalog-mongo mongo
+docker run -d -p 27001:27017 --name webshop-productcatalog-mongo mongo
 docker exec -it webshop-catalog-mongo /bin/bash
 
 	mongosh
@@ -80,3 +80,16 @@ docker exec -it webshop-catalog-mongo /bin/bash
     show databases
     show collections
     db.Products.remove({}) # remove all records
+
+
+
+KriniteWebShop.ProductCart.API
+
+docker pull redis
+docker run -d -p 6301:6379 --name webshop-productcart-redis redis
+docker exec -it webshop-productcart-redis /bin/bash
+
+    redis-cli
+    set name Krystian
+    get name
+
