@@ -11,7 +11,7 @@ public class ShoppingCart
             decimal totalPrice = 0;
             foreach (ShoppingCartItem item in Items)
             {
-                totalPrice += item.Price;
+                totalPrice += item.Price * item.Quantity;
             }
             return totalPrice;
         }
