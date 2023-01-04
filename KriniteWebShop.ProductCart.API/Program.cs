@@ -1,4 +1,3 @@
-
 using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.OpenApi.Models;
 
