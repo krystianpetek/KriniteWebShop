@@ -19,7 +19,7 @@ public static class ProductDbContextSeeder
                         Name = "Kayak",
                         Description = "A boat for one person",
                         Category = "Watersports",
-                        Price = 275
+                        Price = 275.00m
                     },
                     new Product
                     {
@@ -47,14 +47,14 @@ public static class ProductDbContextSeeder
                         Name = "Stadium",
                         Description = "Flat-packed 35,000-seat stadium",
                         Category = "Soccer",
-                        Price = 79500
+                        Price = 79500.00m
                     },
                     new Product
                     {
                         Name = "Thinking Cap",
                         Description = "Improve brain efficiency by 75%",
                         Category = "Chess",
-                        Price = 16
+                        Price = 16.00m
                     },
                     new Product
                     {
@@ -68,14 +68,14 @@ public static class ProductDbContextSeeder
                         Name = "Human Chess Board",
                         Description = "A fun game for the family",
                         Category = "Chess",
-                        Price = 75
+                        Price = 75.00m
                     },
                     new Product
                     {
                         Name = "Bling-Bling King",
                         Description = "Gold-plated, diamond-studded King",
                         Category = "Chess",
-                        Price = 1200
+                        Price = 1200.00m
                     }
                 });
         }

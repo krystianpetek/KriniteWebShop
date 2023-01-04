@@ -47,7 +47,7 @@ public class ProductController : ControllerBase
     [ProducesResponseType(typeof(IReadOnlyCollection<Product>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IReadOnlyCollection<Product>>> GetProductByName(string name)
     {
-        IReadOnlyCollection<Product> products = await _productRepository.GetProductsWithFilter(product => product.Name == name);
+        IReadOnlyCollection<Product> products = await _productRepository.GetProductsWithFilter(product => product.Name.Contains(name));
         return Ok(products);
     }
 
@@ -56,7 +56,7 @@ public class ProductController : ControllerBase
     [ProducesResponseType(typeof(IReadOnlyCollection<Product>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IReadOnlyCollection<Product>>> GetProductByCategory(string category)
     {
-        IReadOnlyCollection<Product> products = await _productRepository.GetProductsWithFilter(product => product.Category == category);
+        IReadOnlyCollection<Product> products = await _productRepository.GetProductsWithFilter(product => product.Category.Contains(category));
         return Ok(products);
     }
 
