@@ -15,7 +15,7 @@ public class CartRepository : ICartRepository
     public async Task<ShoppingCart> GetCart(string userName)
     {
         var cache = await _distributedCache.GetStringAsync(userName);
-        if (string.IsNullOrWhiteSpace(userName))
+        if (string.IsNullOrWhiteSpace(cache))
             return default;
 
         return JsonSerializer.Deserialize<ShoppingCart>(cache);

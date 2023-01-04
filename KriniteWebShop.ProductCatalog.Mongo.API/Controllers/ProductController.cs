@@ -28,7 +28,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet(template: "{id}")]
-    [Consumes(typeof(Guid), "application/json")]
+    [Consumes(typeof(string), "application/json")]
     [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Product>> GetProductById(string id)
@@ -81,7 +81,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Consumes(typeof(Guid), "application/json")]
+    [Consumes(typeof(string), "application/json")]
     [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
     public async Task<IActionResult> DeleteProduct(string id)
     {

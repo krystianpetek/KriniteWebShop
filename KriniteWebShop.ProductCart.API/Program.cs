@@ -1,3 +1,4 @@
+using KriniteWebShop.ProductCart.API.Repositories;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.OpenApi.Models;
 
@@ -21,6 +22,8 @@ public class Program
                     Version = "v1"
                 });
         });
+
+        builder.Services.AddScoped<ICartRepository, CartRepository>();
         builder.Services.AddStackExchangeRedisCache((RedisCacheOptions redis) =>
         {
             string connectionString = builder.Configuration?.GetRequiredSection("CacheSettings")?.GetValue<string>("ConnectionString");
