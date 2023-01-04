@@ -1,7 +1,7 @@
-﻿using KriniteWebShop.ProductCatalog.Mongo.API.Repositories;
+﻿using KriniteWebShop.ProductCatalog.NoSQL.API.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KriniteWebShop.ProductCatalog.Mongo.API.Controllers;
+namespace KriniteWebShop.ProductCatalog.NoSQL.API.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]

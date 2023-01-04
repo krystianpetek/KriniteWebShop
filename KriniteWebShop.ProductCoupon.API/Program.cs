@@ -1,10 +1,8 @@
-using KriniteWebShop.ProductCatalog.Mongo.API.Data;
-using KriniteWebShop.ProductCatalog.Mongo.API.Repositories;
 using Microsoft.OpenApi.Models;
 
-namespace KriniteWebShop.ProductCatalog.Mongo.API;
+namespace KriniteWebShop.ProductCoupon.API;
 
-public static class Program
+public class Program
 {
     public static void Main(string[] args)
     {
@@ -18,14 +16,10 @@ public static class Program
                 name: "v1",
                 info: new OpenApiInfo
                 {
-                    Title = "ProductCatalog.Mongo.API",
+                    Title = "ProductCoupon.API",
                     Version = "v1"
                 });
         });
-
-        builder.Services.AddScoped<IProductDbContext, ProductDbContext>();
-        builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-        builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
         var app = builder.Build();
 
@@ -36,7 +30,7 @@ public static class Program
             {
                 swaggerUi.SwaggerEndpoint(
                     url: "/swagger/v1/swagger.json",
-                    name: "ProductCatalog.Mongo.API v1");
+                    name: "ProductCoupon.API v1");
             });
         }
 
@@ -44,9 +38,8 @@ public static class Program
 
         app.UseAuthorization();
 
-        app.MapControllers();
 
-        app.SeedData();
+        app.MapControllers();
 
         app.Run();
     }

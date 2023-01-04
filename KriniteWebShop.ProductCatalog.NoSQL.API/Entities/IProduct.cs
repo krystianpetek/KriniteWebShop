@@ -1,4 +1,4 @@
-﻿namespace KriniteWebShop.ProductCatalog.Mongo.API.Entities;
+﻿namespace KriniteWebShop.ProductCatalog.NoSQL.API.Entities;
 
 public interface IProduct<T>
 {

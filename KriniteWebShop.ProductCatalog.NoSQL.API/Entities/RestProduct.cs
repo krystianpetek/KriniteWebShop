@@ -1,7 +1,6 @@
-﻿using KriniteWebShop.ProductCatalog.Mongo.API.Entities;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace KriniteWebShop.ProductCatalog.Mongo.API.Entities;
+namespace KriniteWebShop.ProductCatalog.NoSQL.API.Entities;
 
 public class RestProduct : IProduct<string>
 {

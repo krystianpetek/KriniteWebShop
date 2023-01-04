@@ -1,7 +1,7 @@
-﻿using KriniteWebShop.ProductCatalog.Mongo.API.Data;
+﻿using KriniteWebShop.ProductCatalog.NoSQL.API.Data;
 using MongoDB.Driver;
 
-namespace KriniteWebShop.ProductCatalog.Mongo.API.Repositories;
+namespace KriniteWebShop.ProductCatalog.NoSQL.API.Repositories;
 
 public class CategoryRepository : ICategoryRepository
 {

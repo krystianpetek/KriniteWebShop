@@ -1,7 +1,7 @@
-﻿using KriniteWebShop.ProductCatalog.Mongo.API.Entities;
+﻿using KriniteWebShop.ProductCatalog.NoSQL.API.Entities;
 using System.Linq.Expressions;
 
-namespace KriniteWebShop.ProductCatalog.Mongo.API.Repositories;
+namespace KriniteWebShop.ProductCatalog.NoSQL.API.Repositories;
 
 public interface IProductRepository
 {

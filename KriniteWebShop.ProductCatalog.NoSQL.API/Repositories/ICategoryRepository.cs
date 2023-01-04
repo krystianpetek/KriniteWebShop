@@ -1,4 +1,4 @@
-﻿namespace KriniteWebShop.ProductCatalog.Mongo.API.Repositories;
+﻿namespace KriniteWebShop.ProductCatalog.NoSQL.API.Repositories;
 
 public interface ICategoryRepository
 {
