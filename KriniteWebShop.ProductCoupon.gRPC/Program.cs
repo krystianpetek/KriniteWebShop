@@ -1,3 +1,5 @@
+using KriniteWebShop.ProductCoupon.gRPC.Data;
+using KriniteWebShop.ProductCoupon.gRPC.Repositories;
 using KriniteWebShop.ProductCoupon.gRPC.Services;
 
 namespace KriniteWebShop.ProductCoupon.gRPC;
@@ -9,10 +11,14 @@ public class Program
 
         builder.Services.AddGrpc();
 
+        builder.Services.AddScoped<ICouponRepository, CouponRepository>();
+
         var app = builder.Build();
 
         app.MapGrpcService<GreeterService>();
         app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+
+        app.SeedData();
 
         app.Run();
     }
