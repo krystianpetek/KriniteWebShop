@@ -74,7 +74,7 @@ public class ProductController : ControllerBase
 
     [HttpPut("{id}")]
     [Consumes(typeof(Product), "application/json")]
-    [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateProduct(Guid id, RestProduct product)
     {
         bool updateResult = await _productRepository.UpdateProduct(id, product);

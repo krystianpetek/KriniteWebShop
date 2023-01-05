@@ -37,19 +37,16 @@ public class ProductRepository : IProductRepository
 
     public async Task<bool> UpdateProduct(Guid id, RestProduct product)
     {
-        Product dbProduct = await _productDbContext.Products.FirstOrDefaultAsync(product => product.Id == id);
-        if (dbProduct == null)
+        if (!await _productDbContext.Products.AnyAsync(product => product.Id == id))
             return false;
-    
-        dbProduct.Price = product.Price;
-        dbProduct.Description = product.Description;
-        dbProduct.Category = product.Category;
-        dbProduct.Name = product.Name;
 
-        var updateResult = _productDbContext.Products.Update(dbProduct);
-        await _productDbContext.SaveChangesAsync();
+        var updateResult = _productDbContext.Products.Update(product.ToProduct(id));
+        bool result = updateResult.State == EntityState.Modified;
 
-        return updateResult.State == EntityState.Modified;
+        if (result)
+            await _productDbContext.SaveChangesAsync();
+
+        return result;
     }
 
     public async Task<bool> DeleteProduct(Guid id)
