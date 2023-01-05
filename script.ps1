@@ -81,6 +81,9 @@ docker exec -it webshop-catalog-mongo /bin/bash
     show collections
     db.Products.remove({}) # remove all records
 
+docker pull mongoclient/mongoclient
+docker run -d -p 3001:3000 --name webshop-mongoclient mongoclient/mongoclient
+
 
 
 KriniteWebShop.ProductCart.API

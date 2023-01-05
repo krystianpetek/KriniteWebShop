@@ -1,3 +1,4 @@
+using KriniteWebShop.ProductCoupon.API.Data;
 using KriniteWebShop.ProductCoupon.API.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -42,8 +43,9 @@ public static class Program
 
         app.UseAuthorization();
 
-
         app.MapControllers();
+
+        app.SeedData();
 
         app.Run();
     }
