@@ -28,7 +28,7 @@ public class ProductController : ControllerBase
         return Ok(products);
     }
 
-    [HttpGet(template: "{id}")]
+    [HttpGet("{id}")]
     [Consumes(typeof(Guid), "application/json")]
     [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -43,7 +43,7 @@ public class ProductController : ControllerBase
         return Ok(product);
     }
 
-    [HttpGet(template: "[action]/{name}", Name = "GetProductByName")]
+    [HttpGet( "[action]/{name}", Name = "GetProductByName")]
     [Consumes(typeof(string), "application/json")]
     [ProducesResponseType(typeof(IEnumerable<Product>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<Product>>> GetProductByName(string name)
@@ -52,7 +52,7 @@ public class ProductController : ControllerBase
         return Ok(products);
     }
 
-    [HttpGet(template: "[action]/{category}", Name = "GetProductByCategory")]
+    [HttpGet( "[action]/{category}", Name = "GetProductByCategory")]
     [Consumes(typeof(string), "application/json")]
     [ProducesResponseType(typeof(IEnumerable<Product>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<Product>>> GetProductByCategory(string category)
@@ -72,12 +72,12 @@ public class ProductController : ControllerBase
         return CreatedAtAction("GetProductById", new { product.Id }, product);
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     [Consumes(typeof(Product), "application/json")]
     [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
-    public async Task<IActionResult> UpdateProduct(Product product)
+    public async Task<IActionResult> UpdateProduct(Guid id, RestProduct product)
     {
-        bool updateResult = await _productRepository.UpdateProduct(product);
+        bool updateResult = await _productRepository.UpdateProduct(id, product);
         return Ok(updateResult);
     }
 

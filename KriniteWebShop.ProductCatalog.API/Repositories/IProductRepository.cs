@@ -10,6 +10,6 @@ public interface IProductRepository
     Task<IEnumerable<Product>> GetProductsWithFilter(Expression<Func<Product, bool>> filter);
 
     Task CreateProduct(Product product);
-    Task<bool> UpdateProduct(Product product);
+    Task<bool> UpdateProduct(Guid id, RestProduct product);
     Task<bool> DeleteProduct(Guid id);
 }
