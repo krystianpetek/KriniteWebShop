@@ -21,7 +21,6 @@ public class CouponRepository : ICouponRepository
         using NpgsqlConnection npgsqlConnection = new NpgsqlConnection(_connectionString);
 
         Coupon coupon = await npgsqlConnection.QueryFirstOrDefaultAsync<Coupon>("SELECT * FROM Coupon WHERE ProductName = @ProductName", new { ProductName = productName });
-
         if (coupon == default)
         {
             return new Coupon
@@ -34,13 +33,13 @@ public class CouponRepository : ICouponRepository
         return coupon;
     }
 
-    public async Task<bool> CreateCoupon(Coupon coupon)
+    public async Task<bool> CreateCoupon(RestCoupon coupon)
     {
         using NpgsqlConnection npgsqlConnection = new NpgsqlConnection(_connectionString);
 
         var created = await npgsqlConnection.ExecuteAsync(
-            "INSERT INTO Coupon (ProductName, Description, Amount) VALUES (@ProductName, @Description, @Amount, @Id)",
-            new { ProductName = coupon?.ProductName, Description = coupon?.Description, Amount = coupon?.Amount, Id = coupon?.Id });
+            "INSERT INTO Coupon (ProductName, Description, Amount) VALUES (@ProductName, @Description, @Amount)",
+            new { ProductName = coupon?.ProductName, Description = coupon?.Description, Amount = coupon?.Amount });
 
         return created > 0;
     }

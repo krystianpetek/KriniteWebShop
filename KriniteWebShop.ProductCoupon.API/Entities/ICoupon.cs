@@ -1,6 +1,6 @@
 ﻿namespace KriniteWebShop.ProductCoupon.API.Entities;
 
-public class Coupon : ICoupon
+public interface ICoupon
 {
     public int Id { get; set; }
     public string ProductName { get; set; }
