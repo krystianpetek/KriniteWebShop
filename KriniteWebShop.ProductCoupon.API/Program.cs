@@ -1,3 +1,5 @@
+using KriniteWebShop.ProductCoupon.API.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
 namespace KriniteWebShop.ProductCoupon.API;
@@ -20,6 +22,8 @@ public static class Program
                     Version = "v1"
                 });
         });
+
+        builder.Services.AddScoped<ICouponRepository, CouponRepository>();
 
         var app = builder.Build();
 
