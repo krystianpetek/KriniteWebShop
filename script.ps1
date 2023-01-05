@@ -8,7 +8,7 @@ dotnet ef migrations add Initial
 
 
 
-KriniteWebShop.ProductCatalog.Mongo.API
+KriniteWebShop.ProductCatalog.NoSQL.API
 
 docker pull mongo
 docker run -d -p 27001:27017 --name webshop-productcatalog-mongo mongo
@@ -93,3 +93,21 @@ docker exec -it webshop-productcart-redis /bin/bash
     set name Krystian
     get name
 
+
+
+KriniteWebShop.ProductCoupon.API
+
+docker pull postgres
+docker run -d -p 5401:5432 --name webshop-productcoupon-postgres -e POSTGRES_PASSWORD=NotAll0wedForPublic postgres
+
+docker pull dpage/pgadmin4
+docker run -d -p 5402:80 -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=NotAll0wedForPublic --name webshop-pgadmin4 dpage/pgadmin4
+    CREATE TABLE Coupon(
+        ID SERIAL PRIMARY KEY NOT NULL,
+		ProductName VARCHAR(24) NOT NULL,
+		Description Text,
+		Amount INT
+    );
+    INSERT INTO Coupon (ProductName, Description, Amount) VALUES ('Stadium','Stadium Discount', 2000);
+    INSERT INTO Coupon (ProductName, Description, Amount) VALUES ('Bling-Bling King','Bling-Bling King Discount', 150);
+    
