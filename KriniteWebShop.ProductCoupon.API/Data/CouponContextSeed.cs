@@ -28,7 +28,11 @@ public static class CouponDatabaseSeed
 
             npgsqlCommand.CommandText = "DROP TABLE IF EXISTS Coupon";
             npgsqlCommand.ExecuteNonQuery();
-            npgsqlCommand.CommandText = "CREATE TABLE Coupon (Id SERIAL PRIMARY KEY, ProductName varchar(24) NOT NULL, Description varchar(255), Amount int);";
+            npgsqlCommand.CommandText = "CREATE TABLE Coupon (" +
+                "Id SERIAL PRIMARY KEY, " +
+                "ProductName varchar(24) NOT NULL, " +
+                "Description varchar(255), " +
+                "Amount int);";
             npgsqlCommand.ExecuteNonQuery();
             npgsqlCommand.CommandText = "INSERT INTO Coupon (ProductName, Description, Amount) VALUES ('Stadium', 'Stadium Discount', 2000)";
             npgsqlCommand.ExecuteNonQuery();
