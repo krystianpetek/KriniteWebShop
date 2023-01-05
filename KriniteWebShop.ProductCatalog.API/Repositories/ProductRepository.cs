@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
+﻿using KriniteWebShop.ProductCatalog.API.Data;
 using KriniteWebShop.ProductCatalog.API.Entities;
-using KriniteWebShop.ProductCatalog.API.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace KriniteWebShop.ProductCatalog.API.Repositories;
 

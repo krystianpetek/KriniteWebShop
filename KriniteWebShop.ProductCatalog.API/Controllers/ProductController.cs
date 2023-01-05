@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using KriniteWebShop.ProductCatalog.API.Entities;
+﻿using KriniteWebShop.ProductCatalog.API.Entities;
 using KriniteWebShop.ProductCatalog.API.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KriniteWebShop.ProductCatalog.API.Controllers;
 
@@ -43,7 +42,7 @@ public class ProductController : ControllerBase
         return Ok(product);
     }
 
-    [HttpGet( "[action]/{name}", Name = "GetProductByName")]
+    [HttpGet("[action]/{name}", Name = "GetProductByName")]
     [Consumes(typeof(string), "application/json")]
     [ProducesResponseType(typeof(IEnumerable<Product>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<Product>>> GetProductByName(string name)
@@ -52,7 +51,7 @@ public class ProductController : ControllerBase
         return Ok(products);
     }
 
-    [HttpGet( "[action]/{category}", Name = "GetProductByCategory")]
+    [HttpGet("[action]/{category}", Name = "GetProductByCategory")]
     [Consumes(typeof(string), "application/json")]
     [ProducesResponseType(typeof(IEnumerable<Product>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<Product>>> GetProductByCategory(string category)

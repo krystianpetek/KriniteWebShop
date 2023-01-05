@@ -2,8 +2,6 @@ using KriniteWebShop.ProductCatalog.API.Data;
 using KriniteWebShop.ProductCatalog.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace KriniteWebShop.ProductCatalog.API;
 

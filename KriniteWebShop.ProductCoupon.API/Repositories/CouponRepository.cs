@@ -1,8 +1,6 @@
 ﻿using Dapper;
 using KriniteWebShop.ProductCoupon.API.Entities;
-using Microsoft.Extensions.Options;
 using Npgsql;
-using NpgsqlTypes;
 
 namespace KriniteWebShop.ProductCoupon.API.Repositories;
 

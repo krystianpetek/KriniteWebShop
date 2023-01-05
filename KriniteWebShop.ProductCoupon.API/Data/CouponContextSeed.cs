@@ -1,6 +1,4 @@
-﻿using KriniteWebShop.ProductCoupon.API.Entities;
-using Npgsql;
-using System.Collections.Generic;
+﻿using Npgsql;
 
 namespace KriniteWebShop.ProductCoupon.API.Data;
 
@@ -43,7 +41,7 @@ public static class CouponDatabaseSeed
         }
         catch (Exception ex)
         {
-            logger.LogError(ex.Message,"Error occurred while seeding database.");
+            logger.LogError(ex.Message, "Error occurred while seeding database.");
         }
     }
 }

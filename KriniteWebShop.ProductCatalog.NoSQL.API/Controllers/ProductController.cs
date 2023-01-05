@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using KriniteWebShop.ProductCatalog.NoSQL.API.Entities;
+﻿using KriniteWebShop.ProductCatalog.NoSQL.API.Entities;
 using KriniteWebShop.ProductCatalog.NoSQL.API.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KriniteWebShop.ProductCatalog.NoSQL.API.Controllers;
 
