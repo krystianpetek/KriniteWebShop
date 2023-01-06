@@ -11,4 +11,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KriniteWebShop.ProductOrder.Application\KriniteWebShop.ProductOrder.Application.csproj" />
+    <ProjectReference Include="..\KriniteWebShop.ProductOrder.Infrastructure\KriniteWebShop.ProductOrder.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

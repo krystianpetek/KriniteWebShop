@@ -114,3 +114,11 @@ docker run -d -p 5402:80 -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEF
     INSERT INTO Coupon (ProductName, Description, Amount) VALUES ('Stadium','Stadium Discount', 2000);
     INSERT INTO Coupon (ProductName, Description, Amount) VALUES ('Bling-Bling King','Bling-Bling King Discount', 150);
     
+
+
+KriniteWebShop.ProductOrder.API
+
+docker pull mysql
+docker run -d -p 3301:3306 --name webshop-productorder-mysql -e MYSQL_ROOT_PASSWORD=NotAll0wedForPublic mysql
+docker exec -it mk-mysql /bin/bash
+mysql -u root -p NotAll0wedForPublic
