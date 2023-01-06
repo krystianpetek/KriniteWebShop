@@ -6,3 +6,18 @@ services:
     build:
       context: .
       dockerfile: KriniteWebShop.ProductCatalog.API/Dockerfile
+    networks:
+      static-network:
+        ipv4_address: 172.26.155.1
+
+  productsdb:
+    image: mcr.microsoft.com/mssql/server:latest
+    networks:
+      static-network:
+        ipv4_address: 172.26.150.1
+
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 172.26.0.0/16

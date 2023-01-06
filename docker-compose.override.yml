@@ -6,8 +6,19 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
     ports:
-      - "80"
-      - "443"
+      - "5820:80"
+      - "7920:443"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - productsdb
+
+  productsdb:
+    container_name: KriniteWebShop.ProductCatalog.API.DB
+    environment:
+        SA_PASSWORD: "NotAll0wedForPublic"
+        ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+        - "8720:1433"
