@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.ProductCoupo
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CA7414FB-33C4-4A1C-9655-219F09710B81}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KriniteWebShop.ProductOrder.API", "KriniteWebShop.ProductOrder.API\KriniteWebShop.ProductOrder.API.csproj", "{FFF43652-D982-4341-94FE-D41A3643D5B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{CA7414FB-33C4-4A1C-9655-219F09710B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA7414FB-33C4-4A1C-9655-219F09710B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA7414FB-33C4-4A1C-9655-219F09710B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFF43652-D982-4341-94FE-D41A3643D5B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFF43652-D982-4341-94FE-D41A3643D5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFF43652-D982-4341-94FE-D41A3643D5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFF43652-D982-4341-94FE-D41A3643D5B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
