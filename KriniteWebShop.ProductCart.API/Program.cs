@@ -1,4 +1,6 @@
+using KriniteWebShop.ProductCart.API.GrpcServices;
 using KriniteWebShop.ProductCart.API.Repositories;
+using KriniteWebShop.ProductCoupon.gRPC.Protos;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.OpenApi.Models;
 
@@ -29,6 +31,13 @@ public static class Program
             string connectionString = builder.Configuration?.GetRequiredSection("CacheSettings")?.GetValue<string>("ConnectionString");
             redis.Configuration = connectionString;
         });
+
+        builder.Services.AddGrpcClient<CouponProtoService.CouponProtoServiceClient>(configureClient =>
+        {
+            var couponUrl = builder.Configuration.GetRequiredSection("GrpcSettings").GetValue<string>("CouponUrl");
+            configureClient.Address = new Uri(couponUrl);
+        });
+        builder.Services.AddScoped<CouponGrpcService>();
 
         var app = builder.Build();
 

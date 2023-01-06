@@ -7,9 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.51.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.1" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\KriniteWebShop.ProductCoupon.gRPC\Protos\coupon.proto" GrpcServices="Client">
+      <Link>Protos\coupon.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>
