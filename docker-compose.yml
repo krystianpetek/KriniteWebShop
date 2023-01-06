@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  krinitewebshop.productcatalog.api:
+    image: ${DOCKER_REGISTRY-}krinitewebshopproductcatalogapi
+    build:
+      context: .
+      dockerfile: KriniteWebShop.ProductCatalog.API/Dockerfile
