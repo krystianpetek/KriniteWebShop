@@ -34,7 +34,6 @@ public static class Program
         builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
         builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
-        builder.Services.AddDistributedMemoryCache();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

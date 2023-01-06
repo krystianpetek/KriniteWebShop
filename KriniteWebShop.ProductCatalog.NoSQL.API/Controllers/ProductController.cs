@@ -42,19 +42,19 @@ public class ProductController : ControllerBase
         return Ok(product);
     }
 
-    [HttpGet(template: "[action]/{name}", Name = "GetProductByName")]
+    [HttpGet(template: "[action]/{name}", Name = "GetProductsByName")]
     [Consumes(typeof(string), "application/json")]
     [ProducesResponseType(typeof(IEnumerable<Product>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProductByName(string name)
+    public async Task<ActionResult<IEnumerable<Product>>> GetProductsByName(string name)
     {
         IEnumerable<Product> products = await _productRepository.GetProductsWithFilter(product => product.Name.Contains(name));
         return Ok(products);
     }
 
-    [HttpGet(template: "[action]/{category}", Name = "GetProductByCategory")]
+    [HttpGet(template: "[action]/{category}", Name = "GetProductsByCategory")]
     [Consumes(typeof(string), "application/json")]
     [ProducesResponseType(typeof(IEnumerable<Product>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProductByCategory(string category)
+    public async Task<ActionResult<IEnumerable<Product>>> GetProductsByCategory(string category)
     {
         IEnumerable<Product> products = await _productRepository.GetProductsWithFilter(product => product.Category.Contains(category));
         return Ok(products);

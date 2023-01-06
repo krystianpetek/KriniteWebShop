@@ -1,5 +1,6 @@
 ﻿using KriniteWebShop.ProductCatalog.API.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace KriniteWebShop.ProductCatalog.API.Controllers;
 
@@ -15,8 +16,9 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<string>> GetCategories()
+    public async Task<ActionResult<IEnumerable<string>>> GetCategories()
     {
-        return await _categoryRepository.GetCategories();
+        IEnumerable<string> categories = await _categoryRepository.GetCategories();
+        return Ok(categories);
     }
 }
