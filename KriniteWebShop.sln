@@ -5,6 +5,7 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B21DA6C2-A28C-4F2F-82A8-B5448683B266}"
 	ProjectSection(SolutionItems) = preProject
+		KriniteWebShop.postman_collection.json = KriniteWebShop.postman_collection.json
 		script.ps1 = script.ps1
 	EndProjectSection
 EndProject
@@ -16,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.ProductCart.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.ProductCoupon.API", "KriniteWebShop.ProductCoupon.API\KriniteWebShop.ProductCoupon.API.csproj", "{F3510564-CF8B-49A5-8118-75E07E470D4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KriniteWebShop.ProductCoupon.gRPC", "KriniteWebShop.ProductCoupon.gRPC\KriniteWebShop.ProductCoupon.gRPC.csproj", "{9E55738F-D6CB-4C02-94C0-CA571901C620}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.ProductCoupon.gRPC", "KriniteWebShop.ProductCoupon.gRPC\KriniteWebShop.ProductCoupon.gRPC.csproj", "{9E55738F-D6CB-4C02-94C0-CA571901C620}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

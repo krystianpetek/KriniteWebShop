@@ -1,0 +1,861 @@
+{
+	"info": {
+		"_postman_id": "e4abef0a-3a58-478d-ae8d-046f04759e82",
+		"name": "KriniteWebShop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18753905"
+	},
+	"item": [
+		{
+			"name": "ProductCatalog",
+			"item": [
+				{
+					"name": "NoSQL",
+					"item": [
+						{
+							"name": "GET products",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7921/api/v1/product/",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7921",
+									"path": [
+										"api",
+										"v1",
+										"product",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET categories",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7921/api/v1/category/",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7921",
+									"path": [
+										"api",
+										"v1",
+										"category",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET product by ID",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7921/api/v1/product/{{productId2-ObjectId}}",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7921",
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"{{productId2-ObjectId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET products by name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7921/api/v1/Product/GetProductsByName/{{productName2}}",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7921",
+									"path": [
+										"api",
+										"v1",
+										"Product",
+										"GetProductsByName",
+										"{{productName2}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET products by category",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7921/api/v1/product/GetProductsByCategory/{{productCategory2}}",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7921",
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"GetProductsByCategory",
+										"{{productCategory2}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST product",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Ball\",\r\n    \"category\": \"Football\",\r\n    \"description\": \"Ball for football\",\r\n    \"price\": 30.50\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7921/api/v1/product/",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7921",
+									"path": [
+										"api",
+										"v1",
+										"product",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT product",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Stadium\",\r\n    \"category\": \"Soccer\",\r\n    \"description\": \"Flat-packed 35,000-seat stadium\",\r\n    \"price\": 79500.00\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7921/api/v1/product/{{productId2-ObjectId}}",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7921",
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"{{productId2-ObjectId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE product",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7921/api/v1/product/{{productId2-ObjectId}}",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7921",
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"{{productId2-ObjectId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SQL",
+					"item": [
+						{
+							"name": "GET products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7920/api/v1/product/",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7920",
+									"path": [
+										"api",
+										"v1",
+										"product",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7920/api/v1/category/",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7920",
+									"path": [
+										"api",
+										"v1",
+										"category",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET product by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7920/api/v1/product/{{productId1-Guid}}",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7920",
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"{{productId1-Guid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET products by name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7920/api/v1/product/GetProductsByName/{{productName1}}",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7920",
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"GetProductsByName",
+										"{{productName1}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET products by category",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7920/api/v1/product/GetProductsByCategory/{{productCategory1}}",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7920",
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"GetProductsByCategory",
+										"{{productCategory1}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST product",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Ball\",\r\n    \"category\": \"Football\",\r\n    \"description\": \"Ball for football\",\r\n    \"price\": 30.50\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7920/api/v1/product/",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7920",
+									"path": [
+										"api",
+										"v1",
+										"product",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT product",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Kayak\",\r\n    \"category\": \"Watersports\",\r\n    \"description\": \"A boat for one person\",\r\n    \"price\": 275.00\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7920/api/v1/product/{{productId1-Guid}}",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7920",
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"{{productId1-Guid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE product",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7920/api/v1/product/{{productId1-Guid}}",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7920",
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"{{productId1-Guid}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "ProductCart",
+			"item": [
+				{
+					"name": "GetCart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7922/api/v1/Cart/{{userName}}",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7922",
+							"path": [
+								"api",
+								"v1",
+								"Cart",
+								"{{userName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7922/api/v1/Cart/{{userName}}",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7922",
+							"path": [
+								"api",
+								"v1",
+								"Cart",
+								"{{userName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCart",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"{{userName}}\",\r\n    \"items\": [\r\n        {\r\n            \"productId\": \"d655171d-e21e-45f5-9c08-08daee7ce09c\",\r\n            \"productName\": \"Kayak\",\r\n            \"price\": 12.50,\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7922/api/v1/Cart/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7922",
+							"path": [
+								"api",
+								"v1",
+								"Cart",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ProductCoupon",
+			"item": [
+				{
+					"name": "GetCoupon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7923/api/v1/Coupon/{{productName}}/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7923",
+							"path": [
+								"api",
+								"v1",
+								"Coupon",
+								"{{productName}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostCoupon",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"productName\": \"product\",\r\n  \"description\": \"description\",\r\n  \"amount\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7923/api/v1/Coupon/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7923",
+							"path": [
+								"api",
+								"v1",
+								"Coupon",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCoupon",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 0,\r\n    \"productName\": \"product\",\r\n    \"description\": \"description\",\r\n    \"amount\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7923/api/v1/Coupon/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7923",
+							"path": [
+								"api",
+								"v1",
+								"Coupon",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCoupon",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7923/api/v1/Coupon/{{productName}}/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7923",
+							"path": [
+								"api",
+								"v1",
+								"Coupon",
+								"{{productName}}",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "productName1",
+			"value": "Kayak",
+			"type": "string"
+		},
+		{
+			"key": "productId1-Guid",
+			"value": "bbc8d3f2-e9d6-4098-aaee-df176fa40e83",
+			"type": "string"
+		},
+		{
+			"key": "productId1-ObjectId",
+			"value": "63b7e270f54587da0241b103",
+			"type": "string"
+		},
+		{
+			"key": "productName2",
+			"value": "Stadium"
+		},
+		{
+			"key": "productId2-Guid",
+			"value": "a17aa2e4-74a7-490e-92ef-fa1982f36842",
+			"type": "string"
+		},
+		{
+			"key": "productId2-ObjectId",
+			"value": "63b7e29dc1a358f7d360faf5",
+			"type": "string"
+		},
+		{
+			"key": "productCategory1",
+			"value": "Watersports"
+		},
+		{
+			"key": "productCategory2",
+			"value": "Soccer"
+		}
+	]
+}

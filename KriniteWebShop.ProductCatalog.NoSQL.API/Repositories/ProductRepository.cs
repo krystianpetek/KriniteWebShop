@@ -35,8 +35,10 @@ public class ProductRepository : IProductRepository
         await _productDbContext.Products.InsertOneAsync(product);
     }
 
-    public async Task<bool> UpdateProduct(Product product)
+    public async Task<bool> UpdateProduct(string id, RestProduct restProduct)
     {
+        Product product = restProduct.ToProduct(id);
+
         var updateResult = await _productDbContext.Products.ReplaceOneAsync(filterProduct => filterProduct.Id == product.Id, product);
         return updateResult.IsAcknowledged && updateResult.ModifiedCount > 0;
     }

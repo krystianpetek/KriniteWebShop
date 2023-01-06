@@ -1,11 +1,12 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using System.Text.Json.Serialization;
 
 namespace KriniteWebShop.ProductCatalog.NoSQL.API.Entities;
 
 public class RestProduct : IProduct<string>
 {
-    [BsonIgnore]
-    public string Id { get; set; }
+    [JsonIgnore, BsonIgnore]
+    public string? Id { get; set; }
 
     [BsonElement("Name")]
     public string Name { get; set; }
@@ -16,10 +17,11 @@ public class RestProduct : IProduct<string>
 
     public decimal Price { get; set; }
 
-    public Product ToProduct()
+    public Product ToProduct(string id = default)
     {
         return new Product
         {
+            Id = id,
             Name = Name,
             Category = Category,
             Description = Description,
