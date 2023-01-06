@@ -30,8 +30,6 @@ services:
     networks:
       static-network:
         ipv4_address: 172.26.156.2
-   
-
 
 networks:
   static-network:
