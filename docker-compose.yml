@@ -14,7 +14,24 @@ services:
     image: mcr.microsoft.com/mssql/server:latest
     networks:
       static-network:
-        ipv4_address: 172.26.150.1
+        ipv4_address: 172.26.155.2
+
+  krinitewebshop.productcatalog.nosql.api:
+    image: ${DOCKER_REGISTRY-}krinitewebshopproductcatalognosqlapi
+    build:
+      context: .
+      dockerfile: KriniteWebShop.ProductCatalog.NoSQL.API/Dockerfile
+    networks:
+      static-network:
+        ipv4_address: 172.26.156.1
+
+  productsdbmongo:
+    image: mongo
+    networks:
+      static-network:
+        ipv4_address: 172.26.156.2
+   
+
 
 networks:
   static-network:

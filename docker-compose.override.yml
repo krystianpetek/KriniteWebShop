@@ -2,12 +2,12 @@ version: '3.4'
 
 services:
   krinitewebshop.productcatalog.api:
+    container_name: KriniteWebShop.ProductCatalog.API
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_URLS=http://+:80
     ports:
       - "5820:80"
-      - "7920:443"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
@@ -15,10 +15,29 @@ services:
       - productsdb
 
   productsdb:
-    container_name: KriniteWebShop.ProductCatalog.API.DB
+    container_name: KriniteWebShop.ProductCatalog.API.MsSQL
     environment:
-        SA_PASSWORD: "NotAll0wedForPublic"
-        ACCEPT_EULA: "Y"
+      SA_PASSWORD: "NotAll0wedForPublic"
+      ACCEPT_EULA: "Y"
     restart: always
     ports:
-        - "8720:1433"
+      - "8720:1433"
+
+  krinitewebshop.productcatalog.nosql.api:
+    container_name: KriniteWebShop.ProductCatalog.NoSQL.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "5821:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - productsdbmongo
+
+  productsdbmongo:
+    container_name: KriniteWebShop.ProductCatalog.NoSQL.API.Mongo
+    restart: always
+    ports:
+        - "27001:27017"
