@@ -4,7 +4,7 @@ services:
   krinitewebshop.productcatalog.api:
     container_name: KriniteWebShop.ProductCatalog.API
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings:ProductsConnection=Server=172.26.155.2,1433;Database=Products;User ID=sa;Password=NotAll0wedForPublic;MultipleActiveResultSets=true;TrustServerCertificate=True
     ports:
@@ -27,7 +27,7 @@ services:
   krinitewebshop.productcatalog.nosql.api:
     container_name: KriniteWebShop.ProductCatalog.NoSQL.API
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
       - DatabaseSettings:ConnectionString=mongodb://172.26.156.2:27017
     ports:

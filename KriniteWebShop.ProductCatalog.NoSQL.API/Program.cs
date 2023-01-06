@@ -29,7 +29,7 @@ public static class Program
 
         var app = builder.Build();
 
-        if (app.Environment.IsDevelopment())
+        if (app.Environment.IsEnvironment("Docker") || app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI((swaggerUi) =>
