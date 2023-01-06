@@ -24,12 +24,18 @@ services:
     networks:
       static-network:
         ipv4_address: 172.26.156.1
-
+        
   productsdbmongo:
     image: mongo
     networks:
       static-network:
         ipv4_address: 172.26.156.2
+
+  mongodbclient:
+    image: mongoclient/mongoclient
+    networks:
+      static-network:
+        ipv4_address: 172.26.156.3
 
 networks:
   static-network:
