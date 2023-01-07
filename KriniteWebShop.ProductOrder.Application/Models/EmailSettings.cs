@@ -2,7 +2,7 @@
 namespace KriniteWebShop.ProductOrder.Application.Models;
 public class EmailSettings
 {
-    public string ApiKey { get; set; }
-    public string FromAddress { get; set; }
-    public string FromName { get; set; }
+    public required string ApiKey { get; set; }
+    public required string FromAddress { get; set; }
+    public required string FromName { get; set; }
 }

@@ -1,4 +1,6 @@
 
+using KriniteWebShop.ProductOrder.Application;
+
 namespace KriniteWebShop.ProductOrder.API;
 
 public static class Program
@@ -10,6 +12,8 @@ public static class Program
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        //builder.Services.AddApplicationServices();
 
         var app = builder.Build();
 

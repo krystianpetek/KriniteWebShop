@@ -2,8 +2,8 @@
 public abstract class EntityBase
 {
     public Guid Id { get; protected set; }
-    public string CreatedBy { get; set; }
-    public DateTime CreatedDate { get; set;}
-    public string LastModifiedBy { get; set; }
+    public required string CreatedBy { get; set; }
+    public required DateTime CreatedDate { get; set;}
+    public required string LastModifiedBy { get; set; }
     public DateTime? LastModifiedDate { get; set; }
 }
