@@ -1,7 +1,7 @@
 ﻿using MediatR;
 
 namespace KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.UpdateOrder;
-internal class UpdateOrderCommand :IRequest
+public class UpdateOrderCommand :IRequest
 {
     public Guid Id { get; set; }
     public string UserName { get; set; }

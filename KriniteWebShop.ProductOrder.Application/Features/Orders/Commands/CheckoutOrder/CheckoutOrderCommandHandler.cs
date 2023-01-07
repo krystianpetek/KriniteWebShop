@@ -7,7 +7,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.CheckoutOrder;
-internal class CheckoutOrderCommandHandler : IRequestHandler<CheckoutOrderCommand, Guid>
+public class CheckoutOrderCommandHandler : IRequestHandler<CheckoutOrderCommand, Guid>
 {
     private readonly IOrderRepository _orderRepository;
     private readonly IMapper _mapper;

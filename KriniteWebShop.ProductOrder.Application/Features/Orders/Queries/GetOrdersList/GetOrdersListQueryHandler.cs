@@ -4,7 +4,7 @@ using KriniteWebShop.ProductOrder.Domain.Entities;
 using MediatR;
 
 namespace KriniteWebShop.ProductOrder.Application.Features.Orders.Queries.GetOrdersList;
-internal class GetOrdersListQueryHandler : IRequestHandler<GetOrdersListQuery, List<GetOrdersListQueryModel>>
+public class GetOrdersListQueryHandler : IRequestHandler<GetOrdersListQuery, List<GetOrdersListQueryModel>>
 {
     private readonly IOrderRepository _orderRepository;
     private readonly IMapper _mapper;

@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.UpdateOrder;
-internal class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
+public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
 {
     private readonly IOrderRepository _orderRepository;
     private readonly IMapper _mapper;

@@ -14,6 +14,7 @@ public static class Program
         builder.Services.AddSwaggerGen();
 
         //builder.Services.AddApplicationServices();
+        //builder.Services.AddInfrastructureServices();
 
         var app = builder.Build();
 
