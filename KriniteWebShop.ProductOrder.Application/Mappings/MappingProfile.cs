@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.CheckoutOrder;
+using KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.UpdateOrder;
 using KriniteWebShop.ProductOrder.Application.Features.Orders.Queries.GetOrdersList;
 using KriniteWebShop.ProductOrder.Domain.Entities;
 
@@ -10,6 +11,8 @@ public class MappingProfile : Profile
     {
         CreateMap<Order, GetOrdersListQueryModel>().ReverseMap();
 
-        CreateMap<CheckoutOrderCommand, Order>().ReverseMap();
+        CreateMap<Order, CheckoutOrderCommand>().ReverseMap();
+
+        CreateMap<Order, UpdateOrderCommand>().ReverseMap();
     }
 }
