@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KriniteWebShop.ProductOrder.Application.Features.Orders.Queries.GetOrdersList;
+using KriniteWebShop.ProductOrder.Domain.Entities;
 
 namespace KriniteWebShop.ProductOrder.Application.Mappings;
 public class MappingProfile : Profile
 {
+    public MappingProfile()
+    {
+        CreateMap<Order, GetOrdersListQueryModel>().ReverseMap();
+    }
 }
