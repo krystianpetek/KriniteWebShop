@@ -2,11 +2,6 @@
 using KriniteWebShop.ProductOrder.Application.Contracts.Persistance;
 using KriniteWebShop.ProductOrder.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KriniteWebShop.ProductOrder.Application.Features.Orders.Queries.GetOrdersList;
 internal class GetOrdersListQueryHandler : IRequestHandler<GetOrdersListQuery, List<GetOrdersListQueryModel>>

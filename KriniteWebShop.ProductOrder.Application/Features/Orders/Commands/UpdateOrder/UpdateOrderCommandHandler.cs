@@ -4,11 +4,6 @@ using KriniteWebShop.ProductOrder.Application.Exceptions;
 using KriniteWebShop.ProductOrder.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.UpdateOrder;
 internal class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
@@ -30,7 +25,7 @@ internal class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand>
     public async Task<Unit> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
     {
         Order orderToUpdate = await _orderRepository.GetByIdAsync(request.Id);
-        if (orderToUpdate == null)
+        if (orderToUpdate == default)
         {
             _logger.LogError($"Order with ID: {request.Id} not exists in database.");
             throw new NotFoundException(nameof(Order), request.Id);

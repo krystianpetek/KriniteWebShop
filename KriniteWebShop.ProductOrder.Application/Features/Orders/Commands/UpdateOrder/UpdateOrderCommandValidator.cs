@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.UpdateOrder;
 internal class UpdateOrderCommandValidator : AbstractValidator<UpdateOrderCommand>
