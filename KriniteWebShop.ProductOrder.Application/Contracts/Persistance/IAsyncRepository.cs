@@ -4,14 +4,14 @@ using System.Linq.Expressions;
 namespace KriniteWebShop.ProductOrder.Application.Contracts.Persistance;
 public interface IAsyncRepository<T> where T : EntityBase
 {
-    Task<IReadOnlyList<T>> GetAllAsync();
-    Task<IReadOnlyList<T>> GetFilterAsync(Expression<Func<T, bool>> predicate);
-    Task<IReadOnlyList<T>> GetAsync(
+    Task<IReadOnlyCollection<T>> GetAllAsync();
+    Task<IReadOnlyCollection<T>> GetFilterAsync(Expression<Func<T, bool>> predicate);
+    Task<IReadOnlyCollection<T>> GetAsync(
         Expression<Func<T, bool>> predicate = null,
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
         string includeString = null, 
         bool disableTracking = true);
-    Task<IReadOnlyList<T>> GetFilterWithIncludesAsync(
+    Task<IReadOnlyCollection<T>> GetFilterWithIncludesAsync(
         Expression<Func<T, bool>> predicate = null,
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
         List<Expression<Func<T, object>>> includes = null,

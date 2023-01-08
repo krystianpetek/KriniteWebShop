@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.CheckoutOrder;
+using KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.DeleteOrder;
 using KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.UpdateOrder;
 using KriniteWebShop.ProductOrder.Application.Features.Orders.Queries.GetOrdersList;
 using KriniteWebShop.ProductOrder.Domain.Entities;

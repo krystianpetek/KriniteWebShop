@@ -3,5 +3,5 @@
 namespace KriniteWebShop.ProductOrder.Application.Contracts.Infrastructure;
 public interface IEmailService
 {
-    Task<bool> SendMail(Email email);
+    Task<bool> SendMail(EmailModel email);
 }

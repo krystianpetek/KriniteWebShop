@@ -4,7 +4,7 @@ using KriniteWebShop.ProductOrder.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.UpdateOrder;
+namespace KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.DeleteOrder;
 internal class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand>
 {
     private readonly IOrderRepository _orderRepository;
