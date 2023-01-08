@@ -27,7 +27,7 @@ public static class Program
         builder.Services.AddDbContext<ProductDbContext>(
             (options) =>
             {
-                var connectionString = builder.Configuration.GetRequiredSection("ConnectionStrings").GetValue<string>("ProductsConnection");
+                var connectionString = builder.Configuration.GetRequiredSection("ConnectionStrings").GetValue<string>("ProductConnection");
                 options.UseSqlServer(connectionString);
             });
 

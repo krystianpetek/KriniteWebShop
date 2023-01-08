@@ -28,20 +28,20 @@ public static class Program
         builder.Services.AddScoped<ICartRepository, CartRepository>();
         builder.Services.AddStackExchangeRedisCache((RedisCacheOptions redis) =>
         {
-            string connectionString = builder.Configuration?.GetRequiredSection("CacheSettings")?.GetValue<string>("ConnectionString");
+            string connectionString = builder.Configuration?.GetRequiredSection("CacheSettings")?.GetValue<string>("CartConnection");
             redis.Configuration = connectionString;
         });
 
         builder.Services.AddGrpcClient<CouponProtoService.CouponProtoServiceClient>(configureClient =>
         {
-            var couponUrl = builder.Configuration.GetRequiredSection("GrpcSettings").GetValue<string>("CouponUrl");
+            var couponUrl = builder.Configuration.GetRequiredSection("GrpcSettings").GetValue<string>("CouponConnection");
             configureClient.Address = new Uri(couponUrl);
         });
         builder.Services.AddScoped<CouponGrpcService>();
 
         var app = builder.Build();
 
-        if (app.Environment.IsDevelopment())
+        if (app.Environment.IsEnvironment("Docker") || app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI((swaggerUi) =>

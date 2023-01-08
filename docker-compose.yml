@@ -1,20 +1,22 @@
 version: '3.4'
 
 services:
-  krinitewebshop.productcatalog.api:
-    image: ${DOCKER_REGISTRY-}krinitewebshopproductcatalogapi
-    build:
-      context: .
-      dockerfile: KriniteWebShop.ProductCatalog.API/Dockerfile
-    networks:
-      static-network:
-        ipv4_address: 172.26.155.1
+  #krinitewebshop.productcatalog.api:
+  #  image: ${DOCKER_REGISTRY-}krinitewebshopproductcatalogapi
+  #  build:
+  #    context: .
+  #    dockerfile: KriniteWebShop.ProductCatalog.API/Dockerfile
+  #  networks:
+  #    static-network:
+  #      ipv4_address: 172.26.150.1
 
-  productsdb:
-    image: mcr.microsoft.com/mssql/server:latest
-    networks:
-      static-network:
-        ipv4_address: 172.26.155.2
+  #productdb:
+  #  image: mcr.microsoft.com/mssql/server:latest
+  #  networks:
+  #    static-network:
+  #      ipv4_address: 172.26.150.2
+
+
 
   krinitewebshop.productcatalog.nosql.api:
     image: ${DOCKER_REGISTRY-}krinitewebshopproductcatalognosqlapi
@@ -23,19 +25,38 @@ services:
       dockerfile: KriniteWebShop.ProductCatalog.NoSQL.API/Dockerfile
     networks:
       static-network:
-        ipv4_address: 172.26.156.1
+        ipv4_address: 172.26.151.1
         
-  productsdbmongo:
+  productdbmongo:
     image: mongo
     networks:
       static-network:
-        ipv4_address: 172.26.156.2
+        ipv4_address: 172.26.151.2
 
   mongodbclient:
     image: mongoclient/mongoclient
     networks:
       static-network:
-        ipv4_address: 172.26.156.3
+        ipv4_address: 172.26.151.3
+
+
+
+  krinitewebshop.productcart.api:
+    image: ${DOCKER_REGISTRY-}krinitewebshopproductcartapi
+    build:
+      context: .
+      dockerfile: KriniteWebShop.ProductCart.API/Dockerfile
+    networks:
+      static-network:
+        ipv4_address: 172.26.152.1
+        
+  cartdb:
+    image: redis
+    networks:
+      static-network:
+        ipv4_address: 172.26.152.2
+
+
 
 networks:
   static-network:

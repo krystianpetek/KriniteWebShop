@@ -1,44 +1,46 @@
 version: '3.4'
 
 services:
-  krinitewebshop.productcatalog.api:
-    container_name: KriniteWebShop.ProductCatalog.API
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Docker
-      - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings:ProductsConnection=Server=172.26.155.2,1433;Database=Products;User ID=sa;Password=NotAll0wedForPublic;MultipleActiveResultSets=true;TrustServerCertificate=True
-    ports:
-      - "5820:80"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-    depends_on:
-      - productsdb
+  #krinitewebshop.productcatalog.api:
+  #  container_name: KriniteWebShop.ProductCatalog.API
+  #  environment:
+  #    - ASPNETCORE_ENVIRONMENT=Docker
+  #    - ASPNETCORE_URLS=http://+:80
+  #    - ConnectionStrings:ProductConnection=Server=172.26.150.2,1433;Database=ProductDb;User ID=sa;Password=NotAll0wedForPublic;MultipleActiveResultSets=true;TrustServerCertificate=True
+  #  ports:
+  #    - "5820:80"
+  #  volumes:
+  #    - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+  #    - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  #  depends_on:
+  #    - productdb
 
-  productsdb:
-    container_name: KriniteWebShop.ProductCatalog.API.MsSQL
-    environment:
-      SA_PASSWORD: "NotAll0wedForPublic"
-      ACCEPT_EULA: "Y"
-    restart: always
-    ports:
-      - "8720:1433"
+  #productdb:
+  #  container_name: KriniteWebShop.ProductCatalog.API.MsSql
+  #  environment:
+  #    SA_PASSWORD: "NotAll0wedForPublic"
+  #    ACCEPT_EULA: "Y"
+  #  restart: always
+  #  ports:
+  #    - "8720:1433"
+
+
 
   krinitewebshop.productcatalog.nosql.api:
     container_name: KriniteWebShop.ProductCatalog.NoSQL.API
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
-      - DatabaseSettings:ConnectionString=mongodb://172.26.156.2:27017
+      - DatabaseSettings:ConnectionString=mongodb://172.26.151.2:27017
     ports:
       - "5821:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-      - productsdbmongo
+      - productdbmongo
 
-  productsdbmongo:
+  productdbmongo:
     container_name: KriniteWebShop.ProductCatalog.NoSQL.API.Mongo
     restart: always
     ports:
@@ -49,3 +51,28 @@ services:
     restart: always
     ports:
         - "3001:3000"
+
+
+
+  krinitewebshop.productcart.api:
+    container_name: KriniteWebShop.ProductCart.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - CacheSettings:CartConnection=172.26.152.2:6379
+      - GrpcSettings:CouponConnection=http://172.26.154.1:5824
+    ports:
+      - "5822:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - cartdb
+
+  cartdb:
+    container_name: KriniteWebShop.ProductCart.API.Redis
+    restart: always
+    ports:
+        - "6301:6379"
+
+
