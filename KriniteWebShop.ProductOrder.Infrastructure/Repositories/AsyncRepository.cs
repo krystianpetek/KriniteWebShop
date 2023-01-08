@@ -74,6 +74,7 @@ public class AsyncRepository<T> : IAsyncRepository<T> where T : EntityBase
     {
         T? entity = await _orderContext
             .Set<T>()
+            .AsNoTracking()
             .FirstOrDefaultAsync(entityId => entityId.Id == id);
 
         return entity;

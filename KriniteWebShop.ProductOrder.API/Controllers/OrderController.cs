@@ -34,14 +34,14 @@ public class OrderController : ControllerBase
     [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
     public async Task<ActionResult<Guid>> CheckoutOrder(CheckoutOrderCommand checkoutOrderCommand)
     {
-        var orderId = await _mediator.Send<Guid>(checkoutOrderCommand);
+        var orderId = await _mediator.Send<Guid>(request: checkoutOrderCommand);
         return Created($"{orderId}", null);
     }
 
-    [HttpPut(Name = "UpdateOrder")]
+    [HttpPut("{id}", Name = "UpdateOrder")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> UpdateOrder(UpdateOrderCommand updateOrderCommand)
+    public async Task<IActionResult> UpdateOrder(Guid id, UpdateOrderCommand updateOrderCommand)
     {
         await _mediator.Send<Unit>(updateOrderCommand);
         return NoContent();

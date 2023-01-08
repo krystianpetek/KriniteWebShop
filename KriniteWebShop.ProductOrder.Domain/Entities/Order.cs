@@ -3,6 +3,8 @@
 namespace KriniteWebShop.ProductOrder.Domain.Entities;
 public class Order : EntityBase
 {
+    public Order(Guid Id = default) { base.Id = Id; }
+
     public string? UserName { get; set; }
     public decimal? TotalPrice { get; set; }
 
@@ -18,5 +20,14 @@ public class Order : EntityBase
     public string? CardNumber { get; set; }
     public string? Expiration { get; set; }
     public string? CVV { get; set; }
-    public int? PaymentMethod { get; set; }
+    public PaymentMethod? PaymentMethod { get; set; }
+}
+public enum PaymentMethod
+{
+    Cash,
+    Checks,
+    DebitCards,
+    CreditCards,
+    MobilePayments,
+    ElectronicBankTransfers
 }

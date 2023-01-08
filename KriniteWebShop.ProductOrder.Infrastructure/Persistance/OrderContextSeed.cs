@@ -21,15 +21,18 @@ public static class OrderContextSeed
     {
         return new List<Order>
         {
-            new Order
+            new Order(Guid.Parse("d4482b07-9c4c-443a-b5ab-08daf19928d7"))
             {
                 UserName = "krystianpetek2",
                 FirstName= "Krystian",
                 LastName = "Petek",
                 EmailAddress = "krystianpetek2@gmail.com",
                 AddressLine = "Kraków",
-                Country = "Poland",
-                TotalPrice = 1331 ,
+                Country = "Polska",
+                TotalPrice = 2199,
+                ZipCode = "31-599",
+                State = "Małopolska",
+                PaymentMethod = PaymentMethod.MobilePayments
             }
         };
     }

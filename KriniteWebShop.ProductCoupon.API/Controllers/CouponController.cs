@@ -31,9 +31,9 @@ public class CouponController : ControllerBase
         return CreatedAtAction("GetCoupon", new { productName = coupon.ProductName }, coupon);
     }
 
-    [HttpPut]
+    [HttpPut("{productName}")]
     [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
-    public async Task<ActionResult<bool>> UpdateCoupon(Coupon coupon)
+    public async Task<ActionResult<bool>> UpdateCoupon(string productName, RestCoupon coupon)
     {
         bool result = await _couponRepository.UpdateCoupon(coupon);
         return Ok(result);

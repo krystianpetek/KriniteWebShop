@@ -13,39 +13,6 @@
 					"name": "NoSQL",
 					"item": [
 						{
-							"name": "GET products",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:7921/api/v1/product/",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "7921",
-									"path": [
-										"api",
-										"v1",
-										"product",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "GET categories",
 							"event": [
 								{
@@ -62,12 +29,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:7921/api/v1/category/",
-									"protocol": "https",
+									"raw": "{{ProductCatalogNoSQL}}/api/v1/category/",
 									"host": [
-										"localhost"
+										"{{ProductCatalogNoSQL}}"
 									],
-									"port": "7921",
 									"path": [
 										"api",
 										"v1",
@@ -79,7 +44,7 @@
 							"response": []
 						},
 						{
-							"name": "GET product by ID",
+							"name": "GET products",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -95,85 +60,15 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:7921/api/v1/product/{{productId2-ObjectId}}",
-									"protocol": "https",
+									"raw": "{{ProductCatalogNoSQL}}/api/v1/product/",
 									"host": [
-										"localhost"
+										"{{ProductCatalogNoSQL}}"
 									],
-									"port": "7921",
 									"path": [
 										"api",
 										"v1",
 										"product",
-										"{{productId2-ObjectId}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GET products by name",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:7921/api/v1/Product/GetProductsByName/{{productName2}}",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "7921",
-									"path": [
-										"api",
-										"v1",
-										"Product",
-										"GetProductsByName",
-										"{{productName2}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GET products by category",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:7921/api/v1/product/GetProductsByCategory/{{productCategory2}}",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "7921",
-									"path": [
-										"api",
-										"v1",
-										"product",
-										"GetProductsByCategory",
-										"{{productCategory2}}"
+										""
 									]
 								}
 							},
@@ -205,17 +100,46 @@
 									}
 								},
 								"url": {
-									"raw": "https://localhost:7921/api/v1/product/",
-									"protocol": "https",
+									"raw": "{{ProductCatalogNoSQL}}/api/v1/product/",
 									"host": [
-										"localhost"
+										"{{ProductCatalogNoSQL}}"
 									],
-									"port": "7921",
 									"path": [
 										"api",
 										"v1",
 										"product",
 										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET product by ID",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ProductCatalogNoSQL}}/api/v1/product/{{productId2-ObjectId}}",
+									"host": [
+										"{{ProductCatalogNoSQL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"{{productId2-ObjectId}}"
 									]
 								}
 							},
@@ -247,12 +171,10 @@
 									}
 								},
 								"url": {
-									"raw": "https://localhost:7921/api/v1/product/{{productId2-ObjectId}}",
-									"protocol": "https",
+									"raw": "{{ProductCatalogNoSQL}}/api/v1/product/{{productId2-ObjectId}}",
 									"host": [
-										"localhost"
+										"{{ProductCatalogNoSQL}}"
 									],
-									"port": "7921",
 									"path": [
 										"api",
 										"v1",
@@ -289,88 +211,15 @@
 									}
 								},
 								"url": {
-									"raw": "https://localhost:7921/api/v1/product/{{productId2-ObjectId}}",
-									"protocol": "https",
+									"raw": "{{ProductCatalogNoSQL}}/api/v1/product/{{productId2-ObjectId}}",
 									"host": [
-										"localhost"
+										"{{ProductCatalogNoSQL}}"
 									],
-									"port": "7921",
 									"path": [
 										"api",
 										"v1",
 										"product",
 										"{{productId2-ObjectId}}"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "SQL",
-					"item": [
-						{
-							"name": "GET products",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:7920/api/v1/product/",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "7920",
-									"path": [
-										"api",
-										"v1",
-										"product",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GET categories",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:7920/api/v1/category/",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "7920",
-									"path": [
-										"api",
-										"v1",
-										"category",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GET product by ID",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:7920/api/v1/product/{{productId1-Guid}}",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "7920",
-									"path": [
-										"api",
-										"v1",
-										"product",
-										"{{productId1-Guid}}"
 									]
 								}
 							},
@@ -393,18 +242,16 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:7920/api/v1/product/GetProductsByName/{{productName1}}",
-									"protocol": "https",
+									"raw": "{{ProductCatalogNoSQL}}/api/v1/Product/GetProductsByName/{{productName2}}",
 									"host": [
-										"localhost"
+										"{{ProductCatalogNoSQL}}"
 									],
-									"port": "7920",
 									"path": [
 										"api",
 										"v1",
-										"product",
+										"Product",
 										"GetProductsByName",
-										"{{productName1}}"
+										"{{productName2}}"
 									]
 								}
 							},
@@ -427,18 +274,81 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:7920/api/v1/product/GetProductsByCategory/{{productCategory1}}",
-									"protocol": "https",
+									"raw": "{{ProductCatalogNoSQL}}/api/v1/product/GetProductsByCategory/{{productCategory2}}",
 									"host": [
-										"localhost"
+										"{{ProductCatalogNoSQL}}"
 									],
-									"port": "7920",
 									"path": [
 										"api",
 										"v1",
 										"product",
 										"GetProductsByCategory",
-										"{{productCategory1}}"
+										"{{productCategory2}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SQL",
+					"item": [
+						{
+							"name": "GET categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ProductCatalog}}/api/v1/category/",
+									"host": [
+										"{{ProductCatalog}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"category",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ProductCatalog}}/api/v1/product/",
+									"host": [
+										"{{ProductCatalog}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"product",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET product by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ProductCatalog}}/api/v1/product/{{productId1-Guid}}",
+									"host": [
+										"{{ProductCatalog}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"{{productId1-Guid}}"
 									]
 								}
 							},
@@ -470,12 +380,10 @@
 									}
 								},
 								"url": {
-									"raw": "https://localhost:7920/api/v1/product/",
-									"protocol": "https",
+									"raw": "{{ProductCatalog}}/api/v1/product/",
 									"host": [
-										"localhost"
+										"{{ProductCatalog}}"
 									],
-									"port": "7920",
 									"path": [
 										"api",
 										"v1",
@@ -512,12 +420,10 @@
 									}
 								},
 								"url": {
-									"raw": "https://localhost:7920/api/v1/product/{{productId1-Guid}}",
-									"protocol": "https",
+									"raw": "{{ProductCatalog}}/api/v1/product/{{productId1-Guid}}",
 									"host": [
-										"localhost"
+										"{{ProductCatalog}}"
 									],
-									"port": "7920",
 									"path": [
 										"api",
 										"v1",
@@ -554,17 +460,79 @@
 									}
 								},
 								"url": {
-									"raw": "https://localhost:7920/api/v1/product/{{productId1-Guid}}",
-									"protocol": "https",
+									"raw": "{{ProductCatalog}}/api/v1/product/{{productId1-Guid}}",
 									"host": [
-										"localhost"
+										"{{ProductCatalog}}"
 									],
-									"port": "7920",
 									"path": [
 										"api",
 										"v1",
 										"product",
 										"{{productId1-Guid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET products by name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ProductCatalog}}/api/v1/product/GetProductsByName/{{productName1}}",
+									"host": [
+										"{{ProductCatalog}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"GetProductsByName",
+										"{{productName1}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET products by category",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ProductCatalog}}/api/v1/product/GetProductsByCategory/{{productCategory1}}",
+									"host": [
+										"{{ProductCatalog}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"product",
+										"GetProductsByCategory",
+										"{{productCategory1}}"
 									]
 								}
 							},
@@ -598,51 +566,47 @@
 			"name": "ProductCart",
 			"item": [
 				{
-					"name": "GetCart",
+					"name": "GET cart",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:7922/api/v1/Cart/{{userName}}",
-							"protocol": "https",
+							"raw": "{{ProductCart}}/api/v1/Cart/{{UserName}}",
 							"host": [
-								"localhost"
+								"{{ProductCart}}"
 							],
-							"port": "7922",
 							"path": [
 								"api",
 								"v1",
 								"Cart",
-								"{{userName}}"
+								"{{UserName}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DeleteCart",
+					"name": "DELETE cart",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:7922/api/v1/Cart/{{userName}}",
-							"protocol": "https",
+							"raw": "{{ProductCart}}/api/v1/Cart/{{UserName}}",
 							"host": [
-								"localhost"
+								"{{ProductCart}}"
 							],
-							"port": "7922",
 							"path": [
 								"api",
 								"v1",
 								"Cart",
-								"{{userName}}"
+								"{{UserName}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "UpdateCart",
+					"name": "PUT cart",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -659,7 +623,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userName\": \"{{userName}}\",\r\n    \"items\": [\r\n        {\r\n            \"productId\": \"d655171d-e21e-45f5-9c08-08daee7ce09c\",\r\n            \"productName\": \"Kayak\",\r\n            \"price\": 12.50,\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"userName\": \"{{UserName}}\",\r\n    \"items\": [\r\n        {\r\n            \"productId\": \"d655171d-e21e-45f5-9c08-08daee7ce09c\",\r\n            \"productName\": \"Kayak\",\r\n            \"price\": 12.50,\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -667,17 +631,15 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:7922/api/v1/Cart/",
-							"protocol": "https",
+							"raw": "{{ProductCart}}/api/v1/Cart/{{UserName}}",
 							"host": [
-								"localhost"
+								"{{ProductCart}}"
 							],
-							"port": "7922",
 							"path": [
 								"api",
 								"v1",
 								"Cart",
-								""
+								"{{UserName}}"
 							]
 						}
 					},
@@ -689,36 +651,33 @@
 			"name": "ProductCoupon",
 			"item": [
 				{
-					"name": "GetCoupon",
+					"name": "GET coupon",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:7923/api/v1/Coupon/{{productName}}/",
-							"protocol": "https",
+							"raw": "{{ProductCoupon}}/api/v1/Coupon/{{productName1}}",
 							"host": [
-								"localhost"
+								"{{ProductCoupon}}"
 							],
-							"port": "7923",
 							"path": [
 								"api",
 								"v1",
 								"Coupon",
-								"{{productName}}",
-								""
+								"{{productName1}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "PostCoupon",
+					"name": "POST coupon",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"productName\": \"product\",\r\n  \"description\": \"description\",\r\n  \"amount\": 10\r\n}",
+							"raw": "{\r\n  \"productName\": \"{{productName1}}\",\r\n  \"description\": \"Coupon for {{productName1}} \",\r\n  \"amount\": 15\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -726,12 +685,10 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:7923/api/v1/Coupon/",
-							"protocol": "https",
+							"raw": "{{ProductCoupon}}/api/v1/Coupon/",
 							"host": [
-								"localhost"
+								"{{ProductCoupon}}"
 							],
-							"port": "7923",
 							"path": [
 								"api",
 								"v1",
@@ -743,13 +700,13 @@
 					"response": []
 				},
 				{
-					"name": "UpdateCoupon",
+					"name": "PUT coupon",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 0,\r\n    \"productName\": \"product\",\r\n    \"description\": \"description\",\r\n    \"amount\": 10\r\n}",
+							"raw": "{\r\n    \"productName\": \"{{productName1}}\",\r\n    \"description\": \"Updated coupon for {{productName1}}\",\r\n    \"amount\": 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -757,16 +714,89 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:7923/api/v1/Coupon/",
-							"protocol": "https",
+							"raw": "{{ProductCoupon}}/api/v1/Coupon/{{productName1}}",
 							"host": [
-								"localhost"
+								"{{ProductCoupon}}"
 							],
-							"port": "7923",
 							"path": [
 								"api",
 								"v1",
 								"Coupon",
+								"{{productName1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE coupon",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{ProductCoupon}}/api/v1/Coupon/{{productName1}}/",
+							"host": [
+								"{{ProductCoupon}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Coupon",
+								"{{productName1}}",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ProductOrder",
+			"item": [
+				{
+					"name": "GET user orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ProductOrder}}/api/v1/Order/{{UserName}}",
+							"host": [
+								"{{ProductOrder}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Order",
+								"{{UserName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"{{UserName}}\",\r\n    \"totalPrice\": 2199.00,\r\n    \"firstName\": \"Krystian\",\r\n    \"lastName\": \"Petek\",\r\n    \"emailAddress\": \"krystianpetek2@gmail.com\",\r\n    \"addressLine\": \"Kraków\",\r\n    \"country\": \"Polska\",\r\n    \"state\": \"Małopolska\",\r\n    \"zipCode\": \"31-599\",\r\n    \"paymentMethod\": 4,\r\n    \"cardName\": null,\r\n    \"cardNumber\": null,\r\n    \"expiration\": null,\r\n    \"cvv\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ProductOrder}}/api/v1/Order/",
+							"host": [
+								"{{ProductOrder}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Order",
 								""
 							]
 						}
@@ -774,22 +804,50 @@
 					"response": []
 				},
 				{
-					"name": "DeleteCoupon",
+					"name": "PUT order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"{{OrderId}}\",\r\n    \"userName\": \"{{UserName}}\",\r\n    \"totalPrice\": 21939.00,\r\n    \"firstName\": \"Krystian\",\r\n    \"lastName\": \"Petek\",\r\n    \"emailAddress\": \"krystianpetek2@gmail.com\",\r\n    \"addressLine\": \"Kraków\",\r\n    \"country\": \"PL\",\r\n    \"state\": \"Małopolska\",\r\n    \"zipCode\": \"31-599\",\r\n    \"paymentMethod\": 3,\r\n    \"cardName\": null,\r\n    \"cardNumber\": null,\r\n    \"expiration\": null,\r\n    \"cvv\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ProductOrder}}/api/v1/Order/{{OrderId}}/",
+							"host": [
+								"{{ProductOrder}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Order",
+								"{{OrderId}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE order",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:7923/api/v1/Coupon/{{productName}}/",
-							"protocol": "https",
+							"raw": "{{ProductOrder}}/api/v1/Order/{{OrderId}}/",
 							"host": [
-								"localhost"
+								"{{ProductOrder}}"
 							],
-							"port": "7923",
 							"path": [
 								"api",
 								"v1",
-								"Coupon",
-								"{{productName}}",
+								"Order",
+								"{{OrderId}}",
 								""
 							]
 						}
@@ -856,6 +914,46 @@
 		{
 			"key": "productCategory2",
 			"value": "Soccer"
+		},
+		{
+			"key": "UserName",
+			"value": "krystianpetek2",
+			"type": "string"
+		},
+		{
+			"key": "OrderId",
+			"value": "d4482b07-9c4c-443a-b5ab-08daf19928d7",
+			"type": "string"
+		},
+		{
+			"key": "ProductCatalog",
+			"value": "http://localhost:5820",
+			"type": "string"
+		},
+		{
+			"key": "ProductCatalogNoSQL",
+			"value": "https://localhost:7921",
+			"type": "string"
+		},
+		{
+			"key": "ProductCart",
+			"value": "https://localhost:7922",
+			"type": "string"
+		},
+		{
+			"key": "ProductCoupon",
+			"value": "https://localhost:7923",
+			"type": "string"
+		},
+		{
+			"key": "ProductCoupon-gRPC",
+			"value": "https://localhost:7924",
+			"type": "string"
+		},
+		{
+			"key": "ProductOrder",
+			"value": "https://localhost:7925",
+			"type": "string"
 		}
 	]
 }
