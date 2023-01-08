@@ -122,3 +122,6 @@ docker pull mysql
 docker run -d -p 3301:3306 --name webshop-productorder-mysql -e MYSQL_ROOT_PASSWORD=NotAll0wedForPublic mysql
 docker exec -it mk-mysql /bin/bash
 mysql -u root -p NotAll0wedForPublic
+
+# finally run another MsSQL
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=NotAll0wedForPublic" -p 8725:1433 -d --name webshop-productorder-sql mcr.microsoft.com/mssql/server:latest
