@@ -25,7 +25,7 @@ public class OrderController : ControllerBase
     {
         GetOrdersListQuery query = new GetOrdersListQuery(userName);
 
-        IEnumerable<GetOrdersListQueryModel> orders = await _mediator.Send<IEnumerable<GetOrdersListQueryModel>>(query);
+        List<GetOrdersListQueryModel> orders = await _mediator.Send<List<GetOrdersListQueryModel>>(query);
 
         return Ok(orders);
     }
@@ -53,7 +53,7 @@ public class OrderController : ControllerBase
     public async Task<IActionResult> DeleteOrder(Guid id)
     {
         DeleteOrderCommand command = new DeleteOrderCommand { Id = id };
-        await _mediator.Send(command);
+        await _mediator.Send<Unit>(command);
 
         return NoContent();
     }

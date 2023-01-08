@@ -48,7 +48,8 @@ public class CheckoutOrderCommandHandler : IRequestHandler<CheckoutOrderCommand,
 
         try
         {
-            await _emailService.SendMail(email);
+            _logger.LogWarning("Mock sending email, but not implemented");
+            //await _emailService.SendMail(email);
         }
         catch (Exception ex)
         {
