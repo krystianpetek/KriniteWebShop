@@ -1,28 +1,28 @@
 version: '3.4'
 
 services:
-  #krinitewebshop.productcatalog.api:
-  #  container_name: KriniteWebShop.ProductCatalog.API
-  #  environment:
-  #    - ASPNETCORE_ENVIRONMENT=Docker
-  #    - ASPNETCORE_URLS=http://+:80
-  #    - ConnectionStrings:ProductConnection=Server=172.26.150.2,1433;Database=ProductDb;User ID=sa;Password=NotAll0wedForPublic;MultipleActiveResultSets=true;TrustServerCertificate=True
-  #  ports:
-  #    - "5820:80"
-  #  volumes:
-  #    - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-  #    - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-  #  depends_on:
-  #    - productdb
+  krinitewebshop.productcatalog.api:
+    container_name: KriniteWebShop.ProductCatalog.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings:ProductConnection=Server=172.26.150.2,1433;Database=ProductDb;User ID=sa;Password=NotAll0wedForPublic;MultipleActiveResultSets=true;TrustServerCertificate=True
+    ports:
+      - "5820:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - productdb
 
-  #productdb:
-  #  container_name: KriniteWebShop.ProductCatalog.API.MsSql
-  #  environment:
-  #    SA_PASSWORD: "NotAll0wedForPublic"
-  #    ACCEPT_EULA: "Y"
-  #  restart: always
-  #  ports:
-  #    - "8720:1433"
+  productdb:
+    container_name: KriniteWebShop.ProductCatalog.API.MsSql
+    environment:
+      SA_PASSWORD: "NotAll0wedForPublic"
+      ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+      - "8720:1433"
 
 
 
@@ -60,7 +60,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
       - CacheSettings:CartConnection=172.26.152.2:6379
-      - GrpcSettings:CouponConnection=http://172.26.154.1:5824
+      - GrpcSettings:CouponConnection=http://krinitewebshop.productcoupon.grpc
     ports:
       - "5822:80"
     volumes:
@@ -76,3 +76,37 @@ services:
         - "6301:6379"
 
 
+      
+  krinitewebshop.productcoupon.grpc:
+    container_name: KriniteWebShop.ProductCoupon.gRPC
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings:CouponDb=172.26.154.2:5432
+    ports:
+      - "5824:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - coupondb
+
+  coupondb:
+    container_name: KriniteWebShop.ProductCoupon.gRPC.PostgreSql
+    restart: always
+    ports:
+        - "5401:5432"
+    environment:
+      - POSTGRES_PASSWORD=NotAll0wedForPublic
+
+  pgadmin4:
+    container_name: KriniteWebShop.ProductCoupon.gRPC.pgAdmin4
+    restart: always
+    ports:
+        - "5402:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com 
+      - PGADMIN_DEFAULT_PASSWORD=NotAll0wedForPublic
+
+
+      

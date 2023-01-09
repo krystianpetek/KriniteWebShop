@@ -1,20 +1,20 @@
 version: '3.4'
 
 services:
-  #krinitewebshop.productcatalog.api:
-  #  image: ${DOCKER_REGISTRY-}krinitewebshopproductcatalogapi
-  #  build:
-  #    context: .
-  #    dockerfile: KriniteWebShop.ProductCatalog.API/Dockerfile
-  #  networks:
-  #    static-network:
-  #      ipv4_address: 172.26.150.1
+  krinitewebshop.productcatalog.api:
+    image: ${DOCKER_REGISTRY-}krinitewebshopproductcatalogapi
+    build:
+      context: .
+      dockerfile: KriniteWebShop.ProductCatalog.API/Dockerfile
+    networks:
+      static-network:
+        ipv4_address: 172.26.150.1
 
-  #productdb:
-  #  image: mcr.microsoft.com/mssql/server:latest
-  #  networks:
-  #    static-network:
-  #      ipv4_address: 172.26.150.2
+  productdb:
+    image: mcr.microsoft.com/mssql/server:latest
+    networks:
+      static-network:
+        ipv4_address: 172.26.150.2
 
 
 
@@ -55,6 +55,29 @@ services:
     networks:
       static-network:
         ipv4_address: 172.26.152.2
+
+
+
+  krinitewebshop.productcoupon.grpc:
+    image: ${DOCKER_REGISTRY-}krinitewebshopproductcoupongrpc
+    build:
+      context: .
+      dockerfile: KriniteWebShop.ProductCoupon.gRPC/Dockerfile
+    networks:
+      static-network:
+        ipv4_address: 172.26.154.1
+        
+  coupondb:
+    image: postgres
+    networks:
+      static-network:
+        ipv4_address: 172.26.154.2
+        
+  pgadmin4:
+    image: dpage/pgadmin4
+    networks:
+      static-network:
+        ipv4_address: 172.26.154.3
 
 
 
