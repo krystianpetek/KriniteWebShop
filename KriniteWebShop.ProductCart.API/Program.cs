@@ -1,8 +1,10 @@
 using KriniteWebShop.ProductCart.API.GrpcServices;
 using KriniteWebShop.ProductCart.API.Repositories;
 using KriniteWebShop.ProductCoupon.gRPC.Protos;
+using MassTransit;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace KriniteWebShop.ProductCart.API;
 
@@ -25,7 +27,6 @@ public static class Program
                 });
         });
 
-        builder.Services.AddScoped<ICartRepository, CartRepository>();
         builder.Services.AddStackExchangeRedisCache((RedisCacheOptions redis) =>
         {
             string connectionString = builder.Configuration?.GetRequiredSection("CacheSettings")?.GetValue<string>("CartConnection");
@@ -37,7 +38,19 @@ public static class Program
             var couponUrl = builder.Configuration.GetRequiredSection("GrpcSettings").GetValue<string>("CouponConnection");
             configureClient.Address = new Uri(couponUrl);
         });
+
+        builder.Services.AddScoped<ICartRepository, CartRepository>();
         builder.Services.AddScoped<CouponGrpcService>();
+
+        builder.Services.AddMassTransit(massTransitConfig =>
+        {
+            massTransitConfig.UsingRabbitMq((busContext,rabbitMqConfig) =>
+            {
+                string connectionString = builder.Configuration.GetConnectionString("RabbitMqConnection");
+                rabbitMqConfig.Host(connectionString); 
+            });
+        });
+        builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         var app = builder.Build();
 

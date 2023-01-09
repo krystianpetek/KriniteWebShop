@@ -623,7 +623,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userName\": \"{{UserName}}\",\r\n    \"items\": [\r\n        {\r\n            \"productId\": \"d655171d-e21e-45f5-9c08-08daee7ce09c\",\r\n            \"productName\": \"Kayak\",\r\n            \"price\": 12.50,\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"userName\": \"{{UserName}}\",\r\n    \"items\": [\r\n        {\r\n            \"productId\":\"{{productId1-Guid}}\",\r\n            \"productName\": \"{{productName1}}\",\r\n            \"price\": 12.50,\r\n            \"quantity\": 3\r\n        },\r\n        {\r\n            \"productId\":\"{{productId2-Guid}}\",\r\n            \"productName\": \"{{productName2}}\",\r\n            \"price\": 20000,\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -640,6 +640,46 @@
 								"v1",
 								"Cart",
 								"{{UserName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST cart checkout",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"{{UserName}}\",\r\n    \"totalPrice\": 0,\r\n    \"firstName\": \"Krystian\",\r\n    \"lastName\": \"Petek\",\r\n    \"emailAddress\": \"krystianpetek2@gmail.com\",\r\n    \"addressLine\": \"Kraków\",\r\n    \"country\": \"Polska\",\r\n    \"state\": \"Małopolska\",\r\n    \"zipCode\": \"31-599\",\r\n    \"paymentMethod\": 4,\r\n    \"cardName\": null,\r\n    \"cardNumber\": null,\r\n    \"expiration\": null,\r\n    \"cvv\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ProductCart}}/api/v1/Cart/Checkout",
+							"host": [
+								"{{ProductCart}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Cart",
+								"Checkout"
 							]
 						}
 					},
@@ -932,27 +972,27 @@
 		},
 		{
 			"key": "ProductCatalogNoSQL",
-			"value": "https://localhost:7921",
+			"value": "http://localhost:5821",
 			"type": "string"
 		},
 		{
 			"key": "ProductCart",
-			"value": "https://localhost:7922",
+			"value": "http://localhost:5822",
 			"type": "string"
 		},
 		{
 			"key": "ProductCoupon",
-			"value": "https://localhost:7923",
+			"value": "http://localhost:5823",
 			"type": "string"
 		},
 		{
 			"key": "ProductCoupon-gRPC",
-			"value": "https://localhost:7924",
+			"value": "http://localhost:5824",
 			"type": "string"
 		},
 		{
 			"key": "ProductOrder",
-			"value": "https://localhost:7925",
+			"value": "http://localhost:5825",
 			"type": "string"
 		}
 	]
