@@ -145,3 +145,17 @@ services:
     restart: always
     ports:
       - "8725:1433"
+
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+    - "5601:5672"
+    - "15601:15672"
+
+  #portainer:
+  #  container_name: portainer
+  #  restart: always
+  #  ports:
+  #    - "9000:9000"
+  #    - "9443:9443"

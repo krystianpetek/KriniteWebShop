@@ -105,6 +105,18 @@ services:
       static-network:
         ipv4_address: 172.26.155.2
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    networks:
+      static-network:
+        ipv4_address: 172.26.156.1
+
+
+  #portainer:
+  #  image: portainer/portainer-ce:latest
+  #  networks:
+  #    static-network:
+  #      ipv4_address: 172.26.150.10
 networks:
   static-network:
     ipam:
