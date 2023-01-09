@@ -78,6 +78,15 @@ services:
     networks:
       static-network:
         ipv4_address: 172.26.154.3
+  
+  krinitewebshop.productcoupon.api:
+    image: ${DOCKER_REGISTRY-}krinitewebshopproductcouponapi
+    build:
+      context: .
+      dockerfile: KriniteWebShop.ProductCoupon.API/Dockerfile
+    networks:
+      static-network:
+        ipv4_address: 172.26.154.4
 
 
 

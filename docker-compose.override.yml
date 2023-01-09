@@ -76,7 +76,7 @@ services:
         - "6301:6379"
 
 
-      
+
   krinitewebshop.productcoupon.grpc:
     container_name: KriniteWebShop.ProductCoupon.gRPC
     environment:
@@ -107,6 +107,20 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com 
       - PGADMIN_DEFAULT_PASSWORD=NotAll0wedForPublic
+            
+  krinitewebshop.productcoupon.api:
+    container_name: KriniteWebShop.ProductCoupon.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings:CouponDb=172.26.154.2:5432
+    ports:
+      - "5823:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - coupondb
 
 
       

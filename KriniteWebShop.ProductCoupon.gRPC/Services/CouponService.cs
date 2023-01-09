@@ -59,7 +59,7 @@ public class CouponService : CouponProtoService.CouponProtoServiceBase
 
     public override async Task<CouponModel> UpdateCoupon(UpdateCouponRequest request, ServerCallContext context)
     {
-        Coupon coupon = request.Coupon.MapToCoupon();
+        RestCoupon coupon = request.Coupon.MapToRestCoupon();
         
         bool result = await _couponRepository.UpdateCoupon(coupon);
         if (!result)
