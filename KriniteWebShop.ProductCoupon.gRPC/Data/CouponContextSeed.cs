@@ -12,12 +12,12 @@ public static class CouponDatabaseSeed
         ILoggerFactory loggerFactory = scope.ServiceProvider.GetRequiredService<ILoggerFactory>();
         var logger = loggerFactory.CreateLogger("CouponDbSeeder");
 
+        string connectionString = configuration?.GetRequiredSection("ConnectionStrings")?.GetValue<string>("CouponDb")
+            ?? throw new ArgumentNullException(nameof(configuration));
+
         try
         {
             logger.LogInformation("Seed database are started.");
-
-            string connectionString = configuration?.GetRequiredSection("ConnectionStrings")?.GetValue<string>("CouponDb")
-            ?? throw new ArgumentNullException(nameof(configuration));
 
             using NpgsqlConnection npgsqlConnection = new NpgsqlConnection(connectionString);
             npgsqlConnection.Open();
@@ -41,6 +41,16 @@ public static class CouponDatabaseSeed
         }
         catch (Exception ex)
         {
+            string correctConnectionString = connectionString.Replace("Database=coupondb;", "");
+            
+            using NpgsqlConnection npgsqlConnection = new NpgsqlConnection(correctConnectionString);
+            npgsqlConnection.Open();
+
+            using NpgsqlCommand npgsqlCommand = npgsqlConnection.CreateCommand();
+
+            npgsqlCommand.CommandText = "CREATE DATABASE coupondb";
+            npgsqlCommand.ExecuteNonQuery();
+
             logger.LogError(ex.Message, "Error occurred while seeding database.");
         }
     }
