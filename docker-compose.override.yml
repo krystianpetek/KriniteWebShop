@@ -123,4 +123,25 @@ services:
       - coupondb
 
 
-      
+  krinitewebshop.productorder.api:
+    container_name: KriniteWebShop.ProductOrder.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings:OrderDb=Server=172.26.155.2,1433;Database=Order;User ID=sa;Password=NotAll0wedForPublic;MultipleActiveResultSets=true;TrustServerCertificate=True
+    ports:
+      - "5825:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - orderdb
+
+  orderdb:
+    container_name: KriniteWebShop.ProductOrder.API.MsSql
+    environment:
+      SA_PASSWORD: "NotAll0wedForPublic"
+      ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+      - "8725:1433"

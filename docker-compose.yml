@@ -89,6 +89,21 @@ services:
         ipv4_address: 172.26.154.4
 
 
+ 
+  krinitewebshop.productorder.api:
+    image: ${DOCKER_REGISTRY-}krinitewebshopproductorderapi
+    build:
+      context: .
+      dockerfile: KriniteWebShop.ProductOrder.API/Dockerfile
+    networks:
+      static-network:
+        ipv4_address: 172.26.155.1
+
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:latest
+    networks:
+      static-network:
+        ipv4_address: 172.26.155.2
 
 networks:
   static-network:

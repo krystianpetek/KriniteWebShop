@@ -17,7 +17,7 @@ public static class InfrastructureDependencyInjection
     {
         services.AddDbContext<OrderContext>(options =>
         {
-            string connectionString = configuration.GetConnectionString("OrderConnection");
+            string connectionString = configuration.GetConnectionString("OrderDb");
             //options.UseMySql(connectionString, new MySqlServerVersion(new Version("8,0,29")));
             options.UseSqlServer(connectionString);
         });
