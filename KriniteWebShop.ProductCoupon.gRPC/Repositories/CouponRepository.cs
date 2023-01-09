@@ -53,13 +53,13 @@ public class CouponRepository : ICouponRepository
         return deleted > 0;
     }
 
-    public async Task<bool> UpdateCoupon(Coupon coupon)
+    public async Task<bool> UpdateCoupon(RestCoupon coupon)
     {
         using NpgsqlConnection npgsqlConnection = new NpgsqlConnection(_connectionString);
 
         var updated = await npgsqlConnection.ExecuteAsync(
-            "UPDATE Coupon SET ProductName = @ProductName, Description = @Description, Amount = @Amount WHERE Id = @Id",
-            new { ProductName = coupon?.ProductName, Description = coupon?.Description, Amount = coupon?.Amount, Id = coupon?.Id });
+            "UPDATE Coupon SET Description = @Description, Amount = @Amount WHERE ProductName = @ProductName",
+            new { ProductName = coupon?.ProductName, Description = coupon?.Description, Amount = coupon?.Amount });
 
         return updated > 0;
     }
