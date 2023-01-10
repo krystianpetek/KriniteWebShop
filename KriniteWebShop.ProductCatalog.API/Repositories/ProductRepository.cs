@@ -54,4 +54,10 @@ public class ProductRepository : IProductRepository
         var deleteResult = await _productDbContext.Products.Where(product => product.Id == id).ExecuteDeleteAsync();
         return deleteResult > 0;
     }
+
+    public async Task<IEnumerable<string>> GetProductCategories()
+    {
+        IEnumerable<string> categories = await _productDbContext.Products.AsNoTracking().Select(product => product.Category).Distinct().ToListAsync();
+        return categories;
+    }
 }

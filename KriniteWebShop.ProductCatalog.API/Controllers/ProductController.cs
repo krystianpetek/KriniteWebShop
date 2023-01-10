@@ -88,4 +88,12 @@ public class ProductController : ControllerBase
         bool deleteResult = await _productRepository.DeleteProduct(id);
         return Ok(deleteResult);
     }
+
+    [HttpGet("Categories")]
+    [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<string>>> GetCategories()
+    {
+        IEnumerable<string> categories = await _productRepository.GetProductCategories();
+        return Ok(categories);
+    }
 }
