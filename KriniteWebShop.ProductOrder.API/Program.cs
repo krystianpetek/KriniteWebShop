@@ -1,6 +1,10 @@
+using KriniteWebShop.EventBus.Common;
+using KriniteWebShop.ProductOrder.API.EventBusConsumer;
 using KriniteWebShop.ProductOrder.Application;
 using KriniteWebShop.ProductOrder.Infrastructure;
 using KriniteWebShop.ProductOrder.Infrastructure.Persistance;
+using MassTransit;
+using System.Reflection;
 
 namespace KriniteWebShop.ProductOrder.API;
 
@@ -16,6 +20,23 @@ public static class Program
 
         builder.Services.AddApplicationServices();
         builder.Services.AddInfrastructureServices(builder.Configuration);
+
+        builder.Services.AddMassTransit(massTransitConfig =>
+        {
+            massTransitConfig.AddConsumer<CartCheckoutConsumer>();
+            massTransitConfig.UsingRabbitMq((busContext, rabbitMqConfig) =>
+            {
+                string connectionString = builder.Configuration.GetConnectionString("RabbitMqConnection");
+                rabbitMqConfig.Host(connectionString);
+                rabbitMqConfig.ReceiveEndpoint(EventBusConstants.CartCheckoutQueue, endpointConfig =>
+                {
+                    endpointConfig.ConfigureConsumer<CartCheckoutConsumer>(busContext);
+                });
+            });
+        });
+
+        builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        builder.Services.AddScoped<CartCheckoutConsumer>();
 
         var app = builder.Build();
 

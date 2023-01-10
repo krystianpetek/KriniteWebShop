@@ -1,4 +1,5 @@
-﻿using KriniteWebShop.ProductOrder.Application.Contracts.Persistance;
+﻿using AutoMapper;
+using KriniteWebShop.ProductOrder.Application.Contracts.Persistance;
 using KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.CheckoutOrder;
 using KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.DeleteOrder;
 using KriniteWebShop.ProductOrder.Application.Features.Orders.Commands.UpdateOrder;
@@ -30,7 +31,7 @@ public class OrderController : ControllerBase
         return Ok(orders);
     }
 
-    [HttpPost(Name = "CheckoutOrder")]
+    [HttpPost(Name = "CheckoutOrder")] // obsolete but EventBusConsumer
     [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
     public async Task<ActionResult<Guid>> CheckoutOrder(CheckoutOrderCommand checkoutOrderCommand)
     {
