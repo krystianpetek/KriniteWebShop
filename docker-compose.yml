@@ -1,6 +1,7 @@
 version: '3.4'
 
 services:
+# KriniteWebShop.ProductCatalog.API
   krinitewebshop.productcatalog.api:
     image: ${DOCKER_REGISTRY-}krinitewebshopproductcatalogapi
     build:
@@ -8,16 +9,15 @@ services:
       dockerfile: KriniteWebShop.ProductCatalog.API/Dockerfile
     networks:
       static-network:
-        ipv4_address: 172.26.150.1
+        ipv4_address: 172.26.100.1
 
-  productdb:
+  productdb.mssql:
     image: mcr.microsoft.com/mssql/server:latest
     networks:
       static-network:
-        ipv4_address: 172.26.150.2
+        ipv4_address: 172.26.100.2
 
-
-
+# KriniteWebShop.ProductCatalog.NoSQL.API
   krinitewebshop.productcatalog.nosql.api:
     image: ${DOCKER_REGISTRY-}krinitewebshopproductcatalognosqlapi
     build:
@@ -25,22 +25,15 @@ services:
       dockerfile: KriniteWebShop.ProductCatalog.NoSQL.API/Dockerfile
     networks:
       static-network:
-        ipv4_address: 172.26.151.1
+        ipv4_address: 172.26.102.1
         
-  productdbmongo:
+  productdb.mongo:
     image: mongo
     networks:
       static-network:
-        ipv4_address: 172.26.151.2
+        ipv4_address: 172.26.102.2
 
-  mongodbclient:
-    image: mongoclient/mongoclient
-    networks:
-      static-network:
-        ipv4_address: 172.26.151.3
-
-
-
+# KriniteWebShop.ProductCart.API
   krinitewebshop.productcart.api:
     image: ${DOCKER_REGISTRY-}krinitewebshopproductcartapi
     build:
@@ -48,37 +41,16 @@ services:
       dockerfile: KriniteWebShop.ProductCart.API/Dockerfile
     networks:
       static-network:
-        ipv4_address: 172.26.152.1
+        ipv4_address: 172.26.104.1
         
-  cartdb:
+  cartdb.redis:
     image: redis
     networks:
       static-network:
-        ipv4_address: 172.26.152.2
+        ipv4_address: 172.26.104.2
 
 
-
-  krinitewebshop.productcoupon.grpc:
-    image: ${DOCKER_REGISTRY-}krinitewebshopproductcoupongrpc
-    build:
-      context: .
-      dockerfile: KriniteWebShop.ProductCoupon.gRPC/Dockerfile
-    networks:
-      static-network:
-        ipv4_address: 172.26.154.1
-        
-  coupondb:
-    image: postgres
-    networks:
-      static-network:
-        ipv4_address: 172.26.154.2
-        
-  pgadmin4:
-    image: dpage/pgadmin4
-    networks:
-      static-network:
-        ipv4_address: 172.26.154.3
-  
+# KriniteWebShop.ProductCoupon.API
   krinitewebshop.productcoupon.api:
     image: ${DOCKER_REGISTRY-}krinitewebshopproductcouponapi
     build:
@@ -86,10 +58,24 @@ services:
       dockerfile: KriniteWebShop.ProductCoupon.API/Dockerfile
     networks:
       static-network:
-        ipv4_address: 172.26.154.4
+        ipv4_address: 172.26.106.1
+  
+  krinitewebshop.productcoupon.grpc:
+    image: ${DOCKER_REGISTRY-}krinitewebshopproductcoupongrpc
+    build:
+      context: .
+      dockerfile: KriniteWebShop.ProductCoupon.gRPC/Dockerfile
+    networks:
+      static-network:
+        ipv4_address: 172.26.106.2
+        
+  coupondb.postgresql:
+    image: postgres
+    networks:
+      static-network:
+        ipv4_address: 172.26.106.3
 
-
- 
+# KriniteWebShop.ProductOrder.API 
   krinitewebshop.productorder.api:
     image: ${DOCKER_REGISTRY-}krinitewebshopproductorderapi
     build:
@@ -97,25 +83,48 @@ services:
       dockerfile: KriniteWebShop.ProductOrder.API/Dockerfile
     networks:
       static-network:
-        ipv4_address: 172.26.155.1
+        ipv4_address: 172.26.108.1
 
-  orderdb:
+  orderdb.mssql:
     image: mcr.microsoft.com/mssql/server:latest
     networks:
       static-network:
-        ipv4_address: 172.26.155.2
+        ipv4_address: 172.26.108.2
+
+# KriniteWebShop.GatewayAPI
+  krinitewebshop.gatewayapi:
+    image: ${DOCKER_REGISTRY-}krinitewebshopgatewayapi
+    build:
+      context: .
+      dockerfile: KriniteWebShop.GatewayAPI/Dockerfile
+    networks:
+      static-network:
+        ipv4_address: 172.26.110.1
+
+# Tools
+  portainer:
+    image: portainer/portainer-ce:latest
+    networks:
+      static-network:
+        ipv4_address: 172.26.190.1
+
+  mongodbclient:
+    image: mongoclient/mongoclient
+    networks:
+      static-network:
+        ipv4_address: 172.26.191.1
+      
+  pgadmin4:
+    image: dpage/pgadmin4
+    networks:
+      static-network:
+        ipv4_address: 172.26.192.2
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
     networks:
       static-network:
-        ipv4_address: 172.26.156.1
-
-  portainer:
-    image: portainer/portainer-ce:latest
-    networks:
-      static-network:
-        ipv4_address: 172.26.150.10
+        ipv4_address: 172.26.193.1
 
 networks:
   static-network:

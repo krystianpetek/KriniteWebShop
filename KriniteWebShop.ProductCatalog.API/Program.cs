@@ -31,7 +31,6 @@ public static class Program
                 options.UseSqlServer(connectionString);
             });
 
-        builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
         builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
         var app = builder.Build();

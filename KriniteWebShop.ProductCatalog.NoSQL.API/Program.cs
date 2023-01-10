@@ -24,7 +24,6 @@ public static class Program
         });
 
         builder.Services.AddScoped<IProductDbContext, ProductDbContext>();
-        builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
         builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
         var app = builder.Build();

@@ -48,4 +48,10 @@ public class ProductRepository : IProductRepository
         var deleteResult = await _productDbContext.Products.DeleteOneAsync(product => product.Id == id);
         return deleteResult.IsAcknowledged && deleteResult.DeletedCount > 0;
     }
+
+    public async Task<IEnumerable<string>> GetProductCategories()
+    {
+        IEnumerable<string> categories = _productDbContext.Products.AsQueryable().Select(x => x.Category).Distinct().ToList();
+        return await Task.FromResult(categories);
+    }
 }

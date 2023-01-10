@@ -1,21 +1,22 @@
 version: '3.4'
 
 services:
+# KriniteWebShop.ProductCatalog.API
   krinitewebshop.productcatalog.api:
     container_name: KriniteWebShop.ProductCatalog.API
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings:ProductConnection=Server=172.26.150.2,1433;Database=ProductDb;User ID=sa;Password=NotAll0wedForPublic;MultipleActiveResultSets=true;TrustServerCertificate=True
+      - ConnectionStrings:ProductConnection=Server=172.26.100.2,1433;Database=ProductDb;User ID=sa;Password=NotAll0wedForPublic;MultipleActiveResultSets=true;TrustServerCertificate=True
     ports:
       - "5820:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-      - productdb
+      - productdb.mssql
 
-  productdb:
+  productdb.mssql:
     container_name: KriniteWebShop.ProductCatalog.API.MsSql
     environment:
       SA_PASSWORD: "NotAll0wedForPublic"
@@ -24,76 +25,81 @@ services:
     ports:
       - "8720:1433"
 
-
-
+# KriniteWebShop.ProductCatalog.NoSQL.API
   krinitewebshop.productcatalog.nosql.api:
     container_name: KriniteWebShop.ProductCatalog.NoSQL.API
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
-      - DatabaseSettings:ConnectionString=mongodb://172.26.151.2:27017
+      - DatabaseSettings:ConnectionString=mongodb://172.26.102.2:27017
     ports:
       - "5821:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-      - productdbmongo
+      - productdb.mongo
 
-  productdbmongo:
+  productdb.mongo:
     container_name: KriniteWebShop.ProductCatalog.NoSQL.API.Mongo
     restart: always
     ports:
         - "27001:27017"
-        
-  mongodbclient:
-    container_name: KriniteWebShop.ProductCatalog.NoSQL.API.MongoClient
-    restart: always
-    ports:
-        - "3001:3000"
 
-
-
+# KriniteWebShop.ProductCart.API
   krinitewebshop.productcart.api:
     container_name: KriniteWebShop.ProductCart.API
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
-      - CacheSettings:CartConnection=172.26.152.2:6379
+      - CacheSettings:CartConnection=172.26.104.2:6379
       - GrpcSettings:CouponConnection=http://krinitewebshop.productcoupon.grpc
-      - ConnectionStrings:RabbitMqConnection=amqp://guest:guest@172.26.156.1:5672
+      - ConnectionStrings:RabbitMqConnection=amqp://guest:guest@172.26.193.1:5672
     ports:
       - "5822:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-      - cartdb
+      - cartdb.redis
       - rabbitmq
 
-  cartdb:
+  cartdb.redis:
     container_name: KriniteWebShop.ProductCart.API.Redis
     restart: always
     ports:
         - "6301:6379"
 
-
+# KriniteWebShop.ProductCoupon.API
+  krinitewebshop.productcoupon.api:
+    container_name: KriniteWebShop.ProductCoupon.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings:CouponDb=Server=172.26.106.3;Port=5432;Database=coupondb;User Id=postgres;Password=NotAll0wedForPublic
+    ports:
+      - "5823:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - coupondb.postgresql
 
   krinitewebshop.productcoupon.grpc:
     container_name: KriniteWebShop.ProductCoupon.gRPC
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings:CouponDb=172.26.154.2:5432
+      - ConnectionStrings:CouponDb=Server=172.26.106.3;Port=5432;Database=coupondb;User Id=postgres;Password=NotAll0wedForPublic
     ports:
       - "5824:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-      - coupondb
+      - coupondb.postgresql
 
-  coupondb:
+  coupondb.postgresql:
     container_name: KriniteWebShop.ProductCoupon.gRPC.PostgreSql
     restart: always
     ports:
@@ -101,47 +107,24 @@ services:
     environment:
       - POSTGRES_PASSWORD=NotAll0wedForPublic
 
-  pgadmin4:
-    container_name: KriniteWebShop.ProductCoupon.gRPC.pgAdmin4
-    restart: always
-    ports:
-        - "5402:80"
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@admin.com 
-      - PGADMIN_DEFAULT_PASSWORD=NotAll0wedForPublic
-            
-  krinitewebshop.productcoupon.api:
-    container_name: KriniteWebShop.ProductCoupon.API
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Docker
-      - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings:CouponDb=172.26.154.2:5432
-    ports:
-      - "5823:80"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-    depends_on:
-      - coupondb
-
-
+# KriniteWebShop.ProductOrder.API
   krinitewebshop.productorder.api:
     container_name: KriniteWebShop.ProductOrder.API
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings:OrderDb=Server=172.26.155.2,1433;Database=Order;User ID=sa;Password=NotAll0wedForPublic;MultipleActiveResultSets=true;TrustServerCertificate=True
-      - ConnectionStrings:RabbitMqConnection=amqp://guest:guest@172.26.156.1:5672
+      - ConnectionStrings:OrderDb=Server=172.26.108.2,1433;Database=Order;User ID=sa;Password=NotAll0wedForPublic;MultipleActiveResultSets=true;TrustServerCertificate=True
+      - ConnectionStrings:RabbitMqConnection=amqp://guest:guest@172.26.193.1:5672
     ports:
       - "5825:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-      - orderdb
+      - orderdb.mssql
       - rabbitmq
 
-  orderdb:
+  orderdb.mssql:
     container_name: KriniteWebShop.ProductOrder.API.MsSql
     environment:
       SA_PASSWORD: "NotAll0wedForPublic"
@@ -150,19 +133,47 @@ services:
     ports:
       - "8725:1433"
 
+# KriniteWebShop.GatewayAPI
+  krinitewebshop.gatewayapi:
+    container_name: KriniteWebShop.GatewayAPI
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "5826:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+# Tools
+  portainer:
+    container_name: KriniteWebShop.Portainer
+    restart: always
+    ports:
+      - "8000:8000"
+      - "9443:9443"      
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock 
+    - portainer_data:/data portainer/portainer-ce:latest         
+  
+  mongodbclient:
+    container_name: KriniteWebShop.MongoClient
+    restart: always
+    ports:
+        - "3001:3000"
+
+  pgadmin4:
+    container_name: KriniteWebShop.pgAdmin4
+    restart: always
+    ports:
+        - "5402:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com 
+      - PGADMIN_DEFAULT_PASSWORD=NotAll0wedForPublic
+            
   rabbitmq:
-    container_name: rabbitmq
+    container_name: KriniteWebShop.RabbitMQ
     restart: always
     ports:
     - "5601:5672"
     - "15601:15672"
-
-  portainer:
-    container_name: portainer
-    restart: always
-    ports:
-      - "8000:8000"
-      - "9443:9443"
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock 
-    - portainer_data:/data portainer/portainer-ce:latest
