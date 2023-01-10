@@ -13,7 +13,7 @@
 					"name": "NoSQL",
 					"item": [
 						{
-							"name": "GET categories",
+							"name": "GET product categories",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -29,15 +29,15 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{ProductCatalogNoSQL}}/api/v1/category/",
+									"raw": "{{ProductCatalogNoSQL}}/api/v1/Product/Categories",
 									"host": [
 										"{{ProductCatalogNoSQL}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"category",
-										""
+										"Product",
+										"Categories"
 									]
 								}
 							},
@@ -295,20 +295,20 @@
 					"name": "SQL",
 					"item": [
 						{
-							"name": "GET categories",
+							"name": "GET product categories",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{ProductCatalog}}/api/v1/category/",
+									"raw": "{{ProductCatalog}}/api/v1/Product/Categories",
 									"host": [
 										"{{ProductCatalog}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"category",
-										""
+										"Product",
+										"Categories"
 									]
 								}
 							},
@@ -895,6 +895,51 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "GatewayAPI",
+			"item": [
+				{
+					"name": "Product",
+					"item": [
+						{
+							"name": "Product",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{GatewayAPI}}/Product",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Product"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Product/Categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{GatewayAPI}}/Product/Categories",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Product",
+										"Categories"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
 		}
 	],
 	"event": [
@@ -993,6 +1038,11 @@
 		{
 			"key": "ProductOrder",
 			"value": "http://localhost:5825",
+			"type": "string"
+		},
+		{
+			"key": "GatewayAPI",
+			"value": "http://localhost:5826",
 			"type": "string"
 		}
 	]
