@@ -10,7 +10,7 @@ public class CartCheckoutConsumer : IConsumer<CartCheckoutEvent>
 {
     private readonly IMapper _mapper;
     private readonly IMediator _mediator;
-    private ILogger<CartCheckoutConsumer> _logger;
+    private readonly ILogger<CartCheckoutConsumer> _logger;
 
     public CartCheckoutConsumer(
         IMapper mapper,

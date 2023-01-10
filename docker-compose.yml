@@ -111,14 +111,17 @@ services:
       static-network:
         ipv4_address: 172.26.156.1
 
+  portainer:
+    image: portainer/portainer-ce:latest
+    networks:
+      static-network:
+        ipv4_address: 172.26.150.10
 
-  #portainer:
-  #  image: portainer/portainer-ce:latest
-  #  networks:
-  #    static-network:
-  #      ipv4_address: 172.26.150.10
 networks:
   static-network:
     ipam:
       config:
         - subnet: 172.26.0.0/16
+
+volumes:
+  portainer_data:

@@ -61,6 +61,7 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - CacheSettings:CartConnection=172.26.152.2:6379
       - GrpcSettings:CouponConnection=http://krinitewebshop.productcoupon.grpc
+      - ConnectionStrings:RabbitMqConnection=amqp://guest:guest@172.26.156.1:5672
     ports:
       - "5822:80"
     volumes:
@@ -68,6 +69,7 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
       - cartdb
+      - rabbitmq
 
   cartdb:
     container_name: KriniteWebShop.ProductCart.API.Redis
@@ -129,6 +131,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings:OrderDb=Server=172.26.155.2,1433;Database=Order;User ID=sa;Password=NotAll0wedForPublic;MultipleActiveResultSets=true;TrustServerCertificate=True
+      - ConnectionStrings:RabbitMqConnection=amqp://guest:guest@172.26.156.1:5672
     ports:
       - "5825:80"
     volumes:
@@ -136,6 +139,7 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
       - orderdb
+      - rabbitmq
 
   orderdb:
     container_name: KriniteWebShop.ProductOrder.API.MsSql
@@ -153,9 +157,12 @@ services:
     - "5601:5672"
     - "15601:15672"
 
-  #portainer:
-  #  container_name: portainer
-  #  restart: always
-  #  ports:
-  #    - "9000:9000"
-  #    - "9443:9443"
+  portainer:
+    container_name: portainer
+    restart: always
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock 
+    - portainer_data:/data portainer/portainer-ce:latest
