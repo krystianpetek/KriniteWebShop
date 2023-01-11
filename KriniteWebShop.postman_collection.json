@@ -900,10 +900,28 @@
 			"name": "GatewayAPI",
 			"item": [
 				{
-					"name": "Product",
+					"name": "ProductCatalog",
 					"item": [
 						{
-							"name": "Product",
+							"name": "GET product categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{GatewayAPI}}/Product/Categories",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Product",
+										"Categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET products",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -920,18 +938,512 @@
 							"response": []
 						},
 						{
-							"name": "Product/Categories",
+							"name": "POST product",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Ball\",\r\n    \"category\": \"Football\",\r\n    \"description\": \"Ball for football\",\r\n    \"price\": 30.50\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{GatewayAPI}}/Product",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Product"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET product by ID",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{GatewayAPI}}/Product/Categories",
+									"raw": "{{GatewayAPI}}/product/{{productId2-ObjectId}}",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"product",
+										"{{productId2-ObjectId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT product",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Stadium\",\r\n    \"category\": \"Soccer\",\r\n    \"description\": \"Flat-packed 35,000-seat stadium\",\r\n    \"price\": 79500.00\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{GatewayAPI}}/product/{{productId2-ObjectId}}",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"product",
+										"{{productId2-ObjectId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE product",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{GatewayAPI}}/product/{{productId2-ObjectId}}",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"product",
+										"{{productId2-ObjectId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET products by name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{GatewayAPI}}/Product/GetProductsByName/{{productName2}}",
 									"host": [
 										"{{GatewayAPI}}"
 									],
 									"path": [
 										"Product",
-										"Categories"
+										"GetProductsByName",
+										"{{productName2}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET products by category",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{GatewayAPI}}/product/GetProductsByCategory/{{productCategory2}}",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"product",
+										"GetProductsByCategory",
+										"{{productCategory2}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ProductCart",
+					"item": [
+						{
+							"name": "GET cart",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{GatewayAPI}}/Cart/{{UserName}}",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Cart",
+										"{{UserName}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE cart",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{GatewayAPI}}/Cart/{{UserName}}",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Cart",
+										"{{UserName}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT cart",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userName\": \"{{UserName}}\",\r\n    \"items\": [\r\n        {\r\n            \"productId\":\"{{productId1-Guid}}\",\r\n            \"productName\": \"{{productName1}}\",\r\n            \"price\": 12.50,\r\n            \"quantity\": 3\r\n        },\r\n        {\r\n            \"productId\":\"{{productId2-Guid}}\",\r\n            \"productName\": \"{{productName2}}\",\r\n            \"price\": 20000,\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{GatewayAPI}}/Cart/{{UserName}}",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Cart",
+										"{{UserName}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST cart checkout",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userName\": \"{{UserName}}\",\r\n    \"totalPrice\": 0,\r\n    \"firstName\": \"Krystian\",\r\n    \"lastName\": \"Petek\",\r\n    \"emailAddress\": \"krystianpetek2@gmail.com\",\r\n    \"addressLine\": \"Kraków\",\r\n    \"country\": \"Polska\",\r\n    \"state\": \"Małopolska\",\r\n    \"zipCode\": \"31-599\",\r\n    \"paymentMethod\": 4,\r\n    \"cardName\": null,\r\n    \"cardNumber\": null,\r\n    \"expiration\": null,\r\n    \"cvv\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{GatewayAPI}}/Cart/Checkout",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Cart",
+										"Checkout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ProductCoupon",
+					"item": [
+						{
+							"name": "GET coupon",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{GatewayAPI}}/Coupon/{{productName1}}",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Coupon",
+										"{{productName1}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST coupon",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"productName\": \"{{productName1}}\",\r\n  \"description\": \"Coupon for {{productName1}} \",\r\n  \"amount\": 15\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{GatewayAPI}}/Coupon/",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Coupon",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT coupon",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productName\": \"{{productName1}}\",\r\n    \"description\": \"Updated coupon for {{productName1}}\",\r\n    \"amount\": 10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{GatewayAPI}}/Coupon/{{productName1}}",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Coupon",
+										"{{productName1}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE coupon",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{GatewayAPI}}/Coupon/{{productName1}}/",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Coupon",
+										"{{productName1}}",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ProductOrder",
+					"item": [
+						{
+							"name": "GET user orders",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{GatewayAPI}}/Order/{{UserName}}",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Order",
+										"{{UserName}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "POST order",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userName\": \"{{UserName}}\",\r\n    \"totalPrice\": 2199.00,\r\n    \"firstName\": \"Krystian\",\r\n    \"lastName\": \"Petek\",\r\n    \"emailAddress\": \"krystianpetek2@gmail.com\",\r\n    \"addressLine\": \"Kraków\",\r\n    \"country\": \"Polska\",\r\n    \"state\": \"Małopolska\",\r\n    \"zipCode\": \"31-599\",\r\n    \"paymentMethod\": 4,\r\n    \"cardName\": null,\r\n    \"cardNumber\": null,\r\n    \"expiration\": null,\r\n    \"cvv\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{GatewayAPI}}/Order/",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Order",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT order",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":\"{{OrderId}}\",\r\n    \"userName\": \"{{UserName}}\",\r\n    \"totalPrice\": 21939.00,\r\n    \"firstName\": \"Krystian\",\r\n    \"lastName\": \"Petek\",\r\n    \"emailAddress\": \"krystianpetek2@gmail.com\",\r\n    \"addressLine\": \"Kraków\",\r\n    \"country\": \"PL\",\r\n    \"state\": \"Małopolska\",\r\n    \"zipCode\": \"31-599\",\r\n    \"paymentMethod\": 3,\r\n    \"cardName\": null,\r\n    \"cardNumber\": null,\r\n    \"expiration\": null,\r\n    \"cvv\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{GatewayAPI}}/Order/{{OrderId}}/",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Order",
+										"{{OrderId}}",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE order",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{GatewayAPI}}/Order/{{OrderId}}/",
+									"host": [
+										"{{GatewayAPI}}"
+									],
+									"path": [
+										"Order",
+										"{{OrderId}}",
+										""
 									]
 								}
 							},

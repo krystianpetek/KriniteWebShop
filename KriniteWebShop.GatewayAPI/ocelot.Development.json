@@ -1,5 +1,6 @@
 {
   "Routes": [
+    // KriniteWebShop.ProductCatalog.NoSQL.API
     {
       "DownstreamPathTemplate": "/api/v1/Product",
       "DownstreamScheme": "https",
@@ -10,7 +11,19 @@
         }
       ],
       "UpstreamPathTemplate": "/Product",
-      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Product/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7921
+        }
+      ],
+      "UpstreamPathTemplate": "/Product/{id}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
     },
     {
       "DownstreamPathTemplate": "/api/v1/Product/Categories",
@@ -23,6 +36,105 @@
       ],
       "UpstreamPathTemplate": "/Product/Categories",
       "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Product/GetProductsByName/{productName}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7921
+        }
+      ],
+      "UpstreamPathTemplate": "/Product/GetProductsByName/{productName}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Product/GetProductsByCategory/{categoryName}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7921
+        }
+      ],
+      "UpstreamPathTemplate": "/Product/GetProductsByCategory/{categoryName}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    // KriniteWebShop.ProductCart.API
+    {
+      "DownstreamPathTemplate": "/api/v1/Cart/{userName}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7922
+        }
+      ],
+      "UpstreamPathTemplate": "/Cart/{userName}",
+      "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Cart/Checkout",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7922
+        }
+      ],
+      "UpstreamPathTemplate": "/Cart/Checkout",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    // KriniteWebShop.ProductCoupon.API
+    {
+      "DownstreamPathTemplate": "/api/v1/Coupon/",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7923
+        }
+      ],
+      "UpstreamPathTemplate": "/Coupon/",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Coupon/{productName}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7923
+        }
+      ],
+      "UpstreamPathTemplate": "/Coupon/{productName}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
+    },
+    // KriniteWebShop.ProductOrder.API
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7925
+        }
+      ],
+      "UpstreamPathTemplate": "/Order/",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/{orderId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7925
+        }
+      ],
+      "UpstreamPathTemplate": "/Order/{orderId}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
     }
   ],
   "GlobalConfiguration": {
