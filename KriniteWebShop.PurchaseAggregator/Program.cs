@@ -1,4 +1,7 @@
 
+using KriniteWebShop.PurchaseAggregator.Services;
+using KriniteWebShop.PurchaseAggregator.Services.Interfaces;
+
 namespace KriniteWebShop.PurchaseAggregator;
 
 public class Program
@@ -10,6 +13,22 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddHttpClient<IProductService, ProductService>(client =>
+        {
+            string serviceUrl = builder.Configuration.GetRequiredSection("PurchaseServices").GetValue<string>("ProductCatalog");
+            client.BaseAddress = new Uri(serviceUrl);
+        });
+        builder.Services.AddHttpClient<ICartService, CartService>(client =>
+        {
+            string serviceUrl = builder.Configuration.GetRequiredSection("PurchaseServices").GetValue<string>("ProductCart");
+            client.BaseAddress = new Uri(serviceUrl);
+        });
+        builder.Services.AddHttpClient<IOrderService, OrderService>(client =>
+        {
+            string serviceUrl = builder.Configuration.GetRequiredSection("PurchaseServices").GetValue<string>("ProductOrder");
+            client.BaseAddress = new Uri(serviceUrl);
+        });
 
         var app = builder.Build();
 
