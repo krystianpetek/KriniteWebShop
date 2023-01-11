@@ -144,6 +144,12 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+    - krinitewebshop.productcatalog.nosql.api
+    - krinitewebshop.productcart.api
+    - krinitewebshop.productcoupon.api
+    - krinitewebshop.productcoupon.grpc
+    - krinitewebshop.productorder.api
 
 # Tools
   portainer:

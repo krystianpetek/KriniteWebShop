@@ -11,7 +11,10 @@
         }
       ],
       "UpstreamPathTemplate": "/Product",
-      "UpstreamHttpMethod": [ "GET", "POST" ]
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 30
+      }
     },
     {
       "DownstreamPathTemplate": "/api/v1/Product/{id}",
@@ -84,7 +87,14 @@
         }
       ],
       "UpstreamPathTemplate": "/Cart/Checkout",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "ClientWhitelist": [],
+        "Limit": 1,
+        "Period": "1s",
+        "PeriodTimespan": 1
+      }
     },
     // KriniteWebShop.ProductCoupon.API
     {
