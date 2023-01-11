@@ -148,6 +148,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:7926"
+    "BaseUrl": "https://localhost:7927"
   }
 }

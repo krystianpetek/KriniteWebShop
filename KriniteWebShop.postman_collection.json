@@ -1553,8 +1553,13 @@
 			"type": "string"
 		},
 		{
-			"key": "GatewayAPI",
+			"key": "PurchaseAggregator",
 			"value": "http://localhost:5826",
+			"type": "string"
+		},
+		{
+			"key": "GatewayAPI",
+			"value": "http://localhost:5827",
 			"type": "string"
 		}
 	]
