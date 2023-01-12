@@ -91,6 +91,16 @@ services:
       static-network:
         ipv4_address: 172.26.108.2
 
+# KriniteWebShop.PurchaseAggregator
+  krinitewebshop.purchaseaggregator:
+    image: ${DOCKER_REGISTRY-}krinitewebshoppurchaseaggregator
+    build:
+      context: .
+      dockerfile: KriniteWebShop.PurchaseAggregator/Dockerfile
+    networks:
+      static-network:
+        ipv4_address: 172.26.110.1
+
 # KriniteWebShop.GatewayAPI
   krinitewebshop.gatewayapi:
     image: ${DOCKER_REGISTRY-}krinitewebshopgatewayapi
@@ -99,7 +109,7 @@ services:
       dockerfile: KriniteWebShop.GatewayAPI/Dockerfile
     networks:
       static-network:
-        ipv4_address: 172.26.110.1
+        ipv4_address: 172.26.112.1
 
 # Tools
   portainer:

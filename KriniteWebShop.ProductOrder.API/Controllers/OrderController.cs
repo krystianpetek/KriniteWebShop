@@ -35,7 +35,7 @@ public class OrderController : ControllerBase
     [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
     public async Task<ActionResult<Guid>> CheckoutOrder(CheckoutOrderCommand checkoutOrderCommand)
     {
-        var orderId = await _mediator.Send<Guid>(request: checkoutOrderCommand);
+        var orderId = await _mediator.Send<Guid>(checkoutOrderCommand);
         return Created($"{orderId}", null);
     }
 
