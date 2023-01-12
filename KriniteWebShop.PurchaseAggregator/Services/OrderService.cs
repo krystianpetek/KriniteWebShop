@@ -5,13 +5,15 @@ namespace KriniteWebShop.PurchaseAggregator.Services;
 
 public class OrderService : IOrderService
 {
-    public OrderService()
+    private readonly HttpClient _httpClient;
+    public OrderService(HttpClient httpClient)
     {
-
+        _httpClient = httpClient;
     }
 
-    public Task<IEnumerable<OrderModel>> GetOrdersByUserNameAsync(string userName)
+    public async Task<IEnumerable<OrderModel>> GetOrdersByUserNameAsync(string userName)
     {
-        throw new NotImplementedException();
+        var response = await _httpClient.GetFromJsonAsync<IEnumerable<OrderModel>>($"/api/v1/Order/{userName}");
+        return response;
     }
 }

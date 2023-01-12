@@ -5,14 +5,15 @@ namespace KriniteWebShop.PurchaseAggregator.Services;
 
 public class CartService : ICartService
 {
-
-    public CartService()
+    private readonly HttpClient _httpClient;
+    public CartService(HttpClient httpClient)
     {
-
+        _httpClient = httpClient;
     }
 
-    public Task<CartModel> GetCartAsync(string userName)
+    public async Task<CartModel> GetCartAsync(string userName)
     {
-        throw new NotImplementedException();
+        var response = await _httpClient.GetFromJsonAsync<CartModel>($"/api/v1/Cart/{userName}");
+        return response;
     }
 }

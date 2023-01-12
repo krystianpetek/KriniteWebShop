@@ -12,19 +12,21 @@ public class ProductService : IProductService
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
     }
 
-    public Task<ProductModel> GetProductById(string id)
+    public async Task<ProductModel> GetProductById(string id)
     {
-        throw new NotImplementedException();
-
+        var response = await _httpClient.GetFromJsonAsync<ProductModel>($"/api/v1/Product/{id}");
+        return response;
     }
 
-    public Task<IEnumerable<ProductModel>> GetProductsAsync()
+    public async Task<IEnumerable<ProductModel>> GetProductsAsync()
     {
-        throw new NotImplementedException();
+        var response = await _httpClient.GetFromJsonAsync<IEnumerable<ProductModel>>("/api/v1/Product");
+        return response;
     }
 
-    public Task<IEnumerable<ProductModel>> GetProductsByCategoryAsync(string category)
+    public async Task<IEnumerable<ProductModel>> GetProductsByCategoryAsync(string categoryName)
     {
-        throw new NotImplementedException();
+        var response = await _httpClient.GetFromJsonAsync<IEnumerable<ProductModel>>($"/api/v1/Product/GetProductsByCategory/{categoryName}");
+        return response;
     }
 }
