@@ -11,19 +11,24 @@ public class CartService : ICartService
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
     }
 
-    public Task CartCheckoutAsync(CartCheckoutModel cartCheckoutModel)
+    public async Task CartCheckoutAsync(CartCheckoutModel cartCheckoutModel)
     {
-        throw new NotImplementedException();
+        var response = await _httpClient.PostAsJsonAsync<CartCheckoutModel>("/Cart/Checkout", cartCheckoutModel);
+        if (response.IsSuccessStatusCode)
+            throw new HttpRequestException("Error occured when calling to GatewayAPI.");
+        await Task.CompletedTask;
     }
 
     public async Task<CartModel> GetCartAsync(string userName)
     {
-        var response = await _httpClient.GetFromJsonAsync<CartModel>($"/api/v1/Cart/{userName}");
+        var response = await _httpClient.GetFromJsonAsync<CartModel>($"/Cart/{userName}");
         return response;
     }
 
-    public Task<CartModel> UpdateCartAsync(CartModel model)
+    public async Task<CartModel> UpdateCartAsync(CartModel model)
     {
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.PutAsJsonAsync<CartModel>($"/Cart/{model?.UserName}",model);
+        CartModel? result = await response.Content.ReadFromJsonAsync<CartModel>();
+        return result;
     }
 }

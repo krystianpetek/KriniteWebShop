@@ -1,3 +1,6 @@
+using KriniteWebShop.WebClient.Services;
+using KriniteWebShop.WebClient.Services.Interfaces;
+
 namespace KriniteWebShop.WebClient;
 
 public class Program
@@ -7,6 +10,16 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddRazorPages();
+
+        builder.Services.AddScoped<IProductService, ProductService>();
+        builder.Services.AddScoped<ICartService, CartService>();
+        builder.Services.AddScoped<IOrderService, OrderService>();
+
+        string gatewayApiUri = builder.Configuration.GetRequiredSection("GatewayApiUri").Value;
+        builder.Services.AddHttpClient<ProductService>(config => config.BaseAddress = new Uri(gatewayApiUri));
+        builder.Services.AddHttpClient<CartService>(config => config.BaseAddress = new Uri(gatewayApiUri));
+        builder.Services.AddHttpClient<OrderService>(config => config.BaseAddress = new Uri(gatewayApiUri));
+
 
         var app = builder.Build();
 

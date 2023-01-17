@@ -13,7 +13,7 @@ public class OrderService : IOrderService
 
     public async Task<IEnumerable<OrderModel>> GetOrdersByUserNameAsync(string userName)
     {
-        var response = await _httpClient.GetFromJsonAsync<IEnumerable<OrderModel>>($"/api/v1/Order/{userName}");
+        var response = await _httpClient.GetFromJsonAsync<IEnumerable<OrderModel>>($"/Order/{userName}");
         return response;
     }
 }

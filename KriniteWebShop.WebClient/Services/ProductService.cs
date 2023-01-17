@@ -12,26 +12,28 @@ public class ProductService : IProductService
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
     }
 
-    public Task<ProductModel> CreateProduct(ProductModel product)
+    public async Task<ProductModel> CreateProduct(ProductModel product)
     {
-        throw new NotImplementedException();
+        var response = await _httpClient.PostAsJsonAsync<ProductModel>("/Product/", product);
+        var result = await response.Content.ReadFromJsonAsync<ProductModel>();
+        return result;
     }
 
     public async Task<ProductModel> GetProductById(string id)
     {
-        var response = await _httpClient.GetFromJsonAsync<ProductModel>($"/api/v1/Product/{id}");
+        var response = await _httpClient.GetFromJsonAsync<ProductModel>($"/Product/{id}");
         return response;
     }
 
     public async Task<IEnumerable<ProductModel>> GetProductsAsync()
     {
-        var response = await _httpClient.GetFromJsonAsync<IEnumerable<ProductModel>>("/api/v1/Product");
+        var response = await _httpClient.GetFromJsonAsync<IEnumerable<ProductModel>>("/Product/");
         return response;
     }
 
     public async Task<IEnumerable<ProductModel>> GetProductsByCategoryAsync(string categoryName)
     {
-        var response = await _httpClient.GetFromJsonAsync<IEnumerable<ProductModel>>($"/api/v1/Product/GetProductsByCategory/{categoryName}");
+        var response = await _httpClient.GetFromJsonAsync<IEnumerable<ProductModel>>($"/Product/GetProductsByCategory/{categoryName}");
         return response;
     }
 }
