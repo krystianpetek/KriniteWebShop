@@ -111,6 +111,16 @@ services:
       static-network:
         ipv4_address: 172.26.112.1
 
+# KriniteWebShop.WebClient
+  krinitewebshop.webclient:
+    image: ${DOCKER_REGISTRY-}krinitewebshopwebclient
+    build:
+      context: .
+      dockerfile: KriniteWebShop.WebClient/Dockerfile
+    networks:
+      static-network:
+        ipv4_address: 172.26.120.1
+
 # Tools
   portainer:
     image: portainer/portainer-ce:latest

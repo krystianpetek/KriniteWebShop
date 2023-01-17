@@ -14,7 +14,7 @@ public class ProductService : IProductService
 
     public async Task<ProductModel> CreateProduct(ProductModel product)
     {
-        var response = await _httpClient.PostAsJsonAsync<ProductModel>("/Product/", product);
+        var response = await _httpClient.PostAsJsonAsync<ProductModel>("/Product", product);
         var result = await response.Content.ReadFromJsonAsync<ProductModel>();
         return result;
     }
@@ -27,7 +27,7 @@ public class ProductService : IProductService
 
     public async Task<IEnumerable<ProductModel>> GetProductsAsync()
     {
-        var response = await _httpClient.GetFromJsonAsync<IEnumerable<ProductModel>>("/Product/");
+        var response = await _httpClient.GetFromJsonAsync<IEnumerable<ProductModel>>("/Product");
         return response;
     }
 

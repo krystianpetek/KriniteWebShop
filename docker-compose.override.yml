@@ -166,6 +166,23 @@ services:
     - krinitewebshop.productcart.api
     - krinitewebshop.productorder.api
 
+# KriniteWebShop.WebClient
+  krinitewebshop.webclient:
+    container_name: KriniteWebShop.WebClient
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "5830:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+    - krinitewebshop.productcatalog.nosql.api
+    - krinitewebshop.productcart.api
+    - krinitewebshop.productorder.api
+    - krinitewebshop.gatewayapi
+
 # Tools
   portainer:
     container_name: KriniteWebShop.Portainer

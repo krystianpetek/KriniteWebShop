@@ -11,14 +11,10 @@ public class Program
 
         builder.Services.AddRazorPages();
 
-        builder.Services.AddScoped<IProductService, ProductService>();
-        builder.Services.AddScoped<ICartService, CartService>();
-        builder.Services.AddScoped<IOrderService, OrderService>();
-
         string gatewayApiUri = builder.Configuration.GetRequiredSection("GatewayApiUri").Value;
-        builder.Services.AddHttpClient<ProductService>(config => config.BaseAddress = new Uri(gatewayApiUri));
-        builder.Services.AddHttpClient<CartService>(config => config.BaseAddress = new Uri(gatewayApiUri));
-        builder.Services.AddHttpClient<OrderService>(config => config.BaseAddress = new Uri(gatewayApiUri));
+        builder.Services.AddHttpClient<IProductService, ProductService>(config => config.BaseAddress = new Uri(gatewayApiUri));
+        builder.Services.AddHttpClient<ICartService, CartService>(config => config.BaseAddress = new Uri(gatewayApiUri));
+        builder.Services.AddHttpClient<IOrderService, OrderService>(config => config.BaseAddress = new Uri(gatewayApiUri));
 
 
         var app = builder.Build();
