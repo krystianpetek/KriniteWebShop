@@ -34,18 +34,16 @@ public class Program
             .AddCacheManager(cacheManager => cacheManager.WithDictionaryHandle());
 
         var app = builder.Build();
-        app.UseCors(cors =>
-        {
-            cors.AllowAnyOrigin();
-        });
+
         app.UseSwagger();
         app.UseSwaggerUI(swagger =>
         {
             swagger.SwaggerEndpoint(
-                    url: "http://localhost:5821/swagger/v1/swagger.json",
+                    url: "/swagger/v1/swagger.json",
                     name: "api v1");
 
         });
+        // https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/184
 
         await app.UseOcelot();
 
