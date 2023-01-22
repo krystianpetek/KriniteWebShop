@@ -126,3 +126,9 @@ mysql -u root -p NotAll0wedForPublic
 # finally run another MsSQL
 docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=NotAll0wedForPublic" -p 8725:1433 -d --name webshop-productorder-sql mcr.microsoft.com/mssql/server:latest
 docker pull rabbitmq:3-management-alpine
+
+docker run -d -p 27001:27017 --name webshop-productcatalog-mongo mongo
+docker run -d -p 6301:6379 --name webshop-productcart-redis redis
+docker run -d -p 5401:5432 --name webshop-productcoupon-postgres -e POSTGRES_PASSWORD=NotAll0wedForPublic postgres
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=NotAll0wedForPublic" -p 8725:1433 -d --name webshop-productorder-sql mcr.microsoft.com/mssql/server:latest
+docker run -p 5601:5672 -p 15601:15672 -d --name webshop-rabbitmq rabbitmq:3-management-alpine
