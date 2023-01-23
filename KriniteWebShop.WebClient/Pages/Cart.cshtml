@@ -1,4 +1,13 @@
 ﻿@page
 @model KriniteWebShop.WebClient.Pages.CartModel
 @{
+
 }
+<div class="text-white">
+    <h1>@Model._cartModel.UserName</h1>
+    @foreach (var item in Model._cartModel.Items)
+    {
+        <p>@item.ProductName</p>
+    }
+    <p>Summary: @Model._cartModel.TotalPrice</p>
+</div>
