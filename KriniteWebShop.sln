@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.GatewayAPI",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.PurchaseAggregator", "KriniteWebShop.PurchaseAggregator\KriniteWebShop.PurchaseAggregator.csproj", "{396DF146-986D-4CB7-AC2E-00AE77EDA1EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KriniteWebShop.WebClient", "KriniteWebShop.WebClient\KriniteWebShop.WebClient.csproj", "{36249CC9-61EC-4524-A153-0E791D3E4BC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.WebClient", "KriniteWebShop.WebClient\KriniteWebShop.WebClient.csproj", "{36249CC9-61EC-4524-A153-0E791D3E4BC6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.WebBlazorClient", "KriniteWebShop.WebBlazorClient\KriniteWebShop.WebBlazorClient.csproj", "{D3304A31-D48A-49B7-A9B8-26FC5187A9E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +101,10 @@ Global
 		{36249CC9-61EC-4524-A153-0E791D3E4BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36249CC9-61EC-4524-A153-0E791D3E4BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36249CC9-61EC-4524-A153-0E791D3E4BC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3304A31-D48A-49B7-A9B8-26FC5187A9E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3304A31-D48A-49B7-A9B8-26FC5187A9E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3304A31-D48A-49B7-A9B8-26FC5187A9E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3304A31-D48A-49B7-A9B8-26FC5187A9E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
