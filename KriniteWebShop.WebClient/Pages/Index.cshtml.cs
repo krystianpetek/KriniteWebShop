@@ -10,7 +10,7 @@ public class IndexModel : PageModel
     private readonly IProductService _productService;
     private readonly ICartService _cartService;
 
-    public IEnumerable<ProductModel> ProductList { get; set; } = new List<ProductModel>();
+    public IEnumerable<Models.ProductModel> ProductList { get; set; } = new List<Models.ProductModel>();
     public string UserName { get; set; } = "krystianpetek2";
 
     public IndexModel(ILogger<IndexModel> logger, ICartService cartService, IProductService productService)
@@ -28,7 +28,7 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnPostAddProductToCartAsync(string productId)
     {
-        ProductModel product = await _productService.GetProductById(productId);
+        Models.ProductModel product = await _productService.GetProductById(productId);
         Models.CartModel cart = await _cartService.GetCartAsync(User.Identity.Name ?? UserName);
 
         CartItemModel newItem = new CartItemModel
