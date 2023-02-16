@@ -7,8 +7,7 @@ namespace KriniteWebShop.ProductCatalog.NoSQL.API.Repositories;
 
 public class ProductRepository : IProductRepository
 {
-    private IProductDbContext _productDbContext { get; init; }
-
+    private readonly IProductDbContext _productDbContext;
     public ProductRepository(IProductDbContext productDbContext)
     {
         _productDbContext = productDbContext ?? throw new ArgumentNullException(nameof(productDbContext));

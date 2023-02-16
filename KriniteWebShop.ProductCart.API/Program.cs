@@ -29,7 +29,7 @@ public static class Program
 
         builder.Services.AddStackExchangeRedisCache((RedisCacheOptions redis) =>
         {
-            string connectionString = builder.Configuration?.GetRequiredSection("CacheSettings")?.GetValue<string>("CartConnection");
+            string connectionString = builder.Configuration.GetRequiredSection("CacheSettings").GetValue<string>("CartConnection");
             redis.Configuration = connectionString;
         });
 

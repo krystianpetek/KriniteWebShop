@@ -14,17 +14,19 @@ public class CartRepository : ICartRepository
 
     public async Task<ShoppingCart> GetCart(string userName)
     {
-        var cache = await _distributedCache.GetStringAsync(userName);
+        string cache = await _distributedCache.GetStringAsync(userName);
         if (string.IsNullOrWhiteSpace(cache))
-            return default;
+            return new ShoppingCart(userName);
 
-        return JsonSerializer.Deserialize<ShoppingCart>(cache);
+        ShoppingCart shoppingCart = JsonSerializer.Deserialize<ShoppingCart>(cache);
+        return shoppingCart;
     }
 
     public async Task<ShoppingCart> UpdateCart(ShoppingCart cart)
     {
-        await _distributedCache.SetStringAsync(cart?.UserName, JsonSerializer.Serialize<ShoppingCart>(cart));
-        return await GetCart(cart?.UserName);
+        await _distributedCache.SetStringAsync(cart.UserName, JsonSerializer.Serialize<ShoppingCart>(cart));
+        ShoppingCart shoppingCart = await GetCart(cart.UserName);
+        return shoppingCart;
     }
 
     public async Task DeleteCart(string userName)

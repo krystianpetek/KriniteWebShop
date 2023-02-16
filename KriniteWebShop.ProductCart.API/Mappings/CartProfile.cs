@@ -4,9 +4,9 @@ using KriniteWebShop.ProductCart.API.Entities;
 
 namespace KriniteWebShop.ProductCart.API.Mappings;
 
-public class MappingProfile : Profile
+public class CartProfile : Profile
 {
-    public MappingProfile() {
+    public CartProfile() {
         CreateMap<CartCheckout, CartCheckoutEvent>().ReverseMap();
     }
 }

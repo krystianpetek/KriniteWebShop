@@ -5,6 +5,9 @@ using Microsoft.OpenApi.Models;
 
 namespace KriniteWebShop.ProductCatalog.API;
 
+/// <summary>
+/// This project is deprecated use KriniteWebShop.ProductCatalog.NoSQL.API instead.
+/// </summary>
 public static class Program
 {
     public static void Main(string[] args)
