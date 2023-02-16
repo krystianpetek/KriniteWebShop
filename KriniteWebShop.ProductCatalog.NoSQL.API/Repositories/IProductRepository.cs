@@ -11,6 +11,6 @@ public interface IProductRepository
     Task<IEnumerable<Product>> GetProductsWithFilter(Expression<Func<Product, bool>> filter);
 
     Task CreateProduct(Product product);
-    Task<bool> UpdateProduct(string id, RestProduct product);
+    Task<bool> UpdateProduct(string id, RestProduct restProduct);
     Task<bool> DeleteProduct(string id);
 }

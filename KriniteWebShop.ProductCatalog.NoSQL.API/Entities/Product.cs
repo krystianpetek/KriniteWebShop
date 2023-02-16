@@ -1,19 +1,21 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace KriniteWebShop.ProductCatalog.NoSQL.API.Entities;
 
-public class Product : IProduct<string>
+public record Product : IProduct<string>
 {
     [BsonId]
-    [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-    public string Id { get; set; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string Id { get; init; }
 
     [BsonElement("Name")]
-    public string Name { get; set; }
+    public string Name { get; init; }
+    
+    public string Category { get; init; }
 
-    public string Category { get; set; }
+    public string Description { get; init; }
 
-    public string Description { get; set; }
-
-    public decimal Price { get; set; }
+    public decimal Price { get; init; }
 }

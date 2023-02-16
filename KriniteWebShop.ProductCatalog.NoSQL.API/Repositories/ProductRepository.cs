@@ -27,7 +27,6 @@ public class ProductRepository : IProductRepository
     public async Task<IEnumerable<Product>> GetProductsWithFilter(Expression<Func<Product, bool>> filter)
     {
         return await _productDbContext.Products.Find(filter).ToListAsync();
-
     }
 
     public async Task CreateProduct(Product product)

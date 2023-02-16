@@ -2,13 +2,13 @@
 
 public interface IProduct<T>
 {
-    public T Id { get; set; }
+    public T Id { get; init; }
 
-    public string Name { get; set; }
+    public string Name { get; init; }
 
-    public string Category { get; set; }
+    public string Category { get; init; }
 
-    public string Description { get; set; }
+    public string Description { get; init; }
 
-    public decimal Price { get; set; }
+    public decimal Price { get; init; }
 }
