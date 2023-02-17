@@ -28,7 +28,9 @@ public static class Program
             {
                 string connectionString = builder.Configuration.GetConnectionString("RabbitMqConnection");
                 rabbitMqConfig.Host(connectionString);
-                rabbitMqConfig.ReceiveEndpoint(EventBusConstants.CartCheckoutQueue, endpointConfig =>
+                rabbitMqConfig.ReceiveEndpoint(
+                    queueName: EventBusConstants.CartCheckoutQueue, 
+                    configureEndpoint: endpointConfig =>
                 {
                     endpointConfig.ConfigureConsumer<CartCheckoutConsumer>(busContext);
                 });

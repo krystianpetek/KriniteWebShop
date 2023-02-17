@@ -26,7 +26,7 @@ public class CouponService : CouponProtoService.CouponProtoServiceBase
 
         Coupon coupon = await _couponRepository.GetCoupon(request.ProductName);
         if (coupon == null)
-            throw new RpcException(new Status(StatusCode.NotFound, $"Coupon with ProductName = {coupon.ProductName} not found."));
+            throw new RpcException(new Status(StatusCode.NotFound, $"Coupon with ProductName = {coupon?.ProductName} not found."));
         _logger.LogInformation($"Coupon is retrieved for ProductName: {coupon.ProductName}, Amount: {coupon.Amount}");
 
         //CouponModel couponModel = _mapper.Map<Coupon, CouponModel>(coupon);

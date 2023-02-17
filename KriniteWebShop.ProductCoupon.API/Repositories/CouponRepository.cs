@@ -18,17 +18,16 @@ public class CouponRepository : ICouponRepository
     {
         using NpgsqlConnection npgsqlConnection = new NpgsqlConnection(_connectionString);
 
-        Coupon coupon = await npgsqlConnection.QueryFirstOrDefaultAsync<Coupon>("SELECT * FROM Coupon WHERE ProductName = @ProductName", new { ProductName = productName });
-        if (coupon == default)
+        Coupon coupon = await npgsqlConnection.QueryFirstOrDefaultAsync<Coupon>(
+            sql: "SELECT * FROM Coupon WHERE ProductName = @ProductName",
+            param: new { ProductName = productName });
+
+        return coupon ?? new Coupon
         {
-            return new Coupon
-            {
-                ProductName = "No coupon",
-                Description = "No discount description",
-                Amount = 0
-            };
-        }
-        return coupon;
+            ProductName = "No coupon",
+            Description = "No discount description",
+            Amount = 0
+        };
     }
 
     public async Task<bool> CreateCoupon(RestCoupon coupon)
@@ -59,7 +58,7 @@ public class CouponRepository : ICouponRepository
 
         var updated = await npgsqlConnection.ExecuteAsync(
             "UPDATE Coupon SET Description = @Description, Amount = @Amount WHERE ProductName = @ProductName",
-            new { ProductName = coupon?.ProductName, Description = coupon?.Description, Amount = coupon?.Amount});
+            new { ProductName = coupon?.ProductName, Description = coupon?.Description, Amount = coupon?.Amount });
 
         return updated > 0;
     }

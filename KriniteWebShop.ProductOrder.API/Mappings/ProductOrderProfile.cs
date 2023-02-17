@@ -6,7 +6,8 @@ namespace KriniteWebShop.ProductOrder.API.Mappings;
 
 public class ProductOrderProfile : Profile
 {
-    public ProductOrderProfile() {
-    CreateMap<CheckoutOrderCommand, CartCheckoutEvent>().ReverseMap();
+    public ProductOrderProfile()
+    {
+        CreateMap<CheckoutOrderCommand, CartCheckoutEvent>().ReverseMap();
     }
 }

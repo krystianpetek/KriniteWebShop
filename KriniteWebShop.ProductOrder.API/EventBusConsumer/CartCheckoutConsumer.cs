@@ -28,6 +28,6 @@ public class CartCheckoutConsumer : IConsumer<CartCheckoutEvent>
         CheckoutOrderCommand command = _mapper.Map<CartCheckoutEvent, CheckoutOrderCommand>(context.Message);
         Guid result = await _mediator.Send(command);
 
-        _logger.LogInformation($"CartCheckoutEvent consumed successfully. Created order with ID: {result}");  
+        _logger.LogInformation($"CartCheckoutEvent consumed successfully. Created order with ID: {result}");
     }
 }

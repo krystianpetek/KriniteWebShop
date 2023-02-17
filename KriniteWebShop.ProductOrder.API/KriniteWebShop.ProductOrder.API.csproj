@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>0fca232a-8650-42ab-bb3f-d2a6b331ad02</UserSecretsId>
+    <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 

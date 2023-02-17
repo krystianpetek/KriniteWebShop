@@ -14,16 +14,20 @@ namespace KriniteWebShop.ProductOrder.API.Controllers;
 public class OrderController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<OrderController> _logger;
 
-    public OrderController(IMediator mediator)
+    public OrderController(IMediator mediator, ILogger<OrderController> logger)
     {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     [HttpGet("{userName}", Name = "GetOrder")]
     [ProducesResponseType(typeof(IEnumerable<GetOrdersListQueryModel>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<GetOrdersListQueryModel>>> GetOrdersByUserName(string userName)
     {
+        _logger.LogInformation($"Invoked method {nameof(GetOrdersByUserName)} for user name: {userName} in {nameof(OrderController)}");
+
         GetOrdersListQuery query = new GetOrdersListQuery(userName);
 
         List<GetOrdersListQueryModel> orders = await _mediator.Send<List<GetOrdersListQueryModel>>(query);
