@@ -16,5 +16,4 @@ public class CouponGrpcService
         GetCouponRequest getCouponRequest = new GetCouponRequest { ProductName = productName };
         return await _couponGrpcServiceClient.GetCouponAsync(getCouponRequest);
     }
-
 }

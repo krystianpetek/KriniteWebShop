@@ -22,6 +22,8 @@ public class CouponService : CouponProtoService.CouponProtoServiceBase
 
     public override async Task<CouponModel> GetCoupon(GetCouponRequest request, ServerCallContext context)
     {
+        _logger.LogInformation($"Invoked method {nameof(GetCoupon)} for product: {request.ProductName} in {nameof(CouponService)}");
+
         Coupon coupon = await _couponRepository.GetCoupon(request.ProductName);
         if (coupon == null)
             throw new RpcException(new Status(StatusCode.NotFound, $"Coupon with ProductName = {coupon.ProductName} not found."));
@@ -34,11 +36,14 @@ public class CouponService : CouponProtoService.CouponProtoServiceBase
 
     public override async Task<CouponModel> CreateCoupon(CreateCouponRequest request, ServerCallContext context)
     {
+        _logger.LogInformation($"Invoked method {nameof(CreateCoupon)} for product: {request.Coupon.ProductName} in {nameof(CouponService)}");
+
         RestCoupon restCoupon = request.Coupon.MapToRestCoupon();
         
         bool result = await _couponRepository.CreateCoupon(restCoupon);
         if (!result)
             throw new RpcException(new Status(StatusCode.Cancelled, $"Adding coupon ProductName = {restCoupon.ProductName} was rejected."));
+
         _logger.LogInformation($"Coupon ProductName: {restCoupon.ProductName} was created succesfully.");
 
         CouponModel returnCouponModel = restCoupon.MapToCouponModel();
@@ -47,23 +52,28 @@ public class CouponService : CouponProtoService.CouponProtoServiceBase
 
     public override async Task<DeleteCouponResponse> DeleteCoupon(DeleteCouponRequest request, ServerCallContext context)
     {
+        _logger.LogInformation($"Invoked method {nameof(DeleteCoupon)} for product: {request.ProductName}  {nameof(CouponService)}");
+
         bool result = await _couponRepository.DeleteCoupon(request.ProductName);
         if (!result)
             throw new RpcException(new Status(StatusCode.Cancelled, $"Deleting coupon ProductName = {request.ProductName} was rejected."));
+
         _logger.LogInformation($"Coupon ProductName: {request.ProductName} was deleted succesfully.");
 
         DeleteCouponResponse deleteCouponResponse = new DeleteCouponResponse { Success = result };
         return deleteCouponResponse;
     }
 
-
     public override async Task<CouponModel> UpdateCoupon(UpdateCouponRequest request, ServerCallContext context)
     {
+        _logger.LogInformation($"Invoked method {nameof(UpdateCoupon)} for product: {request.Coupon.ProductName} in {nameof(CouponService)}");
+
         RestCoupon coupon = request.Coupon.MapToRestCoupon();
         
         bool result = await _couponRepository.UpdateCoupon(coupon);
         if (!result)
             throw new RpcException(new Status(StatusCode.Cancelled, $"Updating coupon ProductName = {coupon.ProductName} was cancelled."));
+
         _logger.LogInformation($"Coupon ProductName: {coupon.ProductName} was updated succesfully.");
 
         CouponModel returnCouponModel = coupon.MapToCouponModel();
