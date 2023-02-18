@@ -8,7 +8,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
-    <link href="~/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,400;1,200;1,400&display=swap" rel="stylesheet">
@@ -16,20 +16,17 @@
 </head>
 <body class="bgDark">
     <header class="headerLayout">
-        <nav class="navbar navbar-expand-md navbar-dark">
+        <nav class="navbar navbar-expand navbar-dark">
             <div class="container">
                 <a class="navbar navbar-brand" asp-area="" asp-page="/Index">KriniteWebShop</a>
 @*                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>*@
 
-                <div class="navbar navbar-nav" id="navbarsExampleDefault">
+                <div class="navbar navbar-nav " id="navbarsExampleDefault">
                     <ul class="navbar-nav m-auto">
                         <li class="nav-item active">
                             <a class="nav-link fontNunito" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fontNunito" asp-area="" asp-page="/Product">Product</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Order">Order</a>
@@ -48,18 +45,6 @@
             </div>
         </nav>
     </header>
-
-@*    <form class="form-inline my-2 my-lg-0">
-        <div class="input-group input-group-sm">
-            <input type="text" class="form-control" placeholder="Search...">
-            <div class="input-group-append">
-                <button type="button" class="btn btn-secondary btn-number">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
-        </div>
-
-    </form>*@
 
     <div class="container backgroundColorLight">
         <main role="main" class="pb-3">

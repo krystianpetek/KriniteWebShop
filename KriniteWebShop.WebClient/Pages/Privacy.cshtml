@@ -6,3 +6,15 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
+
+@functions{
+    public class PrivacyModel : PageModel
+    {
+        private readonly ILogger<PrivacyModel> _logger;
+
+        public PrivacyModel(ILogger<PrivacyModel> logger)
+        {
+            _logger = logger;
+        }
+    }
+}

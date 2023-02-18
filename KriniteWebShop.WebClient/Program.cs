@@ -15,7 +15,6 @@ public class Program
         builder.Services.AddHttpClient<IProductService, ProductService>(config => config.BaseAddress = new Uri(gatewayApiUri));
         builder.Services.AddHttpClient<ICartService, CartService>(config => config.BaseAddress = new Uri(gatewayApiUri));
         builder.Services.AddHttpClient<IOrderService, OrderService>(config => config.BaseAddress = new Uri(gatewayApiUri));
-
         var app = builder.Build();
 
         if (!app.Environment.IsDevelopment())
