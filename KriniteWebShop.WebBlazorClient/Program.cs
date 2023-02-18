@@ -8,6 +8,7 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        builder.WebHost.UseStaticWebAssets(); // to fix css isolation in docker
 
         // Add services to the container.
         builder.Services.AddRazorPages();
