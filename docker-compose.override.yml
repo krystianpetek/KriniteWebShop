@@ -183,6 +183,27 @@ services:
     - krinitewebshop.productorder.api
     - krinitewebshop.gatewayapi
 
+# KriniteWebShop.WebBlazorClient
+  krinitewebshop.webblazorclient:
+    container_name: KriniteWebShop.WebBlazorClient
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_URLS=https://+:443
+      - Kestrel__Certificates__Default__Path=dev-cert.pfx
+      - Kestrel__Certificates__Default__Password=DoNotTellAny0ne
+    ports:
+      - "5831:80"
+      - "7931:443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+    - krinitewebshop.productcatalog.nosql.api
+    - krinitewebshop.productcart.api
+    - krinitewebshop.productorder.api
+    - krinitewebshop.gatewayapi
+
 # Tools
   portainer:
     container_name: KriniteWebShop.Portainer

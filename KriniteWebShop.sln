@@ -38,7 +38,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.GatewayAPI",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.PurchaseAggregator", "KriniteWebShop.PurchaseAggregator\KriniteWebShop.PurchaseAggregator.csproj", "{396DF146-986D-4CB7-AC2E-00AE77EDA1EE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.WebClient", "KriniteWebShop.WebClient\KriniteWebShop.WebClient.csproj", "{36249CC9-61EC-4524-A153-0E791D3E4BC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "[Deprecated] KriniteWebShop.WebClient", "KriniteWebShop.WebClient\[Deprecated] KriniteWebShop.WebClient.csproj", "{36249CC9-61EC-4524-A153-0E791D3E4BC6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.WebBlazorClient", "KriniteWebShop.WebBlazorClient\KriniteWebShop.WebBlazorClient.csproj", "{D3304A31-D48A-49B7-A9B8-26FC5187A9E0}"
 EndProject
@@ -49,6 +49,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductOrder", "ProductOrder", "{44D43EA9-5510-4699-8458-CA891A631A55}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductCoupon", "ProductCoupon", "{96DDD701-FC89-49BE-8210-26EC4D091D14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebClient", "WebClient", "{55859BA0-A575-44C6-8AAC-6EC1A3406D4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -130,6 +132,8 @@ Global
 		{47320EB8-17E8-4CC8-A8CC-B1C25E30A60E} = {44D43EA9-5510-4699-8458-CA891A631A55}
 		{1DAB4092-F610-49FC-A258-C5B21BADFC93} = {44D43EA9-5510-4699-8458-CA891A631A55}
 		{8BFFB40B-61EB-49D2-9DFA-FE070753F7FB} = {44D43EA9-5510-4699-8458-CA891A631A55}
+		{36249CC9-61EC-4524-A153-0E791D3E4BC6} = {55859BA0-A575-44C6-8AAC-6EC1A3406D4F}
+		{D3304A31-D48A-49B7-A9B8-26FC5187A9E0} = {55859BA0-A575-44C6-8AAC-6EC1A3406D4F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A321A533-CD53-4ADF-A1D8-1C8C142A38E7}

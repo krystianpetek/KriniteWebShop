@@ -121,6 +121,16 @@ services:
       static-network:
         ipv4_address: 172.26.120.1
 
+# KriniteWebShop.WebBlazorClient
+  krinitewebshop.webblazorclient:
+    image: ${DOCKER_REGISTRY-}krinitewebshopwebblazorclient
+    build:
+      context: .
+      dockerfile: KriniteWebShop.WebBlazorClient/Dockerfile
+    networks:
+      static-network:
+        ipv4_address: 172.26.122.1
+
 # Tools
   portainer:
     image: portainer/portainer-ce:latest
