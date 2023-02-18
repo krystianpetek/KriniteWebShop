@@ -40,6 +40,9 @@ public class OrderController : ControllerBase
     public async Task<ActionResult<Guid>> CheckoutOrder(CheckoutOrderCommand checkoutOrderCommand)
     {
         var orderId = await _mediator.Send<Guid>(checkoutOrderCommand);
+
+        _logger.LogInformation($"Invoked method {nameof(CheckoutOrder)} for order ID: {orderId} in {nameof(OrderController)}");
+        
         return Created($"{orderId}", null);
     }
 
@@ -48,6 +51,8 @@ public class OrderController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateOrder(Guid id, UpdateOrderCommand updateOrderCommand)
     {
+        _logger.LogInformation($"Invoked method {nameof(UpdateOrder)} for order ID: {updateOrderCommand.Id} in {nameof(OrderController)}");
+
         await _mediator.Send<Unit>(updateOrderCommand);
         return NoContent();
     }
@@ -57,6 +62,8 @@ public class OrderController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> DeleteOrder(Guid id)
     {
+        _logger.LogInformation($"Invoked method {nameof(DeleteOrder)} for order ID: {id} in {nameof(OrderController)}");
+
         DeleteOrderCommand command = new DeleteOrderCommand { Id = id };
         await _mediator.Send<Unit>(command);
 
