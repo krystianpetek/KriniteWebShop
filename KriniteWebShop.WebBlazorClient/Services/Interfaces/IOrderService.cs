@@ -4,5 +4,5 @@ namespace KriniteWebShop.WebBlazorClient.Services.Interfaces;
 
 public interface IOrderService
 {
-    Task<IEnumerable<OrderModel>> GetOrdersByUserNameAsync(string userName);
+    Task<IEnumerable<OrderModel?>?> GetOrdersByUserNameAsync(string userName);
 }
