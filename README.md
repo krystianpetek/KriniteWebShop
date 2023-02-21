@@ -1,3 +1,3 @@
 # KriniteWebShop
 
-![Architecture diagram](./ArchitectureDiagram/project.svg)
+![Architecture diagram](./ArchitectureDiagram/project.png)

@@ -1,4 +1,4 @@
-.page {
+.main-layout {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -31,7 +31,7 @@ main {
         text-overflow: ellipsis;
     }
 
-@media (max-width: 640.98px) {
+@media (max-width: 640.98px) { /* lower than 641px */
     .top-row:not(.auth) {
         display: none;
     }
@@ -45,8 +45,8 @@ main {
     }
 }
 
-@media (min-width: 641px) {
-    .page {
+@media (min-width: 641px) { /* more than 641px */
+    .main-layout {
         flex-direction: row;
     }
 
