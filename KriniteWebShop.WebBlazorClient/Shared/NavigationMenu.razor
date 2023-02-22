@@ -1,29 +1,26 @@
 ﻿<div class="">
-    <div class="">
-        <a class="" href="">KriniteWebShop</a>
-        <nav class="">
-            <div class="">
-                <NavLink class="" href="" Match="NavLinkMatch.All">
-                    <span class="oi oi-home" aria-hidden="true"></span> Home
-                </NavLink>
-            </div>
-            <div class="">
-                <NavLink class="" href="counter">
-                    <span class="oi oi-plus" aria-hidden="true"></span> Counter
-                </NavLink>
-            </div>
-            <div class="">
-                <NavLink class="" href="fetchdata">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-                </NavLink>
-            </div>
-        </nav>
-        <button class="" @onclick="ToggleNavMenu">
-            <span class="btn btn-primary"></span>
-        </button>
-    </div>
+    <a class="" href="">KriniteWebShop</a>
+    <nav class="">
+        <div class="">
+            <NavLink class="nav nav-link link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav nav-link" href="counter">
+                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            </NavLink>
+        </div>
+        <div class="">
+            <NavLink class="nav nav-link link-light" href="fetchdata">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            </NavLink>
+        </div>
+    </nav>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="btn btn-primary navbar-toggler-icon"></span>
+    </button>
 </div>
-
 
 
 @code {

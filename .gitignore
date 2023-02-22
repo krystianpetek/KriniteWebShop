@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /KriniteWebShop.WebClient/wwwroot/lib/
 /KriniteWebShop.WebBlazorClient/wwwroot/lib/
+/KriniteWebShop.WebBlazorClient/*/*.css
+/KriniteWebShop.WebBlazorClient/**/*.css

@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "Shared/MainLayout.razor.css",
+    "inputFile": "Shared/MainLayout.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/site.css",
+    "inputFile": "wwwroot/css/site.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/reset.css",
+    "inputFile": "wwwroot/css/reset.scss"
+  },
+  {
+    "outputFile": "Shared/NavigationMenu.razor.css",
+    "inputFile": "Shared/NavigationMenu.razor.scss"
+  }
+]
