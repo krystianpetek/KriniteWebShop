@@ -4,6 +4,7 @@
     flex-direction: column;
 }
 
+/*
 main {
     flex: 1;
 }
@@ -31,8 +32,8 @@ main {
         text-overflow: ellipsis;
     }
 
-@media (max-width: 640.98px) { /* lower than 641px */
-    .top-row:not(.auth) {
+@media (max-width: 640.98px) {*/ /* lower than 641px */
+    /*.top-row:not(.auth) {
         display: none;
     }
 
@@ -45,8 +46,8 @@ main {
     }
 }
 
-@media (min-width: 641px) { /* more than 641px */
-    .main-layout {
+@media (min-width: 641px) {*/ /* more than 641px */
+    /*.main-layout {
         flex-direction: row;
     }
 
@@ -68,3 +69,4 @@ main {
         padding-right: 1.5rem !important;
     }
 }
+    */
