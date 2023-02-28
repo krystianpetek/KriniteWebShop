@@ -1,3 +1,18 @@
+@import "../wwwroot/lib/bootstrap/scss/_functions.scss";
+@import "../wwwroot/lib/bootstrap/scss/_variables.scss";
+@import "../wwwroot/lib/bootstrap/scss/_mixins.scss";
+
+.navbar__background--color {
+    background-color: $indigo-400;
+}
+
+::deep .nav-link {
+    color: $white;
+}
+
+::deep .navbar-toggler-icon{
+    color: $white;
+}
 /*.menu {
     display: flex;
     justify-content:space-between;
@@ -9,19 +24,20 @@
 }
 .link, .link:active{
     color: #ffffff;
-}
-
+}*/
 @media (min-width: 641px) {
     .navbar-toggler {
         display: none;
     }
-}*/
-
-/*.navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
 }
 
-.top-row {
+::deep .navbar-toggler {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.5)
+}
+
+/*.top-row {
     height: 3.5rem;
     background-color: rgba(0,0,0,0.4);
 }

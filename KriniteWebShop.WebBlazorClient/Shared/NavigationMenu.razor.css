@@ -1,4 +1,16 @@
-﻿/*.menu {
+﻿.navbar__background--color {
+  background-color: #8540f5;
+}
+
+::deep .nav-link {
+  color: #fff;
+}
+
+::deep .navbar-toggler-icon {
+  color: #fff;
+}
+
+/*.menu {
     display: flex;
     justify-content:space-between;
 }
@@ -9,18 +21,19 @@
 }
 .link, .link:active{
     color: #ffffff;
-}
-
-@media (min-width: 641px) {
-    .navbar-toggler {
-        display: none;
-    }
 }*/
-/*.navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
+@media (min-width: 641px) {
+  .navbar-toggler {
+    display: none;
+  }
+}
+::deep .navbar-toggler {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.top-row {
+/*.top-row {
     height: 3.5rem;
     background-color: rgba(0,0,0,0.4);
 }
