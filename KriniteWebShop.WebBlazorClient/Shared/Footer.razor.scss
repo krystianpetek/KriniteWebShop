@@ -1,0 +1,11 @@
+@import "../wwwroot/lib/bootstrap/scss/_functions.scss";
+@import "../wwwroot/lib/bootstrap/scss/_variables.scss";
+@import "../wwwroot/lib/bootstrap/scss/_mixins.scss";
+
+
+.footerLayout {
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    background-color: $indigo-400;
+}

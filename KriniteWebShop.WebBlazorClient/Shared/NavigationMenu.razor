@@ -1,32 +1,55 @@
-﻿<div class="navbar navbar-expand-sm justify-content-between  p-3 navbar__background--color">
-    <a class="navbar navbar-brand text-white p" href="">KriniteWebShop</a>
-    <nav class="navbar-collapse @NavMenuCssClass justify-content-end">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Product" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Products
-            </NavLink>
+﻿<div class="navbar navbar-expand-md justify-content-between p-2 navbar__background--color navbar-dark">
+    <div class="container-fluid">
+
+        <div class="navbar-header navbar-nav p-2">
+            <a href="" Match="NavLinkMatch.All"
+                class="navbar-brand">KriniteWebShop</a>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Order">
-                <span class="oi oi-plus" aria-hidden="true"></span> Orders
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Contact">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Contact
-            </NavLink>
-        </div>
-    </nav>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <button class="navbar-toggler" @onclick="ToggleNavMenu"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <nav id="collapsibleNavbar" class="navbar-collapse collapse justify-content-end">
+            <div class="navbar-nav">
+                <div class="nav-item p-2 nav-link__hover">
+                    <NavLink 
+                        class="nav-link" 
+                        href="Product" 
+                        Match="NavLinkMatch.All">
+                        <span class="bi bi-cart px-1" aria-hidden="true"></span> Products
+                    </NavLink>
+                </div>
+                <div class="nav-item p-2 nav-link__hover">
+                    <NavLink class="nav-link"
+                             href="Order">
+                        <span class="bi bi-box-seam px-1" aria-hidden="true"></span> Orders
+                    </NavLink>
+                </div>
+                <div class="nav-item p-2 nav-link__hover">
+                    <NavLink class="nav-link"
+                             href="Cart">
+                        <span class="bi bi-cart4 px-1" aria-hidden="true"></span> Cart
+                    </NavLink>
+                </div>
+                <div class="nav-item p-2 nav-link__hover">
+                    <NavLink class="nav-link"
+                             href="Contact">
+                        <span class="bi bi-person-vcard" aria-hidden="true"></span> Contact
+                    </NavLink>
+                </div>
+            </div>
+        </nav>
+
+    </div>
 </div>
 
 
 @code {
     private bool collapseNavMenu = false;
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    //private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     private void ToggleNavMenu()
     {
