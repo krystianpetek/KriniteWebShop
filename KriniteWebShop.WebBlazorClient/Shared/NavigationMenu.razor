@@ -11,9 +11,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <nav id="collapsibleNavbar" class="navbar-collapse collapse justify-content-end">
-            <div class="navbar-nav">
-                <div class="nav-item p-2 nav-link__hover">
+        <nav id="collapsibleNavbar" class="navbar-collapse @NavMenuCssClass justify-content-end">
+            <div class="navbar-nav" @onclick="ToggleNavMenu">
+                <div class="nav-item p-2 nav-link__hover" >
                     <NavLink 
                         class="nav-link" 
                         href="Product" 
@@ -47,9 +47,9 @@
 
 
 @code {
-    private bool collapseNavMenu = false;
+    private bool collapseNavMenu = true;
 
-    //private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     private void ToggleNavMenu()
     {
