@@ -15,7 +15,7 @@
     padding: 0.7rem 0.7rem 0 0.7rem;    
 }
 
-.product-card__footer-text--color {
-    color: $blue-600;
-    font-size: 0.9rem;
+::deep .product-card__title{
+    color: white;
+    text-decoration: none;
 }

@@ -2,12 +2,27 @@
 
 <PageTitle>KriniteWebShop - Index Page</PageTitle>
 
-<div class="row">
-    @foreach (var product in Products ?? Enumerable.Empty<Models.ProductModel>())
-    {
-        <ProductCard product="product"></ProductCard>
-    }
-</div>
+@if (Products?.Count() > 0)
+{
+    <div class="latest-promo">
+    </div>
+
+    <ProductsWrapper products="@Products?.Take(4)" header="Top products" color="primary"></ProductsWrapper>
+    <ProductsWrapper products="@Products?.TakeLast(4)" header="New products" color="success"></ProductsWrapper>
+
+    <div class="row justify-content-center">
+        @foreach (var product in Products ?? Enumerable.Empty<Models.ProductModel>())
+        {
+            <ProductCard product="product"></ProductCard>
+        }
+    </div>
+}
+else
+{
+    <div class="d-block m-auto justify-content-center spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+}
 @code {
     [Inject]
     private IProductService? productService { get; set; }

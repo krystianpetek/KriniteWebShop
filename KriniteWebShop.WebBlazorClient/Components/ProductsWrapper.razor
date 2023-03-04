@@ -1,0 +1,22 @@
+﻿<div class="m-3 card">
+    <div class="card-header bg-@color text-white align-items-center">
+        <p class="card-title text-center p-2 m-0">@header</p>
+    </div>
+    <div class="card-body row justify-content-center">
+        @foreach (Models.ProductModel? productModel in products)
+        {
+            <ProductCard product="productModel"></ProductCard>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string header { get; set; }
+    
+    [Parameter]
+    public string color { get; set; }
+
+    [Parameter]
+    public IEnumerable<Models.ProductModel?>? products { get; set; }
+}
