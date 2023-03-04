@@ -1,0 +1,20 @@
+﻿
+<div class="p-3 product-card__container col-lg-3">
+    <div class="card product-card">
+        <img class="card-img-top" src="@(product?.Image ?? """.\placeholder.png""")" />
+        <div class="card-title">
+            <p class="product-card__title">@product?.Name</p>
+        </div>
+        <div class="card-body">
+            <p>@product?.Description</p>
+        </div>
+        <div class="card-footer text-end text-dark product-card__footer">
+            <p class="product-card__footer-text--color">@product.Category</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Models.ProductModel? product { get; set; }
+}

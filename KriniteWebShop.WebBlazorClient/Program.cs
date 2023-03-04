@@ -1,4 +1,5 @@
-using KriniteWebShop.WebBlazorClient.Data;
+using KriniteWebShop.WebBlazorClient.Services;
+using KriniteWebShop.WebBlazorClient.Services.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -13,7 +14,11 @@ public class Program
         // Add services to the container.
         builder.Services.AddRazorPages();
         builder.Services.AddServerSideBlazor();
-        builder.Services.AddSingleton<WeatherForecastService>();
+
+        string gatewayApiUri = builder.Configuration.GetRequiredSection("GatewayApiUri").Value;
+        builder.Services.AddHttpClient<IProductService, ProductService>(config => config.BaseAddress = new Uri(gatewayApiUri));
+        builder.Services.AddHttpClient<ICartService, CartService>(config => config.BaseAddress = new Uri(gatewayApiUri));
+        builder.Services.AddHttpClient<IOrderService, OrderService>(config => config.BaseAddress = new Uri(gatewayApiUri));
 
         var app = builder.Build();
 

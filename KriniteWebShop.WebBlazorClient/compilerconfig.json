@@ -18,5 +18,13 @@
   {
     "outputFile": "Shared/Footer.razor.css",
     "inputFile": "Shared/Footer.razor.scss"
+  },
+  {
+    "outputFile": "Components/ProductCard.razor.css",
+    "inputFile": "Components/ProductCard.razor.scss"
+  },
+  {
+    "outputFile": "Components/ProductsWrapper.razor.css",
+    "inputFile": "Components/ProductsWrapper.razor.scss"
   }
 ]

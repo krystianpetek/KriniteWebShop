@@ -2,8 +2,19 @@
 
 <PageTitle>KriniteWebShop - Index Page</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="row">
+    @foreach (var product in Products ?? Enumerable.Empty<Models.ProductModel>())
+    {
+        <ProductCard product="product"></ProductCard>
+    }
+</div>
+@code {
+    [Inject]
+    private IProductService? productService { get; set; }
+    private IEnumerable<Models.ProductModel?>? Products { get; set; }
 
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+    protected override async Task OnInitializedAsync()
+    {
+        Products = await productService.GetProductsAsync();
+    }
+}
