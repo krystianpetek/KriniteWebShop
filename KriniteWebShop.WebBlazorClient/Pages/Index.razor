@@ -1,11 +1,18 @@
 ﻿@page "/"
+@using KriniteWebShop.WebBlazorClient.Helpers;
 
 <PageTitle>KriniteWebShop - Index Page</PageTitle>
 
 @if (Products?.Count() > 0)
 {
     <div class="latest-promo">
-        @currentDate.ToString(@"hh\:mm\:ss")
+        <div class="latest-promo__product">
+            <p>@PromoProduct?.Name</p>
+            <img src="@PromoProduct?.Image" />
+        </div>
+        <div class="latest-promo__time">
+            @currentDayTime.ToString(@"hh\:mm\:ss")
+        </div>
     </div>
 
     <ProductsWrapper Products="@Products?.Take(4)" Header="Top products" Color="bg-blue"></ProductsWrapper>
@@ -28,22 +35,25 @@ else
     [Inject]
     private IProductService? productService { get; set; }
     private IEnumerable<Models.ProductModel?>? Products { get; set; }
-    private TimeSpan date = new TimeSpan(24, 00, 00);
-    private TimeSpan currentDate{ get; set; }
+    private Models.ProductModel? PromoProduct { get; set; }
+
+    private readonly TimeSpan TimeInDay = new TimeSpan(24, 00, 00);
+    private TimeSpan currentDayTime { get; set; }
+
 
     protected override async Task OnInitializedAsync()
     {
         Products = await productService.GetProductsAsync();
+        currentDayTime = TimeInDay - DateTime.Now.TimeOfDay;
+        PromoProduct = Products.RandomElement();
         RunTimer();
     }
-
-    private int currentCount = 0;
 
     private void RunTimer()
     {
         var timer = new Timer(new TimerCallback(_ =>
         {
-            currentDate = date - DateTime.Now.TimeOfDay;
+            currentDayTime = TimeInDay - DateTime.Now.TimeOfDay;
             InvokeAsync(() =>
             {
                 StateHasChanged();

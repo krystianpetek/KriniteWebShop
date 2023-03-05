@@ -26,5 +26,9 @@
   {
     "outputFile": "Components/ProductsWrapper.razor.css",
     "inputFile": "Components/ProductsWrapper.razor.scss"
+  },
+  {
+    "outputFile": "Pages/Index.razor.css",
+    "inputFile": "Pages/Index.razor.scss"
   }
 ]
