@@ -1,9 +1,9 @@
 ﻿<div class="m-3 card">
-    <div class="card-header bg-@color text-white align-items-center">
-        <p class="card-title text-center p-2 m-0">@header</p>
+    <div class="card-header @Color text-white align-items-center">
+        <p class="card-title text-center p-2 m-0">@Header</p>
     </div>
     <div class="card-body row justify-content-center">
-        @foreach (Models.ProductModel? productModel in products)
+        @foreach (Models.ProductModel? productModel in Products ?? Enumerable.Empty<Models.ProductModel>())
         {
             <ProductCard product="productModel"></ProductCard>
         }
@@ -12,11 +12,11 @@
 
 @code {
     [Parameter]
-    public string header { get; set; }
+    public string Header { get; set; }
     
     [Parameter]
-    public string color { get; set; }
+    public string Color { get; set; }
 
     [Parameter]
-    public IEnumerable<Models.ProductModel?>? products { get; set; }
+    public IEnumerable<Models.ProductModel?>? Products { get; set; }
 }
