@@ -1,0 +1,30 @@
+﻿@page "/products"
+
+@if (ProductsCollection.Count() > 0)
+{
+    <input type="text" @bind-value="userName" />
+    <div class="row justify-content-center">
+        @foreach (var product in ProductsCollection)
+        {
+            <DetailedProductCard userName="@userName" product="product"></DetailedProductCard>
+        }
+    </div>
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    [Inject]
+    private IProductService productService { get; set; }
+
+    private string userName { get; set; }
+
+    private IEnumerable<Models.ProductModel> ProductsCollection { get; set; } = Enumerable.Empty<Models.ProductModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        ProductsCollection = (await productService.GetProductsAsync()).ToList();
+    }
+}

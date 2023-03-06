@@ -1,0 +1,45 @@
+﻿
+<div class="p-3 product-card__container col-lg-3">
+    <div class="card product-card">
+        <img class="card-img-top" src="@(product?.Image ?? """.\placeholder.png""")" />
+        <div class="card-title">
+            <p class="product-card__title">
+                <NavLink class="link-primary text-decoration-none" href="@(GetProductLink)"> @product?.Name</NavLink>
+            </p>
+        </div>
+        <div class="card-body">
+            <p>@product?.Description</p>
+        <button type="button" class="btn btn-warning" @onclick="@AddProductToCart"></button>
+        </div>
+        <div class="card-footer text-end text-dark product-card__footer">
+            <p class="text-danger">@product.Category</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Inject]
+    private ICartService cartService { get; set; }
+
+    [Parameter]
+    public string userName { get; set; }
+
+    private async Task AddProductToCart()
+    {
+        if (string.IsNullOrWhiteSpace(userName))
+            return;
+
+        Models.CartModel? cartModel = await cartService.GetCartAsync(userName);
+
+        var cartItem = new Models.CartItemModel("","",1,123);
+        await cartService.UpdateCartAsync(cartModel with
+            {
+                Items = cartModel.Items.Append(cartItem)
+            });
+    }
+
+    [Parameter]
+    public Models.ProductModel? product { get; set; }
+
+    private string GetProductLink => $"product/{product.Id}";
+}

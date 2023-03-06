@@ -1,3 +1,3 @@
 ﻿namespace KriniteWebShop.WebBlazorClient.Models;
 
-public record CartModel (string UserName, IReadOnlyCollection<CartItemModel> Items, decimal TotalPrice);
+public record CartModel (string UserName, IEnumerable<CartItemModel> Items, decimal TotalPrice);
