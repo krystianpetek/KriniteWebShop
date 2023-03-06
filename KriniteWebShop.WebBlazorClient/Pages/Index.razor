@@ -7,11 +7,27 @@
 {
     <div class="latest-promo">
         <div class="latest-promo__product">
-            <p>@PromoProduct?.Name</p>
-            <img src="@PromoProduct?.Image" />
+            <img class="latest-promo__photo" src="@(PromoProduct?.Image ?? """.\placeholder.png""")" />
+            <NavLink href="@(GetProductLink)" class="text-decoration-none">
+                <p class="h5 latest-promo__title">@PromoProduct?.Name</p>
+            </NavLink>
         </div>
         <div class="latest-promo__time">
-            @currentDayTime.ToString(@"hh\:mm\:ss")
+            <p class="h5">The offer ends in: </p>
+            <div class="d-flex flex-row">
+            <div class="timer">
+                <p class="latest-promo__p">@currentDayTime.ToString(@"hh")</p>
+            </div>
+            <p class="latest-promo__p">:</p>
+            <div class="timer">
+                <p class="latest-promo__p">@currentDayTime.ToString(@"mm")</p>
+            </div>
+            <p class="latest-promo__p">:</p>
+            <div class="timer">
+                <p class="latest-promo__p">@currentDayTime.ToString(@"ss")</p>
+
+                </div>
+            </div>
         </div>
     </div>
 
@@ -36,16 +52,17 @@ else
     private IProductService? productService { get; set; }
     private IEnumerable<Models.ProductModel?>? Products { get; set; }
     private Models.ProductModel? PromoProduct { get; set; }
+    private string GetProductLink => $"product/{PromoProduct.Id}";
 
     private readonly TimeSpan TimeInDay = new TimeSpan(24, 00, 00);
     private TimeSpan currentDayTime { get; set; }
 
-
     protected override async Task OnInitializedAsync()
     {
         Products = await productService.GetProductsAsync();
-        currentDayTime = TimeInDay - DateTime.Now.TimeOfDay;
         PromoProduct = Products.RandomElement();
+
+        currentDayTime = TimeInDay - DateTime.Now.TimeOfDay;
         RunTimer();
     }
 

@@ -4,7 +4,7 @@
         <img class="card-img-top" src="@(product?.Image ?? """.\placeholder.png""")" />
         <div class="card-title">
             <p class="product-card__title">
-                <NavLink class="link-primary text-decoration-none" href="@($"product/{product.Id}")"> @product?.Name</NavLink>
+                <NavLink class="link-primary text-decoration-none" href="@(GetProductLink)"> @product?.Name</NavLink>
             </p>
         </div>
         <div class="card-body">
@@ -19,4 +19,6 @@
 @code {
     [Parameter]
     public Models.ProductModel? product { get; set; }
+
+    private string GetProductLink => $"product/{product.Id}";
 }
