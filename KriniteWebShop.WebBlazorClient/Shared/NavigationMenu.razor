@@ -5,21 +5,19 @@
 
         <div class="navbar-header navbar-nav p-2">
             <a href="" Match="NavLinkMatch.All"
-                class="navbar-brand">KriniteWebShop</a>
+               class="navbar-brand">KriniteWebShop</a>
         </div>
         <button class="navbar-toggler" @onclick="ToggleNavMenu"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <nav id="collapsibleNavbar" class="navbar-collapse @NavMenuCssClass justify-content-end">
             <div class="navbar-nav" @onclick="ToggleNavMenu">
-                <div class="nav-item p-2 nav-link__hover" >
-                    <NavLink 
-                        class="nav-link" 
-                        href="Products" 
-                        Match="NavLinkMatch.All">
+                <div class="nav-item p-2 nav-link__hover">
+                    <NavLink class="nav-link"
+                             href="Products"
+                             Match="NavLinkMatch.All">
                         <span class="bi bi-cart px-1" aria-hidden="true"></span> Products
                     </NavLink>
                 </div>
@@ -42,6 +40,24 @@
                         <span class="bi bi-person-vcard" aria-hidden="true"></span> Contact
                     </NavLink>
                 </div>
+                <AuthorizeView>
+                        <Authorized>
+                            <div class="nav-item p-2 nav-link__hover">
+                                <NavLink class="nav-link"
+                                         href="Logout">
+                                    <span class="bi bi-box-arrow-in-left" aria-hidden="true"></span> Logout
+                                </NavLink>
+                            </div>
+                        </Authorized>
+                        <NotAuthorized>
+                            <div class="nav-item p-2 nav-link__hover">
+                                <NavLink class="nav-link"
+                                         href="Login">
+                                    <span class="bi bi-box-arrow-in-right" aria-hidden="true"></span> Login
+                                </NavLink>
+                            </div>
+                        </NotAuthorized>
+                </AuthorizeView>
             </div>
         </nav>
 
@@ -50,7 +66,7 @@
 
 @code {
     [Inject]
-    public ICartState eventService { get; set; }
+    private ICartState eventService { get; set; }
 
     private int cartItems { get; set; }
 

@@ -1,7 +1,6 @@
 using KriniteWebShop.WebBlazorClient.Services;
 using KriniteWebShop.WebBlazorClient.Services.Interfaces;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace KriniteWebShop.WebBlazorClient;
 public class Program
@@ -14,6 +13,8 @@ public class Program
         // Add services to the container.
         builder.Services.AddRazorPages();
         builder.Services.AddServerSideBlazor();
+        builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+
         builder.Services.AddSingleton<ICartState, CartState>();
 
         string gatewayApiUri = builder.Configuration.GetRequiredSection("GatewayApiUri").Value;
@@ -34,8 +35,6 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseStaticFiles();
-
-        app.UseRouting();
 
         app.MapBlazorHub();
         app.MapFallbackToPage("/_Host");
