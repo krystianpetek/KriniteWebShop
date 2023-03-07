@@ -1,4 +1,6 @@
-﻿<div class="navbar navbar-expand-md justify-content-between p-2 navbar__background--color navbar-dark">
+﻿@implements IDisposable
+
+<div class="navbar navbar-expand-md justify-content-between p-2 navbar__background--color navbar-dark">
     <div class="container-fluid">
 
         <div class="navbar-header navbar-nav p-2">
@@ -31,7 +33,7 @@
                     <NavLink class="nav-link"
                              href="Cart">
                         <span class="bi bi-cart4 px-1" aria-hidden="true">Cart</span>
-                        <i class="badge text-bg-secondary p-0 cart-badge">@cart?.Items?.Count()</i>
+                        <i class="badge text-bg-secondary p-0 cart-badge">@cartItems</i>
                     </NavLink>
                 </div>
                 <div class="nav-item p-2 nav-link__hover">
@@ -46,11 +48,11 @@
     </div>
 </div>
 
-
 @code {
     [Inject]
-    public ICartService cartService { get; set; }
-    private Models.CartModel cart{ get; set; }
+    public ICartState eventService { get; set; }
+
+    private int cartItems { get; set; }
 
     private bool collapseNavMenu = true;
 
@@ -61,8 +63,19 @@
         collapseNavMenu = !collapseNavMenu;
     }
 
-    protected override async Task OnInitializedAsync()
+    private void ChangeCartItemsCount()
     {
-        cart = await cartService.GetCartAsync("krystianpetek2");
+        cartItems = eventService.CartItems;
+        StateHasChanged();
+    }
+    protected override void OnInitialized()
+    {
+        cartItems = eventService.CartItems;
+        eventService.CartStateUpdated += ChangeCartItemsCount;
+    }
+
+    public void Dispose()
+    {
+        eventService.CartStateUpdated -= ChangeCartItemsCount;
     }
 }

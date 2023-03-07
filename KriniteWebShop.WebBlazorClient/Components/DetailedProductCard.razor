@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             <p>@product?.Description</p>
-        <button type="button" class="btn btn-warning" @onclick="@AddProductToCart"></button>
+        <button type="button" class="btn btn-warning" @onclick="@(ProductSelected)"></button>
         </div>
         <div class="card-footer text-end text-dark product-card__footer">
             <p class="text-danger">@product.Category</p>
@@ -18,28 +18,16 @@
 </div>
 
 @code {
-    [Inject]
-    private ICartService cartService { get; set; }
-
     [Parameter]
-    public string userName { get; set; }
-
-    private async Task AddProductToCart()
-    {
-        if (string.IsNullOrWhiteSpace(userName))
-            return;
-
-        Models.CartModel? cartModel = await cartService.GetCartAsync(userName);
-
-        var cartItem = new Models.CartItemModel("","",1,123);
-        await cartService.UpdateCartAsync(cartModel with
-            {
-                Items = cartModel.Items.Append(cartItem)
-            });
-    }
+    public EventCallback<Models.ProductModel> AddProductToCart { get; set; }
 
     [Parameter]
     public Models.ProductModel? product { get; set; }
 
     private string GetProductLink => $"product/{product.Id}";
+
+    private async Task ProductSelected(MouseEventArgs e)
+    {
+        await AddProductToCart.InvokeAsync(product);
+    }
 }

@@ -14,6 +14,7 @@ public class Program
         // Add services to the container.
         builder.Services.AddRazorPages();
         builder.Services.AddServerSideBlazor();
+        builder.Services.AddSingleton<ICartState, CartState>();
 
         string gatewayApiUri = builder.Configuration.GetRequiredSection("GatewayApiUri").Value;
         builder.Services.AddHttpClient<IProductService, ProductService>(config => config.BaseAddress = new Uri(gatewayApiUri));

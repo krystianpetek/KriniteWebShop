@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         @foreach (var product in ProductsCollection)
         {
-            <DetailedProductCard userName="@userName" product="product"></DetailedProductCard>
+            <DetailedProductCard AddProductToCart=@(AddProductToCart) product="product"></DetailedProductCard>
         }
     </div>
 }
@@ -17,14 +17,35 @@ else
 
 @code {
     [Inject]
+    public ICartState eventService { get; set; }
+
+    [Inject]
     private IProductService productService { get; set; }
 
-    private string userName { get; set; }
+    [Inject]
+    private ICartService cartService { get; set; }
 
-    private IEnumerable<Models.ProductModel> ProductsCollection { get; set; } = Enumerable.Empty<Models.ProductModel>();
+    private string userName { get; set; }
+    private IEnumerable<Models.ProductModel?> ProductsCollection { get; set; } = Enumerable.Empty<Models.ProductModel>();
+
+    private async Task AddProductToCart(Models.ProductModel productModel)
+    {
+        if (string.IsNullOrWhiteSpace(userName))
+            return;
+
+        Models.CartModel? cartModel = await cartService.GetCartAsync(userName);
+        eventService.SetState(cartModel.Items.Count());
+
+        var cartItem = new Models.CartItemModel(productModel.Id, productModel.Name, 1, productModel.Price);
+        await cartService.UpdateCartAsync(cartModel with
+            {
+                Items = cartModel.Items.Append(cartItem)
+            });
+    }
 
     protected override async Task OnInitializedAsync()
     {
-        ProductsCollection = (await productService.GetProductsAsync()).ToList();
+        var collection = await productService.GetProductsAsync();
+        ProductsCollection = collection.ToList();
     }
 }
