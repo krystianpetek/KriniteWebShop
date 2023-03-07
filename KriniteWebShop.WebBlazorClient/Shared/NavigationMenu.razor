@@ -30,7 +30,8 @@
                 <div class="nav-item p-2 nav-link__hover">
                     <NavLink class="nav-link"
                              href="Cart">
-                        <span class="bi bi-cart4 px-1" aria-hidden="true"></span> Cart
+                        <span class="bi bi-cart4 px-1" aria-hidden="true">Cart</span>
+                        <i class="badge text-bg-secondary p-0 cart-badge">@cart?.Items?.Count()</i>
                     </NavLink>
                 </div>
                 <div class="nav-item p-2 nav-link__hover">
@@ -47,6 +48,10 @@
 
 
 @code {
+    [Inject]
+    public ICartService cartService { get; set; }
+    private Models.CartModel cart{ get; set; }
+
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
@@ -54,5 +59,10 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        cart = await cartService.GetCartAsync("krystianpetek2");
     }
 }
