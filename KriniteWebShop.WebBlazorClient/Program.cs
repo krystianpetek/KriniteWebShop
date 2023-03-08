@@ -14,7 +14,7 @@ public class Program
         builder.Services.AddRazorPages();
         builder.Services.AddServerSideBlazor();
         builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-
+        builder.Services.AddScoped<ILoginService, LoginService>();
         builder.Services.AddSingleton<ICartState, CartState>();
 
         string? gatewayApiUri = builder.Configuration.GetRequiredSection("GatewayApiUri")?.Value;

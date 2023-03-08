@@ -1,6 +1,6 @@
 ﻿@page "/products"
 
-@if (ProductsCollection.Count() > 0)
+@if (ProductsCollection?.Count() > 0)
 {
     <input type="text" @bind-value="userName" />
     <div class="row justify-content-center">
