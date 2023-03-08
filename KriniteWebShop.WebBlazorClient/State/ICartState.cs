@@ -1,4 +1,4 @@
-﻿namespace KriniteWebShop.WebBlazorClient.Services.Interfaces;
+﻿namespace KriniteWebShop.WebBlazorClient.State;
 
 public interface ICartState
 {

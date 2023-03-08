@@ -1,6 +1,4 @@
-﻿using KriniteWebShop.WebBlazorClient.Services.Interfaces;
-
-namespace KriniteWebShop.WebBlazorClient.Services;
+﻿namespace KriniteWebShop.WebBlazorClient.State;
 
 public class CartState : ICartState
 {

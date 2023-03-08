@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         @foreach (var product in ProductsCollection)
         {
-            <DetailedProductCard AddProductToCart=@(AddProductToCart) product="product"></DetailedProductCard>
+            <DetailedProductCard AddProductToCart=@(AddProductToCart) Product="product"></DetailedProductCard>
         }
     </div>
 }
@@ -17,27 +17,27 @@ else
 
 @code {
     [Inject]
-    public ICartState eventService { get; set; }
+    public ICartState? CartState { get; set; }
 
     [Inject]
-    private IProductService productService { get; set; }
+    private IProductService? ProductService { get; set; }
 
     [Inject]
-    private ICartService cartService { get; set; }
+    private ICartService? CartService { get; set; }
 
     private string userName { get; set; }
-    private IEnumerable<Models.ProductModel?> ProductsCollection { get; set; } = Enumerable.Empty<Models.ProductModel>();
+    private IEnumerable<Models.ProductModel?>? ProductsCollection { get; set; }
 
     private async Task AddProductToCart(Models.ProductModel productModel)
     {
         if (string.IsNullOrWhiteSpace(userName))
             return;
 
-        Models.CartModel? cartModel = await cartService.GetCartAsync(userName);
-        eventService.SetState(cartModel.Items.Count());
+        Models.CartModel? cartModel = await CartService!.GetCartAsync(userName);
+        CartState?.SetState(cartModel.Items.Count());
 
         var cartItem = new Models.CartItemModel(productModel.Id, productModel.Name, 1, productModel.Price);
-        await cartService.UpdateCartAsync(cartModel with
+        await CartService.UpdateCartAsync(cartModel with
             {
                 Items = cartModel.Items.Append(cartItem)
             });
@@ -45,7 +45,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var collection = await productService.GetProductsAsync();
-        ProductsCollection = collection.ToList();
+        var collection = await ProductService!.GetProductsAsync();
+        ProductsCollection = collection.ToList() ?? Enumerable.Empty<Models.ProductModel>();
     }
 }

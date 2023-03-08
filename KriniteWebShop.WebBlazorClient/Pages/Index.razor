@@ -37,7 +37,7 @@
     <div class="row justify-content-center">
         @foreach (var product in Products ?? Enumerable.Empty<Models.ProductModel>())
         {
-            <ProductCard product="product"></ProductCard>
+            <ProductCard Product="product"></ProductCard>
         }
     </div>
 }
@@ -52,15 +52,15 @@ else
     private IProductService? productService { get; set; }
     private IEnumerable<Models.ProductModel?>? Products { get; set; }
     private Models.ProductModel? PromoProduct { get; set; }
-    private string GetProductLink => $"product/{PromoProduct.Id}";
+    private string GetProductLink => $"product/{PromoProduct?.Id}";
 
     private readonly TimeSpan TimeInDay = new TimeSpan(24, 00, 00);
     private TimeSpan currentDayTime { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Products = await productService.GetProductsAsync();
-        PromoProduct = Products.RandomElement();
+        Products = await productService!.GetProductsAsync() ?? Enumerable.Empty<Models.ProductModel>();
+        PromoProduct = Products?.RandomElement();
 
         currentDayTime = TimeInDay - DateTime.Now.TimeOfDay;
         RunTimer();

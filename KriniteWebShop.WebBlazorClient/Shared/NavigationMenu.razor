@@ -31,7 +31,7 @@
                     <NavLink class="nav-link"
                              href="Cart">
                         <span class="bi bi-cart4 px-1" aria-hidden="true">Cart</span>
-                        <i class="badge text-bg-secondary p-0 cart-badge">@cartItems</i>
+                        <i class="badge text-bg-secondary p-0 cart-badge">@CartItems</i>
                     </NavLink>
                 </div>
                 <div class="nav-item p-2 nav-link__hover">
@@ -66,32 +66,29 @@
 
 @code {
     [Inject]
-    private ICartState eventService { get; set; }
-
-    private int cartItems { get; set; }
-
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-
+    private ICartState? EventService { get; set; }
+    private int CartItems { get; set; }
     private void ChangeCartItemsCount()
     {
-        cartItems = eventService.CartItems;
+        CartItems = EventService!.CartItems;
         StateHasChanged();
     }
+
+    private bool CollapseNavMenu = true;
+    private string? NavMenuCssClass => CollapseNavMenu ? "collapse" : null;
+    private void ToggleNavMenu()
+    {
+        CollapseNavMenu = !CollapseNavMenu;
+    }
+
     protected override void OnInitialized()
     {
-        cartItems = eventService.CartItems;
-        eventService.CartStateUpdated += ChangeCartItemsCount;
+        CartItems = EventService!.CartItems;
+        EventService!.CartStateUpdated += ChangeCartItemsCount;
     }
 
     public void Dispose()
     {
-        eventService.CartStateUpdated -= ChangeCartItemsCount;
+        EventService!.CartStateUpdated -= ChangeCartItemsCount;
     }
 }

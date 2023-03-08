@@ -5,7 +5,7 @@
     <div class="card-body row justify-content-center">
         @foreach (Models.ProductModel? productModel in Products ?? Enumerable.Empty<Models.ProductModel>())
         {
-            <ProductCard product="productModel"></ProductCard>
+            <ProductCard Product="productModel"></ProductCard>
         }
     </div>
 </div>

@@ -1,8 +1,8 @@
 ﻿@page "/product/{id}"
 
-@if (productModel is not null)
+@if (ProductModel is not null)
 {
-    <ProductCard product="productModel"></ProductCard>
+    <ProductCard Product="ProductModel"></ProductCard>
 }
 else
 {
@@ -11,17 +11,17 @@ else
 
 @code {
     [Inject]
-    private ICartService cartService { get; set; }
+    private ICartService? CartService { get; set; }
 
     [Inject]
-    private IProductService productService { get; set; }
-    private Models.ProductModel productModel { get; set; }
+    private IProductService? ProductService { get; set; }
+    private Models.ProductModel? ProductModel { get; set; }
 
     [Parameter]
     public string Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        productModel = await productService.GetProductByIdAsync(Id);
+        ProductModel = await ProductService!.GetProductByIdAsync(Id);
     }
 }
