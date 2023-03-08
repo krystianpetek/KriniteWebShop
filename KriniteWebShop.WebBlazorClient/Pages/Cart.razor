@@ -1,5 +1,42 @@
 ﻿@page "/cart"
 
-@code {
+<h3 class="h3">Cart @UserName</h3>
 
-}
+<div class="d-grid">
+    <InputText id="username"
+               placeholder="Enter Username"
+               class="form-control"
+               DisplayName="User name"
+               @bind-Value="@UserName"></InputText>
+    <button type="button"
+            class="btn btn-secondary mt-2"
+            @onclick="FetchData">
+        Fetch cart
+    </button>
+</div>
+
+<div class="p-2 d-grid">
+    <table class="table table-sm table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (Models.CartItemModel cartItemModel in CartModelProp?.Items ?? Enumerable.Empty<Models.CartItemModel>())
+                {
+                    <tr>
+                        <td>@cartItemModel.ProductId</td>
+                        <td>@cartItemModel.ProductName</td>
+                        <td>@cartItemModel.Quantity</td>
+                        <td>@cartItemModel.Price</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

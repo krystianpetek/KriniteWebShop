@@ -15,7 +15,7 @@ public class Program
         builder.Services.AddServerSideBlazor();
         builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
         builder.Services.AddScoped<ILoginService, LoginService>();
-        builder.Services.AddSingleton<ICartState, CartState>();
+        builder.Services.AddScoped<ICartState, CartState>();
 
         string? gatewayApiUri = builder.Configuration.GetRequiredSection("GatewayApiUri")?.Value;
         builder.Services.AddHttpClient<IProductService, ProductService>(config => config.BaseAddress = new Uri(gatewayApiUri!));

@@ -2,6 +2,8 @@
 
 @if (ProductsCollection?.Count() > 0)
 {
+    <h3 class="h3">Products</h3>
+
     <InputText id="username"
                placeholder="Enter Username"
                class="form-control"
@@ -39,13 +41,16 @@ else
             return;
 
         Models.CartModel? cartModel = await CartService!.GetCartAsync(UserName);
-        CartState?.SetState(cartModel.Items.Count());
 
         var cartItem = new Models.CartItemModel(productModel.Id, productModel.Name, 1, productModel.Price);
-        await CartService.UpdateCartAsync(cartModel with
+        cartModel = await CartService.UpdateCartAsync(cartModel with
             {
                 Items = cartModel.Items.Append(cartItem)
             });
+
+        int count = cartModel.Items.Count();
+
+        CartState?.SetState(count);
     }
 
     protected override async Task OnInitializedAsync()

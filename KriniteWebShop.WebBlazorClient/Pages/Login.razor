@@ -4,9 +4,8 @@
 
 <h3 class="h3">Login page</h3>
 
-<p>Work in progress</p>
 
-<div class="p-2">
+<div class="d-grid">
     <InputText id="username"
                placeholder="Enter Username"
                class="form-control"
@@ -15,6 +14,8 @@
 
     <button class="btn btn-secondary mt-2" @onclick="@SetUserName">Sign in</button>
 </div>
+
+<p class="p-2">Work in progress</p>
 @code {
     [Inject]
     ILoginService? LoginService { get; set; }
