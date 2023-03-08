@@ -6,12 +6,18 @@
 
 <p>Work in progress</p>
 
-<input type="text" @bind-value="@UserName" placeholder="Enter username" />
-<button @onclick="@SetUserName">Sign in</button>
+<div class="p-2">
+    <InputText id="username"
+               placeholder="Enter Username"
+               class="form-control"
+               DisplayName="User name"
+               @bind-Value="@UserName"></InputText>
 
+    <button class="btn btn-secondary mt-2" @onclick="@SetUserName">Sign in</button>
+</div>
 @code {
     [Inject]
-    ILoginService? LoginService{ get; set; }
+    ILoginService? LoginService { get; set; }
 
     [Inject]
     ICartState? CartState { get; set; }

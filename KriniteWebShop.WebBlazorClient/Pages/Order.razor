@@ -1,6 +1,65 @@
 ﻿@page "/order"
 
+<h1 class="h1">Orders</h1>
+<div class="p-2 d-grid">
+    <InputText 
+        id="username" 
+        placeholder="Enter Username" 
+        class="form-control" 
+        DisplayName="User name" 
+        @bind-Value="@UserName"
+    ></InputText>
+    <button
+        type="button" 
+        class="btn btn-secondary mt-2" 
+        @onclick="FetchData"
+    >Fetch orders</button>
+</div>
+<table class="table table-md table-striped">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Email address</th>
+            <th scope="col">Total price</th>
+            <th scope="col">Payment method</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Models.OrderModel orderModel in UserOrders)
+        {
+            <tr>
+                <td>@orderModel?.Id</td>
+                <td>@orderModel?.FirstName</td>
+                <td>@orderModel?.LastName</td>
+                <td>@orderModel?.EmailAddress</td>
+                <td>@orderModel?.TotalPrice</td>
+                <td>@orderModel?.PaymentMethod</td>
+            </tr>
+       }
+    </tbody>
+</table>
+
 @code {
     [Inject]
     IOrderService? OrderService { get; set; }
+    IEnumerable<Models.OrderModel?>? UserOrders { get; set; } = Enumerable.Empty<Models.OrderModel?>();
+
+    private string? UserName { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(UserName))
+            await OrderService!.GetOrdersByUserNameAsync(UserName);
+    }
+
+    private async Task FetchData()
+    {
+        if (!string.IsNullOrWhiteSpace(UserName))
+        {
+            UserOrders = await OrderService!.GetOrdersByUserNameAsync(UserName);
+            await InvokeAsync(StateHasChanged);
+        }
+    }
 }

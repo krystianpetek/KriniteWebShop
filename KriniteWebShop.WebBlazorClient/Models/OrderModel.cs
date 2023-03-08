@@ -1,6 +1,6 @@
 ﻿namespace KriniteWebShop.WebBlazorClient.Models;
 
-public record OrderModel(string TotalPrice, string FirstName, string LastName, string EmailAddress, string AddressLine, string Country, string State, string ZipCode, int PaymentMethod)
+public record OrderModel(Guid Id, decimal TotalPrice, string FirstName, string LastName, string EmailAddress, string AddressLine, string Country, string State, string ZipCode, int PaymentMethod)
 {
     public string? CardName { get; set; }
 

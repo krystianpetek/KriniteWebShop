@@ -9,7 +9,7 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     public void SetUserName(string userName)
     {
         UserName = userName;
-        GetAuthenticationStateAsync();
+        NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
     }
 
     public override Task<AuthenticationState> GetAuthenticationStateAsync()
