@@ -2,7 +2,12 @@
 
 @if (ProductsCollection?.Count() > 0)
 {
-    <input type="text" @bind-value="userName" />
+    <InputText id="username"
+               placeholder="Enter Username"
+               class="form-control"
+           DisplayName="User name"
+           @bind-Value="@UserName"></InputText>
+
     <div class="row justify-content-center">
         @foreach (var product in ProductsCollection)
         {
@@ -25,15 +30,15 @@ else
     [Inject]
     private ICartService? CartService { get; set; }
 
-    private string userName { get; set; }
+    private string UserName { get; set; }
     private IEnumerable<Models.ProductModel?>? ProductsCollection { get; set; }
 
     private async Task AddProductToCart(Models.ProductModel productModel)
     {
-        if (string.IsNullOrWhiteSpace(userName))
+        if (string.IsNullOrWhiteSpace(UserName))
             return;
 
-        Models.CartModel? cartModel = await CartService!.GetCartAsync(userName);
+        Models.CartModel? cartModel = await CartService!.GetCartAsync(UserName);
         CartState?.SetState(cartModel.Items.Count());
 
         var cartItem = new Models.CartItemModel(productModel.Id, productModel.Name, 1, productModel.Price);
