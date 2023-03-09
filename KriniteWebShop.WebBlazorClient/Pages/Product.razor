@@ -1,8 +1,29 @@
 ﻿@page "/product/{id}"
 
+<InputText id="username"
+           placeholder="Enter Username"
+           class="form-control"
+           DisplayName="User name"
+           @bind-Value="@UserName"></InputText>
+
+
 @if (ProductModel is not null)
 {
-    <ProductCard Product="ProductModel"></ProductCard>
+    <h3 class="h3">@ProductModel?.Name</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img class="card-img" src="@(ProductModel?.Image ?? """.\placeholder.png""")" />
+            </div>
+            <div class="col-md-6">
+                <p>Product name: <span>@ProductModel?.Name</span></p>
+                <p>Product description: <span>@ProductModel?.Description</span></p>
+                <p>Price: <span>@ProductModel?.Price</span></p>
+                <p>Product category<span>@ProductModel?.Category</span></p>
+                <button type="button" class="btn btn-primary" @onclick="AddProductToCart">Add to cart</button>
+            </div>
+        </div>
+    </div>
 }
 else
 {
@@ -12,16 +33,39 @@ else
 @code {
     [Inject]
     private ICartService? CartService { get; set; }
+    
+    [Inject]
+    private ICartState? CartState { get; set; }
 
     [Inject]
     private IProductService? ProductService { get; set; }
+    
     private Models.ProductModel? ProductModel { get; set; }
-
+    private string UserName { get; set; }
+    
     [Parameter]
     public string Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         ProductModel = await ProductService!.GetProductByIdAsync(Id);
+    }
+
+    private async Task AddProductToCart()
+    {
+        if (string.IsNullOrWhiteSpace(UserName))
+            return;
+
+        Models.CartModel? cartModel = await CartService!.GetCartAsync(UserName);
+
+        var cartItem = new Models.CartItemModel(ProductModel?.Id, ProductModel?.Name, 1, ProductModel.Price);
+        cartModel = await CartService.UpdateCartAsync(cartModel with
+            {
+                Items = cartModel.Items.Append(cartItem)
+            });
+
+        int count = cartModel.Items.Count();
+
+        CartState?.SetState(count);
     }
 }
