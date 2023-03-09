@@ -1,0 +1,48 @@
+﻿@page "/checkout/{username}";
+
+<h3 class="h3">Checkout cart for @UserName</h3>
+
+<div class="d-grid">
+
+    <EditForm Model="@cartCheckoutModel" OnValidSubmit="OnValidSubmit">
+        <div class="mb-3">
+            <label class="form-label" for="firstName">First name</label>
+            <InputText class="form-control" id="firstName" @bind-Value="cartCheckoutModel.FirstName"></InputText>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="lastName">Last name</label>
+            <InputText class="form-control" id="lastName" @bind-Value="cartCheckoutModel.LastName"></InputText>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="emailAddress">Email address</label>
+            <InputText class="form-control" id="emailAddress" @bind-Value="cartCheckoutModel.EmailAddress"></InputText>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="addressLine">Address line</label>
+            <InputText class="form-control" id="addressLine" @bind-Value="cartCheckoutModel.AddressLine"></InputText>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="zipCode">Zip code</label>
+            <InputText class="form-control" id="zipCode" @bind-Value="cartCheckoutModel.ZipCode"></InputText>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="country">Country</label>
+            <InputText class="form-control" id="country" @bind-Value="cartCheckoutModel.Country"></InputText>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="state">State</label>
+            <InputText class="form-control" id="state" @bind-Value="cartCheckoutModel.State"></InputText>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="paymentMethod">Payment method</label>
+            <InputNumber class="form-control" id="paymentMethod" @bind-Value="cartCheckoutModel.PaymentMethod"></InputNumber>
+        </div>
+        <button type="submit"
+                class="btn btn-secondary mt-2"
+                @onclick="CheckoutCart">
+            Checkout cart
+        </button>
+    </EditForm>
+
+</div>
+

@@ -13,6 +13,9 @@ public partial class Cart : ComponentBase
     [Inject]
     private ICartState? CartState { get; set; }
 
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
     private string? UserName { get; set; }
 
     private Models.CartModel? CartModelProp { get; set; }
@@ -48,6 +51,14 @@ public partial class Cart : ComponentBase
                 Items = aggregated
             };
 
+        }
+    }
+
+    private void CheckoutCart()
+    {
+        if (CartModelProp?.Items?.Count() > 0)
+        {
+            NavigationManager.NavigateTo($"/checkout/{UserName}");
         }
     }
 }

@@ -15,28 +15,34 @@
     </button>
 </div>
 
-<div class="p-2 d-grid">
-    <table class="table table-sm table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Product ID</th>
-                <th>Product name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                foreach (Models.CartItemModel cartItemModel in CartModelProp?.Items ?? Enumerable.Empty<Models.CartItemModel>())
-                {
-                    <tr>
-                        <td>@cartItemModel.ProductId</td>
-                        <td>@cartItemModel.ProductName</td>
-                        <td>@cartItemModel.Quantity</td>
-                        <td>@cartItemModel.Price</td>
-                    </tr>
+@if (CartModelProp is not null && CartModelProp?.Items?.Count() > 0)
+{
+    <div class="p-2 d-grid">
+        <table class="table table-sm table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (Models.CartItemModel cartItemModel in CartModelProp?.Items ?? Enumerable.Empty<Models.CartItemModel>())
+                    {
+                        <tr>
+                            <td>@cartItemModel.ProductId</td>
+                            <td>@cartItemModel.ProductName</td>
+                            <td>@cartItemModel.Quantity</td>
+                            <td>@cartItemModel.Price</td>
+                        </tr>
+                    }
                 }
-            }
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
+    <button type="button" class="btn btn-secondary mt-2" @onclick="CheckoutCart">
+        Checkout
+    </button>
+}

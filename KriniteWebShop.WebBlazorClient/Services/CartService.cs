@@ -13,7 +13,7 @@ public class CartService : ICartService
 
     public async Task CartCheckoutAsync(CartCheckoutModel cartCheckoutModel)
     {
-        HttpResponseMessage httpResponse = await _httpClient.PostAsJsonAsync<CartCheckoutModel>("/cart", cartCheckoutModel);
+        HttpResponseMessage httpResponse = await _httpClient.PostAsJsonAsync<CartCheckoutModel>("/cart/Checkout", cartCheckoutModel);
         if(!httpResponse.IsSuccessStatusCode)
             throw new HttpRequestException($"Error occured when calling to GatewayAPI.\nStatus code: {httpResponse.StatusCode}");
         await Task.CompletedTask;
