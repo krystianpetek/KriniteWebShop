@@ -365,3 +365,7 @@ FodyWeavers.xsd
 /KriniteWebShop.WebBlazorClient/wwwroot/lib/
 /KriniteWebShop.WebBlazorClient/*/*.css
 /KriniteWebShop.WebBlazorClient/**/*.css
+src/KriniteWebShop.WebClient/wwwroot/lib/
+src/KriniteWebShop.WebBlazorClient/wwwroot/lib/
+src/KriniteWebShop.WebBlazorClient/*/*.css
+src/KriniteWebShop.WebBlazorClient/**/*.css
