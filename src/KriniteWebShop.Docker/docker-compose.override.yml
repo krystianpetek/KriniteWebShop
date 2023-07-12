@@ -2,8 +2,8 @@ version: '3.4'
 
 services:
 # KriniteWebShop.ProductCatalog.API
-  krinitewebshop.productcatalog.api:
-    container_name: KriniteWebShop.ProductCatalog.API
+  krinitewebshop.catalog.api:
+    container_name: KriniteWebShop.Catalog.API
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
@@ -17,7 +17,7 @@ services:
       - productdb.mssql
 
   productdb.mssql:
-    container_name: KriniteWebShop.ProductCatalog.API.MsSql
+    container_name: KriniteWebShop.Catalog.API.MsSql
     environment:
       SA_PASSWORD: "NotAll0wedForPublic"
       ACCEPT_EULA: "Y"
@@ -26,8 +26,8 @@ services:
       - "8720:1433"
 
 # KriniteWebShop.ProductCatalog.NoSQL.API
-  krinitewebshop.productcatalog.nosql.api:
-    container_name: KriniteWebShop.ProductCatalog.NoSQL.API
+  krinitewebshop.catalog.nosql.api:
+    container_name: KriniteWebShop.Catalog.NoSQL.API
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
@@ -47,8 +47,8 @@ services:
         - "27001:27017"
 
 # KriniteWebShop.ProductCart.API
-  krinitewebshop.productcart.api:
-    container_name: KriniteWebShop.ProductCart.API
+  krinitewebshop.cart.api:
+    container_name: KriniteWebShop.Cart.API
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
@@ -65,14 +65,14 @@ services:
       - rabbitmq
 
   cartdb.redis:
-    container_name: KriniteWebShop.ProductCart.API.Redis
+    container_name: KriniteWebShop.Cart.API.Redis
     restart: always
     ports:
         - "6301:6379"
 
 # KriniteWebShop.ProductCoupon.API
-  krinitewebshop.productcoupon.api:
-    container_name: KriniteWebShop.ProductCoupon.API
+  krinitewebshop.coupon.api:
+    container_name: KriniteWebShop.Coupon.API
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
@@ -85,8 +85,8 @@ services:
     depends_on:
       - coupondb.postgresql
 
-  krinitewebshop.productcoupon.grpc:
-    container_name: KriniteWebShop.ProductCoupon.gRPC
+  krinitewebshop.coupon.grpc:
+    container_name: KriniteWebShop.Coupon.gRPC
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
@@ -100,7 +100,7 @@ services:
       - coupondb.postgresql
 
   coupondb.postgresql:
-    container_name: KriniteWebShop.ProductCoupon.gRPC.PostgreSql
+    container_name: KriniteWebShop.Coupon.gRPC.PostgreSql
     restart: always
     ports:
         - "5401:5432"
@@ -108,8 +108,8 @@ services:
       - POSTGRES_PASSWORD=NotAll0wedForPublic
 
 # KriniteWebShop.ProductOrder.API
-  krinitewebshop.productorder.api:
-    container_name: KriniteWebShop.ProductOrder.API
+  krinitewebshop.order.api:
+    container_name: KriniteWebShop.Order.API
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
@@ -125,7 +125,7 @@ services:
       - rabbitmq
 
   orderdb.mssql:
-    container_name: KriniteWebShop.ProductOrder.API.MsSql
+    container_name: KriniteWebShop.Order.API.MsSql
     environment:
       SA_PASSWORD: "NotAll0wedForPublic"
       ACCEPT_EULA: "Y"
@@ -145,10 +145,10 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-    - krinitewebshop.productcatalog.nosql.api
-    - krinitewebshop.productcart.api
-    - krinitewebshop.productcoupon.grpc
-    - krinitewebshop.productorder.api
+    - krinitewebshop.catalog.nosql.api
+    - krinitewebshop.cart.api
+    - krinitewebshop.coupon.grpc
+    - krinitewebshop.order.api
 
 # KriniteWebShop.GatewayAPI
   krinitewebshop.gatewayapi:
@@ -162,13 +162,13 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-    - krinitewebshop.productcatalog.nosql.api
-    - krinitewebshop.productcart.api
-    - krinitewebshop.productorder.api
+    - krinitewebshop.catalog.nosql.api
+    - krinitewebshop.cart.api
+    - krinitewebshop.order.api
 
 # KriniteWebShop.WebClient
-  krinitewebshop.webclient:
-    container_name: KriniteWebShop.WebClient
+  krinitewebshop.webui.razorpages:
+    container_name: KriniteWebShop.WebUI.RazorPages
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
@@ -178,14 +178,14 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-    - krinitewebshop.productcatalog.nosql.api
-    - krinitewebshop.productcart.api
-    - krinitewebshop.productorder.api
+    - krinitewebshop.catalog.nosql.api
+    - krinitewebshop.cart.api
+    - krinitewebshop.order.api
     - krinitewebshop.gatewayapi
 
 # KriniteWebShop.WebBlazorClient
-  krinitewebshop.webblazorclient:
-    container_name: KriniteWebShop.WebBlazorClient
+  krinitewebshop.webui.blazor:
+    container_name: KriniteWebShop.WebUI.Blazor
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+:80
@@ -199,9 +199,9 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
-    - krinitewebshop.productcatalog.nosql.api
-    - krinitewebshop.productcart.api
-    - krinitewebshop.productorder.api
+    - krinitewebshop.catalog.nosql.api
+    - krinitewebshop.cart.api
+    - krinitewebshop.order.api
     - krinitewebshop.gatewayapi
 
 # Tools
