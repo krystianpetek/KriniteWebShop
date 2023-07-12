@@ -1,0 +1,29 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "cartdb.redis": "StartWithoutDebugging",
+        "coupondb.postgresql": "StartWithoutDebugging",
+        "krinitewebshop.gatewayapi": "StartWithoutDebugging",
+        "krinitewebshop.productcart.api": "StartWithoutDebugging",
+        "krinitewebshop.productcatalog.api": "StartWithoutDebugging",
+        "krinitewebshop.productcatalog.nosql.api": "StartWithoutDebugging",
+        "krinitewebshop.productcoupon.api": "StartWithoutDebugging",
+        "krinitewebshop.productcoupon.grpc": "StartWithoutDebugging",
+        "krinitewebshop.productorder.api": "StartWithoutDebugging",
+        "krinitewebshop.purchaseaggregator": "StartWithoutDebugging",
+        "krinitewebshop.webblazorclient": "StartWithoutDebugging",
+        "krinitewebshop.webclient": "StartWithoutDebugging",
+        "mongodbclient": "StartWithoutDebugging",
+        "orderdb.mssql": "StartWithoutDebugging",
+        "pgadmin4": "StartWithoutDebugging",
+        "portainer": "StartWithoutDebugging",
+        "productdb.mongo": "StartWithoutDebugging",
+        "productdb.mssql": "StartWithoutDebugging",
+        "rabbitmq": "StartWithoutDebugging"
+      }
+    }
+  }
+}

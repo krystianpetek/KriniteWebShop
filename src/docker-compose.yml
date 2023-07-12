@@ -1,0 +1,66 @@
+version: '3.4'
+
+services:
+  productdb.mssql:
+    image: mcr.microsoft.com/mssql/server:latest
+    networks:
+      static-network:
+        ipv4_address: 172.26.100.2
+
+  productdb.mongo:
+    image: mongo
+    networks:
+      static-network:
+        ipv4_address: 172.26.102.2
+
+  cartdb.redis:
+    image: redis
+    networks:
+      static-network:
+        ipv4_address: 172.26.104.2
+
+  coupondb.postgresql:
+    image: postgres
+    networks:
+      static-network:
+        ipv4_address: 172.26.106.3
+
+  orderdb.mssql:
+    image: mcr.microsoft.com/mssql/server:latest
+    networks:
+      static-network:
+        ipv4_address: 172.26.108.2
+
+# Tools
+  portainer:
+    image: portainer/portainer-ce:latest
+    networks:
+      static-network:
+        ipv4_address: 172.26.190.1
+
+  mongodbclient:
+    image: mongoclient/mongoclient
+    networks:
+      static-network:
+        ipv4_address: 172.26.191.1
+      
+  pgadmin4:
+    image: dpage/pgadmin4
+    networks:
+      static-network:
+        ipv4_address: 172.26.192.2
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    networks:
+      static-network:
+        ipv4_address: 172.26.193.1
+
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 172.26.0.0/16
+
+volumes:
+  portainer_data:

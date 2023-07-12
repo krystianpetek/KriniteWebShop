@@ -1,0 +1,56 @@
+﻿@page
+@model OrderModel
+
+<h1 class="text-white text-center">@Model.UserName</h1>
+<div class="p-3 m-4 bgLight border-0 border-dark rounded">
+    <table class="table table-borderless table-dark">
+        <thead>
+            <tr>
+                <th class="col-1">#</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Total price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td></td>
+                        <td>@order.FirstName</td>
+                        <td>@order.LastName</td>
+                        <td>@order.EmailAddress</td>
+                        <td>@order.AddressLine</td>
+                        <td>@order.TotalPrice</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@functions{
+    public class OrderModel : PageModel
+    {
+        private readonly IOrderService _orderService;
+        public IEnumerable<Old_KriniteWebShop.WebClient.Models.OrderModel> Orders { get; set; } = Enumerable.Empty<Old_KriniteWebShop.WebClient.Models.OrderModel>();
+
+        public OrderModel(IOrderService orderService)
+        {
+            _orderService = orderService;
+        }
+
+        public string UserName { get; set; }
+
+        public async Task OnGet(string userName)
+        {
+            UserName = userName ?? "Empty User";
+            
+            Orders = await _orderService.GetOrdersByUserNameAsync(UserName);
+        }
+    }
+}
+

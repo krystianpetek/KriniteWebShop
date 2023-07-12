@@ -1,0 +1,73 @@
+version: '3.4'
+
+services:
+  productdb.mssql:
+    container_name: KriniteWebShop.ProductCatalog.API.MsSql
+    environment:
+      SA_PASSWORD: "NotAll0wedForPublic"
+      ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+      - "8720:1433"
+
+  productdb.mongo:
+    container_name: KriniteWebShop.ProductCatalog.NoSQL.API.Mongo
+    restart: always
+    ports:
+        - "27001:27017"
+
+  cartdb.redis:
+    container_name: KriniteWebShop.ProductCart.API.Redis
+    restart: always
+    ports:
+        - "6301:6379"
+
+  coupondb.postgresql:
+    container_name: KriniteWebShop.ProductCoupon.gRPC.PostgreSql
+    restart: always
+    ports:
+        - "5401:5432"
+    environment:
+      - POSTGRES_PASSWORD=NotAll0wedForPublic
+
+  orderdb.mssql:
+    container_name: KriniteWebShop.ProductOrder.API.MsSql
+    environment:
+      SA_PASSWORD: "NotAll0wedForPublic"
+      ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+      - "8725:1433"
+
+# Tools
+  portainer:
+    container_name: KriniteWebShop.Portainer
+    restart: always
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - portainer_data:/data portainer/portainer-ce:latest
+
+  mongodbclient:
+    container_name: KriniteWebShop.MongoClient
+    restart: always
+    ports:
+        - "3001:3000"
+
+  pgadmin4:
+    container_name: KriniteWebShop.pgAdmin4
+    restart: always
+    ports:
+        - "5402:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=NotAll0wedForPublic
+
+  rabbitmq:
+    container_name: KriniteWebShop.RabbitMQ
+    restart: always
+    ports:
+    - "5601:5672"
+    - "15601:15672"
