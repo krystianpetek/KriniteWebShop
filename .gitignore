@@ -361,11 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/KriniteWebShop.WebClient/wwwroot/lib/
-/KriniteWebShop.WebBlazorClient/wwwroot/lib/
-/KriniteWebShop.WebBlazorClient/*/*.css
-/KriniteWebShop.WebBlazorClient/**/*.css
-src/KriniteWebShop.WebClient/wwwroot/lib/
-src/KriniteWebShop.WebBlazorClient/wwwroot/lib/
-src/KriniteWebShop.WebBlazorClient/*/*.css
-src/KriniteWebShop.WebBlazorClient/**/*.css
+src/WebUI/KriniteWebShop.WebUI.RazorPages/wwwroot/lib/
+src/WebUI/KriniteWebShop.WebUI.Blazor/wwwroot/lib/
+src/WebUI/KriniteWebShop.WebUI.Blazor/*/*.css
+src/WebUI/KriniteWebShop.WebUI.Blazor/**/*.css

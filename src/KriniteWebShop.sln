@@ -32,15 +32,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.Order.Applic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.Order.Infrastructure", "Services\Order\KriniteWebShop.Order.Infrastructure\KriniteWebShop.Order.Infrastructure.csproj", "{8BFFB40B-61EB-49D2-9DFA-FE070753F7FB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.EventBus", "KriniteWebShop.EventBus\KriniteWebShop.EventBus.csproj", "{54F8B6E8-2E6C-4CF1-B3E5-D0958AE7D23C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.EventBus", "Shared\KriniteWebShop.EventBus\KriniteWebShop.EventBus.csproj", "{54F8B6E8-2E6C-4CF1-B3E5-D0958AE7D23C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.GatewayAPI", "KriniteWebShop.GatewayAPI\KriniteWebShop.GatewayAPI.csproj", "{5A03ECA4-FFFE-4532-8675-F08F1646E8CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.PurchaseAggregator", "KriniteWebShop.PurchaseAggregator\KriniteWebShop.PurchaseAggregator.csproj", "{396DF146-986D-4CB7-AC2E-00AE77EDA1EE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Old_KriniteWebShop.WebClient", "KriniteWebShop.WebClient\Old_KriniteWebShop.WebClient.csproj", "{36249CC9-61EC-4524-A153-0E791D3E4BC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Old_KriniteWebShop.WebUI.RazorPages", "WebUI\KriniteWebShop.WebUI.RazorPages\Old_KriniteWebShop.WebUI.RazorPages.csproj", "{36249CC9-61EC-4524-A153-0E791D3E4BC6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.WebBlazorClient", "KriniteWebShop.WebBlazorClient\KriniteWebShop.WebBlazorClient.csproj", "{D3304A31-D48A-49B7-A9B8-26FC5187A9E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.WebUI.Blazor", "WebUI\KriniteWebShop.WebUI.Blazor\KriniteWebShop.WebUI.Blazor.csproj", "{D3304A31-D48A-49B7-A9B8-26FC5187A9E0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{782BDAED-A4B1-4E9D-855E-461239BE73CE}"
 EndProject
@@ -50,9 +50,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{44D43EA9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Coupon", "Coupon", "{96DDD701-FC89-49BE-8210-26EC4D091D14}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebClient", "WebClient", "{55859BA0-A575-44C6-8AAC-6EC1A3406D4F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{55859BA0-A575-44C6-8AAC-6EC1A3406D4F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{DF4215E3-086F-46F4-8EAD-817A3219825F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{10F41BA7-928A-42A1-81CE-C9E6FB2D25A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -134,6 +136,7 @@ Global
 		{47320EB8-17E8-4CC8-A8CC-B1C25E30A60E} = {44D43EA9-5510-4699-8458-CA891A631A55}
 		{1DAB4092-F610-49FC-A258-C5B21BADFC93} = {44D43EA9-5510-4699-8458-CA891A631A55}
 		{8BFFB40B-61EB-49D2-9DFA-FE070753F7FB} = {44D43EA9-5510-4699-8458-CA891A631A55}
+		{54F8B6E8-2E6C-4CF1-B3E5-D0958AE7D23C} = {10F41BA7-928A-42A1-81CE-C9E6FB2D25A5}
 		{36249CC9-61EC-4524-A153-0E791D3E4BC6} = {55859BA0-A575-44C6-8AAC-6EC1A3406D4F}
 		{D3304A31-D48A-49B7-A9B8-26FC5187A9E0} = {55859BA0-A575-44C6-8AAC-6EC1A3406D4F}
 		{782BDAED-A4B1-4E9D-855E-461239BE73CE} = {DF4215E3-086F-46F4-8EAD-817A3219825F}

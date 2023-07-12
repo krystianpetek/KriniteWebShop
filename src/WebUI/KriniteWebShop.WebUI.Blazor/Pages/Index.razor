@@ -1,0 +1,79 @@
+﻿@page "/"
+
+<PageTitle>KriniteWebShop - Index Page</PageTitle>
+
+@if (Products?.Count() > 0)
+{
+    <div class="latest-promo">
+        <div class="latest-promo__product">
+            <img class="latest-promo__photo" src="@(PromoProduct?.Image ?? """.\placeholder.png""")" />
+            <NavLink href="@(GetProductLink)" class="text-decoration-none">
+                <p class="h5 latest-promo__title">@PromoProduct?.Name</p>
+            </NavLink>
+        </div>
+        <div class="latest-promo__time">
+            <p class="h5">The offer ends in: </p>
+            <div class="d-flex flex-row">
+            <div class="timer">
+                <p class="latest-promo__p">@currentDayTime.ToString(@"hh")</p>
+            </div>
+            <p class="latest-promo__p">:</p>
+            <div class="timer">
+                <p class="latest-promo__p">@currentDayTime.ToString(@"mm")</p>
+            </div>
+            <p class="latest-promo__p">:</p>
+            <div class="timer">
+                <p class="latest-promo__p">@currentDayTime.ToString(@"ss")</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ProductsWrapper Products="@Products?.Take(4)" Header="Top products" Color="bg-blue"></ProductsWrapper>
+    <ProductsWrapper Products="@Products?.TakeLast(4)" Header="New products" Color="bg-indigo"></ProductsWrapper>
+
+    <div class="row justify-content-center">
+        @foreach (var product in Products ?? Enumerable.Empty<Models.ProductModel>())
+        {
+            <ProductCard Product="product"></ProductCard>
+        }
+    </div>
+}
+else
+{
+    <div class="d-block m-auto justify-content-center spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+}
+@code {
+    [Inject]
+    private IProductService? productService { get; set; }
+    private IEnumerable<Models.ProductModel?>? Products { get; set; }
+    private Models.ProductModel? PromoProduct { get; set; }
+    private string GetProductLink => $"product/{PromoProduct?.Id}";
+
+    private readonly TimeSpan TimeInDay = new TimeSpan(24, 00, 00);
+    private TimeSpan currentDayTime { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Products = await productService!.GetProductsAsync() ?? Enumerable.Empty<Models.ProductModel>();
+        PromoProduct = Products?.RandomElement();
+
+        currentDayTime = TimeInDay - DateTime.Now.TimeOfDay;
+        RunTimer();
+    }
+
+    private void RunTimer()
+    {
+        var timer = new Timer(new TimerCallback(_ =>
+        {
+            currentDayTime = TimeInDay - DateTime.Now.TimeOfDay;
+            InvokeAsync(() =>
+            {
+                StateHasChanged();
+            });
+        }), null, 1000, 1000);
+    }
+}

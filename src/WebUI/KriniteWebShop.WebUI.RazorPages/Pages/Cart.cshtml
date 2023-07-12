@@ -1,0 +1,34 @@
+﻿@page
+@model CartModel
+
+<h1 class="text-white text-center">@Model.UserName</h1>
+<div class="text-white">
+    @foreach (var item in Model.CurrentCart.Items ?? Enumerable.Empty<CartItemModel>())
+    {
+        <p>@item.ProductName</p>
+    }
+    <p>Summary: @Model.CurrentCart.TotalPrice</p>
+</div>
+
+@functions{
+    public class CartModel : PageModel
+    {
+        private readonly ICartService _cartService;
+        private readonly ILogger<CartModel> _logger;
+        public WebUI.RazorPages.Models.CartModel CurrentCart { get; set; }
+
+        public string UserName { get; set; } = "Empty User";
+
+        public CartModel(ILogger<CartModel> logger, ICartService cartService, IProductService productService)
+        {
+            _logger = logger;
+            _cartService = cartService ?? throw new ArgumentNullException(nameof(cartService));
+        }
+
+        public async Task<IActionResult> OnGetAsync()
+        {
+            CurrentCart = await _cartService.GetCartAsync(UserName);
+            return Page();
+        }
+    }
+}

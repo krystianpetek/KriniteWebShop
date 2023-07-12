@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\KriniteWebShop.EventBus\KriniteWebShop.EventBus.csproj" />
+    <ProjectReference Include="..\..\..\Shared\KriniteWebShop.EventBus\KriniteWebShop.EventBus.csproj" />
     <ProjectReference Include="..\KriniteWebShop.Order.Infrastructure\KriniteWebShop.Order.Infrastructure.csproj" />
   </ItemGroup>
 
