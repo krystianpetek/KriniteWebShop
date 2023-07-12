@@ -3,15 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B21DA6C2-A28C-4F2F-82A8-B5448683B266}"
-	ProjectSection(SolutionItems) = preProject
-		KriniteWebShop.postman_collection.json = KriniteWebShop.postman_collection.json
-		ArchitectureDiagram\project.drawio = ArchitectureDiagram\project.drawio
-		README.md = README.md
-		runDevelop.ps1 = runDevelop.ps1
-		script.ps1 = script.ps1
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Old_KriniteWebShop.Catalog.API", "Services\Catalog\KriniteWebShop.Catalog.API\Old_KriniteWebShop.Catalog.API.csproj", "{B3296A28-003A-4267-A5A5-511EED37A1D8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KriniteWebShop.Catalog.NoSQL.API", "Services\Catalog\KriniteWebShop.Catalog.NoSQL.API\KriniteWebShop.Catalog.NoSQL.API.csproj", "{6D95D446-59F0-4C90-876C-54A9F3AB1308}"

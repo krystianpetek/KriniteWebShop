@@ -1,13 +1,13 @@
 version: '3.4'
 
 services:
-  productdb.mssql:
+  catalogdb.mssql:
     image: mcr.microsoft.com/mssql/server:latest
     networks:
       static-network:
         ipv4_address: 172.26.100.2
 
-  productdb.mongo:
+  catalogdb.mongo:
     image: mongo
     networks:
       static-network:
@@ -43,7 +43,7 @@ services:
     networks:
       static-network:
         ipv4_address: 172.26.191.1
-      
+
   pgadmin4:
     image: dpage/pgadmin4
     networks:

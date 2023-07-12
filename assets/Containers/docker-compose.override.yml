@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  productdb.mssql:
-    container_name: KriniteWebShop.ProductCatalog.API.MsSql
+  catalogdb.mssql:
+    container_name: KriniteWebShop.Catalog.MsSql
     environment:
       SA_PASSWORD: "NotAll0wedForPublic"
       ACCEPT_EULA: "Y"
@@ -10,20 +10,20 @@ services:
     ports:
       - "8720:1433"
 
-  productdb.mongo:
-    container_name: KriniteWebShop.ProductCatalog.NoSQL.API.Mongo
+  catalogdb.mongo:
+    container_name: KriniteWebShop.Catalog.MongoDb
     restart: always
     ports:
         - "27001:27017"
 
   cartdb.redis:
-    container_name: KriniteWebShop.ProductCart.API.Redis
+    container_name: KriniteWebShop.Cart.Redis
     restart: always
     ports:
         - "6301:6379"
 
   coupondb.postgresql:
-    container_name: KriniteWebShop.ProductCoupon.gRPC.PostgreSql
+    container_name: KriniteWebShop.Coupon.PostgreSql
     restart: always
     ports:
         - "5401:5432"
@@ -31,7 +31,7 @@ services:
       - POSTGRES_PASSWORD=NotAll0wedForPublic
 
   orderdb.mssql:
-    container_name: KriniteWebShop.ProductOrder.API.MsSql
+    container_name: KriniteWebShop.Order.MsSql
     environment:
       SA_PASSWORD: "NotAll0wedForPublic"
       ACCEPT_EULA: "Y"

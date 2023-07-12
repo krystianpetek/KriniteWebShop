@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "ProductCatalog",
+			"name": "Catalog",
 			"item": [
 				{
 					"name": "NoSQL",
@@ -563,7 +563,7 @@
 			]
 		},
 		{
-			"name": "ProductCart",
+			"name": "Cart",
 			"item": [
 				{
 					"name": "GET cart",
@@ -623,7 +623,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userName\": \"{{UserName}}\",\r\n    \"items\": [\r\n        {\r\n            \"productId\":\"{{productId1-Guid}}\",\r\n            \"productName\": \"{{productName1}}\",\r\n            \"price\": 12.50,\r\n            \"quantity\": 3\r\n        },\r\n        {\r\n            \"productId\":\"{{productId2-Guid}}\",\r\n            \"productName\": \"{{productName2}}\",\r\n            \"price\": 20000,\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"userName\": \"{{UserName}}\",\r\n    \"items\": [\r\n        {\r\n            \"productId\":\"{{productId1-ObjectId}}\",\r\n            \"productName\": \"{{productName1}}\",\r\n            \"price\": 12.50,\r\n            \"quantity\": 3\r\n        },\r\n        {\r\n            \"productId\":\"{{productId2-ObjectId}}\",\r\n            \"productName\": \"{{productName2}}\",\r\n            \"price\": 20000,\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -688,7 +688,7 @@
 			]
 		},
 		{
-			"name": "ProductCoupon",
+			"name": "Coupon",
 			"item": [
 				{
 					"name": "GET coupon",
@@ -792,7 +792,7 @@
 			]
 		},
 		{
-			"name": "ProductOrder",
+			"name": "Order",
 			"item": [
 				{
 					"name": "GET user orders",
@@ -897,7 +897,7 @@
 			]
 		},
 		{
-			"name": "GatewayAPI",
+			"name": "ApiGateway",
 			"item": [
 				{
 					"name": "ProductCatalog",
@@ -1198,7 +1198,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"userName\": \"{{UserName}}\",\r\n    \"items\": [\r\n        {\r\n            \"productId\":\"{{productId1-Guid}}\",\r\n            \"productName\": \"{{productName1}}\",\r\n            \"price\": 12.50,\r\n            \"quantity\": 3\r\n        },\r\n        {\r\n            \"productId\":\"{{productId2-Guid}}\",\r\n            \"productName\": \"{{productName2}}\",\r\n            \"price\": 20000,\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
+									"raw": "{\r\n    \"userName\": \"{{UserName}}\",\r\n    \"items\": [\r\n        {\r\n            \"productId\":\"{{productId1-ObjectId}}\",\r\n            \"productName\": \"{{productName1}}\",\r\n            \"price\": 12.50,\r\n            \"quantity\": 3\r\n        },\r\n        {\r\n            \"productId\":\"{{productId2-ObjectId}}\",\r\n            \"productName\": \"{{productName2}}\",\r\n            \"price\": 20000,\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1452,6 +1452,31 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "PurchaseAggregator",
+			"item": [
+				{
+					"name": "GET client cart and previous orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PurchaseAggregator}}/api/v1/purchase/{{UserName}}",
+							"host": [
+								"{{PurchaseAggregator}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"purchase",
+								"{{UserName}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -1524,42 +1549,42 @@
 		},
 		{
 			"key": "ProductCatalog",
-			"value": "http://localhost:5820",
+			"value": "https://localhost:7920",
 			"type": "string"
 		},
 		{
 			"key": "ProductCatalogNoSQL",
-			"value": "http://localhost:5821",
+			"value": "https://localhost:7921",
 			"type": "string"
 		},
 		{
 			"key": "ProductCart",
-			"value": "http://localhost:5822",
+			"value": "https://localhost:7922",
 			"type": "string"
 		},
 		{
 			"key": "ProductCoupon",
-			"value": "http://localhost:5823",
+			"value": "https://localhost:7923",
 			"type": "string"
 		},
 		{
 			"key": "ProductCoupon-gRPC",
-			"value": "http://localhost:5824",
+			"value": "https://localhost:7924",
 			"type": "string"
 		},
 		{
 			"key": "ProductOrder",
-			"value": "http://localhost:5825",
+			"value": "https://localhost:7925",
 			"type": "string"
 		},
 		{
 			"key": "PurchaseAggregator",
-			"value": "http://localhost:5826",
+			"value": "https://localhost:7926",
 			"type": "string"
 		},
 		{
 			"key": "GatewayAPI",
-			"value": "http://localhost:5827",
+			"value": "https://localhost:7927",
 			"type": "string"
 		}
 	]
