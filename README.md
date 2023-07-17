@@ -7,23 +7,38 @@
  KriniteWebShop is a modern platform for online shopping in microservice architecture.
 </h3>
 
-**KriniteWebShop** its a mobile application for search and discover interesting places in various categories such as culture, nature, entertainment and many more. The application was created in the [Dart](https://dart.dev/) language using the [Flutter](https://flutter.dev/) framework, which allows you to create beautiful and responsive user interfaces on various platforms. Interesting places are shared by very simple API, created in ASP.NET Core which is currently hosted in [Azure Web App Service](https://azure.microsoft.com/en-us/products/app-service/web). The application is designed for people who like to travel and discover new places, as well as for those who are looking for inspiration for their next trips. The application is designed to make it easier for users to find interesting places and share them with others. The application allows users to browse available places by category, location or name. Users can also add their own places, rate and comment on existing ones, and create lists of favorite places. The application also offers a map function that shows the location of selected places and how to navigate to them.
+**KriniteWebShop** is an e-commerce application build for selling of any products online. The application was created in the [C#](https://learn.microsoft.com/en-us/dotnet/csharp/) language using [ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-7.0) framework, which allows you to create web apps and services that are fast, secure, cross-platform, and cloud-based. The visual side of the application was also made using the .NET platform, in the [ASP.NET Core Blazor](https://learn.microsoft.com/pl-pl/aspnet/core/blazor/?view=aspnetcore-7.0) framework. The application is designed for people who want to save time and money on shopping. The application allows users to visit the websites, registers and login (WIP) to the shop. They can check all the products available for shopping, filter and search item based on different categories, and then add to cart.
 
-- KriniteWebShop is a platform for online shopping that provides a convenient and secure way for customers to buy products from various sellers.
 - The platform is developed using microservice architecture, which allows for scalability, reliability and easy maintenance of the system.
 - The platform uses ASP.NET Core as the main technology for each microservices, which are hosted in Docker as containers and also in local environment.
 - The platform offers a variety of features for both customers and sellers, such as product catalog, shopping cart, payment processing, order management, reviews and ratings, etc.
-- The platform aims to create a positive and satisfying shopping experience for customers, as well as to help sellers grow their businesses and reach more customers.
 
-<br/>
-<div align="center">
-    <img src="./assets/screens/show-2.png" height="700" />
-    <img src="./assets/screens/show-1.png" height="700" />
-</div>
+Application is splitted into 4 microservices, 1 web application and two additional microservices for API Gateway and Purchase Aggregator. Each microservice is a separate project in the solution. The microservices are:
+
+- `KriniteWebShop.Cart` - microservice responsible for managing the shopping cart
+- `KriniteWebShop.Catalog` - microservice responsible for managing the product catalog
+- `KriniteWebShop.Coupon` - microservice responsible for managing the coupons and calculate discount for all products in the cart
+- `KriniteWebShop.Order` - microservice responsible for managing the orders
+- `KriniteWebShop.WebUI` - web application responsible for managing the shopping cart
+
+- `KriniteWebShop.PurchaseAggregator` - which implements the Service Aggregator pattern and aggregates the data from the other microservices to ensure that the user can see the products in the cart and the total price of the order
+- `KriniteWebShop.GatewayAPI` - which implements the [API Gateway](https://microservices.io/patterns/apigateway.html) or Backend for Frontends pattern and aggregates the data from the other microservices
+
+- [**KriniteWebShop.Docker**](./src/KriniteWebShop.Docker/) - Visual Studio .sln project, which contains the Docker Compose files from each microservices, which allows to run the application in Docker containers by one click button
+
+<!-- - `KriniteWebShop.Identity` - microservice responsible for managing the identity -->
 
 ## Run the application
 
-### WebAPI
+To start the application, you need to have the [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) installed on your computer and also [.NET 7.0 SDK](https://dotnet.microsoft.com/en-us/download) or later and [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+
+Then, depending on which microservices you want to run, you need other tools:
+
+- ``
+
+to open the solution in Visual Studio and run the project.
+
+Then, depending on your runtime environment, the following steps are needed:
 
 ## Project architecture
 
