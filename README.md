@@ -7,8 +7,6 @@
  KriniteWebShop is a modern platform for online shopping in microservice architecture.
 </h3>
 
-<br/>
-
 **KriniteWebShop** its a mobile application for search and discover interesting places in various categories such as culture, nature, entertainment and many more. The application was created in the [Dart](https://dart.dev/) language using the [Flutter](https://flutter.dev/) framework, which allows you to create beautiful and responsive user interfaces on various platforms. Interesting places are shared by very simple API, created in ASP.NET Core which is currently hosted in [Azure Web App Service](https://azure.microsoft.com/en-us/products/app-service/web). The application is designed for people who like to travel and discover new places, as well as for those who are looking for inspiration for their next trips. The application is designed to make it easier for users to find interesting places and share them with others. The application allows users to browse available places by category, location or name. Users can also add their own places, rate and comment on existing ones, and create lists of favorite places. The application also offers a map function that shows the location of selected places and how to navigate to them.
 
 - KriniteWebShop is a platform for online shopping that provides a convenient and secure way for customers to buy products from various sellers.
@@ -198,3 +196,25 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 
 5. Launch <http://host.docker.internal:8007> in your browser to view the Web Status. Make sure that every microservices are healthy.
 6. Launch <http://host.docker.internal:8006> in your browser to view the Web UI. You can use Web project in order to **call microservices over API Gateway**. When you **checkout the basket** you can follow **queue record on RabbitMQ dashboard**.
+
+# colors
+
+- background - #004b61
+- foreground - #0094b3
+- background2 - #01708b
+- text - #ffffff
+
+# sections
+
+- logo
+- title
+- description
+- TOC - table of contents
+- features
+- requirements
+- usage
+- technologies (Build with)
+- architektura
+- folder structure ??
+- app screenshots
+- API (table of api endpoints - swagger)
