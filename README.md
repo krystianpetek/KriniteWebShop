@@ -134,7 +134,7 @@ For each microservice, the following technologies were used:
 
 ![Architecture diagram](./assets/architecture-diagram/project.png)
 
-#### Catalog microservice which includes
+<!-- #### Catalog microservice which includes
 
 - ASP.NET Core Web API application
 
@@ -267,7 +267,7 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 - **Web UI -> <http://host.docker.internal:8006>**
 
 5. Launch <http://host.docker.internal:8007> in your browser to view the Web Status. Make sure that every microservices are healthy.
-6. Launch <http://host.docker.internal:8006> in your browser to view the Web UI. You can use Web project in order to **call microservices over API Gateway**. When you **checkout the basket** you can follow **queue record on RabbitMQ dashboard**.
+6. Launch <http://host.docker.internal:8006> in your browser to view the Web UI. You can use Web project in order to **call microservices over API Gateway**. When you **checkout the basket** you can follow **queue record on RabbitMQ dashboard**. -->
 
 # colors
 
