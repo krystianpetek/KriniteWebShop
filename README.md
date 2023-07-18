@@ -76,15 +76,37 @@ The project was created using the following technologies:
 
 ### Back-end
 
-- `ASP.NET Core 7` - framework for creating web applications, APIs and services
-- `Entity Framework Core` - ORM (Object Relational Mapper) to map objects to relational databases, in this case the `InMemory` database
-- `Dapper` - ORM for mapping objects to relational databases, in this case it is the `Sqlite` database (relational database in the form of a file)
-- `FluentValidation` - library for model validation, checking the correctness of input data to the API with `IEndpointFilter` in middleware of ASP.NET Core
-- `Swagger` - a tool for documenting and querying the API
-- `MediatR` - library for implementing the CQRS pattern, which is used to separate the read and write sides of the application
+For each microservice, the following technologies were used:
+
+- `ASP.NET Core` - framework for creating web applications, APIs and services
+- `Swagger` - a tool for documenting and querying the API, which is used to test endpoints
+- `Automapper` - library for mapping objects to other objects, used to map DTO models to domain entities
+- `Swashbuckle` - library for integrating Swagger with ASP.NET Core
+
+#### KriniteWebShop.Cart
+
+- `Grpc.AspNetCore` - framework for implementing the gRPC protocol, which is used to communicate between microservices
+- `StackExchangeRedis` - library for connecting to the Redis database, which is used to store data in memory
 - `MassTransit` - library for implementing the message broker, which is used to send messages between microservices
-- `gRPC` - framework for implementing the gRPC protocol, which is used to communicate between microservices
--
+
+#### KriniteWebShop.Catalog
+
+- `MongoDB` - library for connecting to the MongoDB database, which is used to store data in the form of documents
+
+#### KriniteWebShop.Coupon
+
+- `Npgsql` - library for connecting to the `PostgreSQL` database, which is used to store data in the form of tables
+- `Dapper` - ORM for mapping objects to relational databases, in this case it is the PostgreSQL database
+
+#### KriniteWebShop.Order
+
+- `Entity Framework Core` - ORM (Object Relational Mapper) to map objects to relational databases, with variants:
+  - `SqlServer` database, which is used to store data in a relational database Microsoft SQL Server
+  - `InMemory` database, which is used to store data in memory, for testing purposes
+
+<!-- - `MediatR` - library for implementing the CQRS pattern, which is used to separate the read and write sides of the application
+- `FluentValidation` - library for model validation, checking the correctness of input data to the API with `IEndpointFilter` in middleware of ASP.NET Core
+- -->
 
 // TODO - not completed yet
 
