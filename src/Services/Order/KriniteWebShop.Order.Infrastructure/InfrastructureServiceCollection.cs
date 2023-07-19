@@ -1,17 +1,17 @@
 ﻿using KriniteWebShop.Order.Infrastructure.Email;
 using KriniteWebShop.Order.Infrastructure.Persistance;
 using KriniteWebShop.Order.Infrastructure.Repositories;
-using KriniteWebShop.Order.Application.Contracts.Infrastructure;
-using KriniteWebShop.Order.Application.Contracts.Persistance;
 using KriniteWebShop.Order.Application.Models;
 using KriniteWebShop.Order.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using KriniteWebShop.Order.Domain.Repository;
+using KriniteWebShop.Order.Application.Contracts.Infrastructure;
 
 namespace KriniteWebShop.Order.Infrastructure;
 
-public static class InfrastructureDependencyInjection
+public static class InfrastructureServiceCollection
 {
 	public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
 	{

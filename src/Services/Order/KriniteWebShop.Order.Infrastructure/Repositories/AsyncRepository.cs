@@ -1,5 +1,5 @@
-﻿using KriniteWebShop.Order.Application.Contracts.Persistance;
-using KriniteWebShop.Order.Domain.Common;
+﻿using KriniteWebShop.Order.Domain.Common;
+using KriniteWebShop.Order.Domain.Repository;
 using KriniteWebShop.Order.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;

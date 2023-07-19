@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using KriniteWebShop.Order.Application.Contracts.Persistance;
 using KriniteWebShop.Order.Domain.Entities;
+using KriniteWebShop.Order.Domain.Repository;
 using MediatR;
 
 namespace KriniteWebShop.Order.Application.Features.Orders.Queries.GetOrdersList;

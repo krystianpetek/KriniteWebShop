@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using KriniteWebShop.Order.Application.Contracts.Persistance;
 using KriniteWebShop.Order.Application.Models;
 using KriniteWebShop.Order.Domain.Entities;
+using KriniteWebShop.Order.Domain.Repository;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

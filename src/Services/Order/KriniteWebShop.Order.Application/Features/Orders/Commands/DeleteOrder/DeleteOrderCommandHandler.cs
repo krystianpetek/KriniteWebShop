@@ -1,6 +1,6 @@
-﻿using KriniteWebShop.Order.Application.Contracts.Persistance;
-using KriniteWebShop.Order.Application.Exceptions;
+﻿using KriniteWebShop.Order.Application.Exceptions;
 using KriniteWebShop.Order.Domain.Entities;
+using KriniteWebShop.Order.Domain.Repository;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
