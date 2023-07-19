@@ -85,9 +85,9 @@ For each microservice, the following technologies were used:
 
 #### KriniteWebShop.Cart
 
-- `Grpc.AspNetCore` - framework for implementing the gRPC protocol, which is used to communicate between microservices
-- `StackExchangeRedis` - library for connecting to the Redis database, which is used to store data in memory
-- `MassTransit` - library for implementing the message broker, which is used to send messages between microservices
+- `Grpc.AspNetCore` - framework for implementing the gRPC protocol, which is used to consume Coupon **gRPC Service** for internal sync communication to calculate final price of products in cart
+- `StackExchangeRedis` - library for connecting to the Redis database, which is used to publish CartCheckout event with using **MassTransit and RabbitMQ**
+- `MassTransit` - library for implementing the message broker, which is used to send messages between microservices, this library ensure abstraction over RabbitMQ system
 
 #### KriniteWebShop.Catalog
 
@@ -96,197 +96,94 @@ For each microservice, the following technologies were used:
 #### KriniteWebShop.Coupon
 
 - `Npgsql` - library for connecting to the `PostgreSQL` database, which is used to store data in the form of tables
-- `Dapper` - ORM for mapping objects to relational databases, in this case it is the PostgreSQL database
+- `Dapper` - ORM for mapping objects to relational databases, in this case it is the PostgreSQL database, used to simplify data access and ensure high performance
+- `Grpc.AspNetCore` - used to ensure high performance and expose the Coupon **gRPC Service** for internal sync communication with Cart microservice
 
 #### KriniteWebShop.Order
 
 - `Entity Framework Core` - ORM (Object Relational Mapper) to map objects to relational databases, with variants:
-  - `SqlServer` database, which is used to store data in a relational database Microsoft SQL Server
-  - `InMemory` database, which is used to store data in memory, for testing purposes
-
-<!-- - `MediatR` - library for implementing the CQRS pattern, which is used to separate the read and write sides of the application
+- `SqlServer` database, which is used to store data in a relational database Microsoft SQL Server
+- `InMemory` database, which is used to store data in memory, for testing purposes
+- `MailKit` - library for sending emails, which is used to send emails to users about the status of their order
+- `MediatR` - library for implementing the CQRS pattern, which is used to separate the read and write sides of the application
 - `FluentValidation` - library for model validation, checking the correctness of input data to the API with `IEndpointFilter` in middleware of ASP.NET Core
-- -->
 
-// TODO - not completed yet
+This microservice is developed with corresponding to the [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [CQRS](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs) pattern and DDD (Domain Driven Design) approach. The project is divided into the following layers:
+
+- `KriniteWebShop.Order.Domain` - domain layer, containing domain entities, specifically: `OrderEntity`, as well as public contracts to repositories of these entities, contracts to services domain names. This layer does not depend on any other layer, it has no external dependencies, it is the most inner layer.
+
+- `KriniteWebShop.Order.Application` - warstwa aplikacji zawierająca logikę biznesową aplikacji, w tym przypadku są to funkcje aplikacji zgodne z wzorcem CQRS. Występują 2 rodzaje, commands and queries z ich walidatorami, handlerami oraz DTO modelami, które przekazują dane przez publiczny interfejs w `KriniteWebShop.Order.API`, a później w kolejnym etapie, przed wykonaniem operacji na bazie danych, są mapowane do encji domeny. Ta warstwa zależy od warstwy domeny, ale nie zależy już od żadnych warstw zewnętrznych. W tej warstwie znajdziemy również zachowania które są zaimplementowane przy pomocy wzorca dekorator, które są zarejestrowane jako PipelineBehavior dla MediatR.
+
+- `KriniteWebShop.Order.Infrastructure` - the infrastructure layer, contains implementations of interfaces from the `KriniteWebShop.Order.Domain` layer, in this case these are repository implementations that use the `SQLServer` database with `Entity Framework Core`, as well as implementations of application services that use repositories. In this system, this layer contains implementations of repositories that are used in application services. This layer depends on the `KriniteWebShop.Order.Application`, it inherits from the domain layer because there is inheritance from the application layer. It is a layer that combines external dependencies with the domain layer, but using abstractions in the domain and application layer, the dependence of external entities from the project's business rules has been separated. The infrastructure layer is mainly used to communicate external dependencies not directly related to the project's business theme, such as a database, file system or external API.
+
+- `KriniteWebShop.Order.API` - API layer, contains controllers that are responsible for handling HTTP requests that are sent to the API. This layer also contains the Swagger configuration, which is used to document the API and to test endpoints. This layer depends on the application layer by inheriting from the infrastructure layer, because it uses application services that are used in controllers. This layer is the outermost layer, because it is the layer that is visible to the end users of the system, because it is here that endpoints are issued that are used by client applications to communicate with the API. This layer is directly dependent only on the infrastructure layer. A global error handling system has also been implemented here, which is used in controllers to return appropriate HTTP error codes, depending on what error occurred in the system, and to ensure that the application is not stopped by an unhandled exception.
+
+#### KriniteWebShop.GatewayAPI
+
+- `Ocelot` - library for implementing the API Gateway pattern, which is used to route requests from the web application to the appropriate microservices
+
+This microservice is developed using the [Backend for Frontends](https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends) pattern and is responsible for routing the requests from the web application to the appropriate microservices.
 
 ### Front-end
 
+#### KriniteWebShop.WebUI.Blazor
+
 - `ASP.NET Core Blazor` - framework for creating web applications using C# and HTML, CSS and JavaScript
-
-!!!  WORK IN PROGRESS !!!
-
-- `.Core` - domain layer, containing domain entities, specifically: ``,`` and `` and identity entities `User` and `Role`, as well as public contracts to repositories of these entities, contracts to services domain names and exceptions. This layer does not depend on any other layer, it has no external dependencies, it is the most inner layer.
-
-- `.Application` - the application layer containing the business logic of the application, in this case these are application services that use domain service contracts from the `.Core` layer, which are then used in controllers to separate database repositories from models passed in controllers, it's another level of abstraction, that was created. In this layer, there are also DTO (Data transfer object) models with them validators, that pass data via the public interface in `.Api`, and later in the next stage, before performing operations on the database, they are mapped to domain entities. This layer depends on the domain layer, but no longer depends on any external layers.
-
-- `.Infrastructure` - the infrastructure layer, contains implementations of interfaces from the `.Core` layer, in this case these are repository implementations that use the `InMemory` database with `Entity Framework Core` and `Sqlite` with the support of `Dapper`, as well as implementations of application services that use repositories. In this system, this layer contains implementations of repositories that are used in application services. This layer depends on the `.Application`, it inherits from the domain layer because there is inheritance from the application layer. It is a layer that combines external dependencies with the domain layer, but using abstractions in the domain and application layer, the dependence of external entities from the project's business rules has been separated. The infrastructure layer is mainly used to communicate external dependencies not directly related to the project's business theme, such as a database, file system or external API.
-
-- `.Api` - API layer, contains controllers that are responsible for handling HTTP requests that are sent to the API. This layer also contains the Swagger configuration, which is used to document the API and to test endpoints, with the implementation of authentication using the JWT token (Json Web Token). This layer depends on the application layer by inheriting from the infrastructure layer, because it uses application services that are used in controllers. This layer is the outermost layer, because it is the layer that is visible to the end users of the system, because it is here that endpoints are issued that are used by client applications to communicate with the API. This layer is directly dependent only on the infrastructure layer. A global error handling system has also been implemented here, which is used in controllers to return appropriate HTTP error codes, depending on what error occurred in the system, and to ensure that the application is not stopped by an unhandled exception.
+- `Bootstrap` - library for creating responsive web applications, which is used to create the visual side of the application
 
 ## Features
 
+The application offers the following features:
+
+#### Catalog
+
+- `GetCart` - get the cart of the user
+- `CartCheckout` - checkout the cart of the user
+- `UpdateCart` - update the cart of the user, add new items
+- `DeleteCart` - remove the cart of the user
+
+#### Cart
+
+- `GetProductById` - get the product by id
+- `GetProductsByName` - get the products by name
+- `GetProductsByCategory` - get the products by category
+- `CreateProduct` - create the product
+- `UpdateProduct` - update the product
+- `DeleteProduct` - delete the product
+- `GetProductsCategories` - get the products categories
+
+#### Coupon
+
+- `GetCoupon` - get the coupon for product by product name
+- `CreateCoupon` - create coupon for product
+- `UpdateCoupon` - update coupon for product
+- `DeleteCoupon` - delete coupon for product
+
+#### Order
+
+- `GetOrdersByUserName` - get the orders by user name
+- `CheckoutOrder` - checkout the order
+- `UpdateOrder` - update the order
+- `DeleteOrder` - delete the order
+
 ## Screenshots
 
-| | | |
-| :-------------------------:|:-------------------------:|:-------------------------: |
-| ![](./assets/screens/1.png)  |  ![](./assets/screens/2.png) | ![](./assets/screens/3.png) |
-
 ![Architecture diagram](./assets/architecture-diagram/project.png)
+<!-- | | | |
+| :-------------------------:|:-------------------------:|:-------------------------: |
+| ![](./assets/screens/1.png)  |  ![](./assets/screens/2.png) | ![](./assets/screens/3.png) | -->
 
-<!-- #### Catalog microservice which includes
+<!-- 5. You can **launch microservices** as below urls: -->
 
-- ASP.NET Core Web API application
-
-- REST API principles, CRUD operations
-- **MongoDB database** connection and containerization
-- Repository Pattern Implementation
-- Swagger Open API implementation
-
-#### Basket microservice which includes
-
-- ASP.NET Web API application
-
-- REST API principles, CRUD operations
-- **Redis database** connection and containerization
-- Consume Discount **Grpc Service** for inter-service sync communication to calculate product final price
-- Publish BasketCheckout Queue with using **MassTransit and RabbitMQ**
-  
-#### Discount microservice which includes
-
-- ASP.NET **Grpc Server** application
-
-- Build a Highly Performant **inter-service gRPC Communication** with Basket Microservice
-- Exposing Grpc Services with creating **Protobuf messages**
-- Using **Dapper for micro-orm implementation** to simplify data access and ensure high performance
-- **PostgreSQL database** connection and containerization
-
-#### Microservices Communication
-
-- Sync inter-service **gRPC Communication**
-
-- Async Microservices Communication with **RabbitMQ Message-Broker Service**
-- Using **RabbitMQ Publish/Subscribe Topic** Exchange Model
-- Using **MassTransit** for abstraction over RabbitMQ Message-Broker system
-- Publishing BasketCheckout event queue from Basket microservices and Subscribing this event from Ordering microservices
-- Create **RabbitMQ EventBus.Messages library** and add references Microservices
-
-#### Ordering Microservice
-
-- Implementing **DDD, CQRS, and Clean Architecture** with using Best Practices
-
-- Developing **CQRS with using MediatR, FluentValidation and AutoMapper packages**
-- Consuming **RabbitMQ** BasketCheckout event queue with using **MassTransit-RabbitMQ** Configuration
-- **SqlServer database** connection and containerization
-- Using **Entity Framework Core ORM** and auto migrate to SqlServer when application startup
-
-#### API Gateway Ocelot Microservice
-
-- Implement **API Gateways with Ocelot**
-
-- Sample microservices/containers to reroute through the API Gateways
-- Run multiple different **API Gateway/BFF** container types
-- The Gateway aggregation pattern in Shopping.Aggregator
-
-#### WebUI ShoppingApp Microservice
-
-- ASP.NET Core Web Application with Bootstrap 4 and Razor template
-
-- Call **Ocelot APIs with HttpClientFactory** and **Polly**
-
-#### Microservices Cross-Cutting Implementations
-
-- Implementing **Centralized Distributed Logging with Elastic Stack (ELK); Elasticsearch, Logstash, Kibana and SeriLog** for Microservices
-
-- Use the **HealthChecks** feature in back-end ASP.NET microservices
-- Using **Watchdog** in separate service that can watch health and load across services, and report health about the microservices by querying with the HealthChecks
-
-#### Microservices Resilience Implementations
-
-- Making Microservices more **resilient Use IHttpClientFactory** to implement resilient HTTP requests
-
-- Implement **Retry and Circuit Breaker patterns** with exponential backoff with IHttpClientFactory and **Polly policies**
-
-#### Ancillary Containers
-
-- Use **Portainer** for Container lightweight management UI which allows you to easily manage your different Docker environments
-
-- **pgAdmin PostgreSQL Tools** feature rich Open Source administration and development platform for PostgreSQL
-
-#### Docker Compose establishment with all microservices on docker
-
-- Containerization of microservices
-
-- Containerization of databases
-- Override Environment variables
-
-## Run The Project
-
-You will need the following tools:
-
-- [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/)
-- [.Net Core 5 or later](https://dotnet.microsoft.com/download/dotnet-core/5)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)
-
-### Installing
-
-Follow these steps to get your development environment set up: (Before Run Start the Docker Desktop)
-
-1. Clone the repository
-2. Once Docker for Windows is installed, go to the **Settings > Advanced option**, from the Docker icon in the system tray, to configure the minimum amount of memory and CPU like so:
-
-- **Memory: 4 GB**
-
-- CPU: 2
-
-3. At the root directory which include **docker-compose.yml** files, run below command:
-
-```csharp
-docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
-```
-
->Note: If you get connection timeout error Docker for Mac please [Turn Off Docker's "Experimental Features".](https://github.com/aspnetrun/run-aspnetcore-microservices/issues/33)
-
-4. Wait for docker compose all microservices. That’s it! (some microservices need extra time to work so please wait if not worked in first shut)
-
-5. You can **launch microservices** as below urls:
-
-- **Catalog API -> <http://host.docker.internal:8000/swagger/index.html>**
-- **Basket API -> <http://host.docker.internal:8001/swagger/index.html>**
-- **Discount API -> <http://host.docker.internal:8002/swagger/index.html>**
-- **Ordering API -> <http://host.docker.internal:8004/swagger/index.html>**
-- **Shopping.Aggregator -> <http://host.docker.internal:8005/swagger/index.html>**
-- **API Gateway -> <http://host.docker.internal:8010/Catalog>**
-- **Rabbit Management Dashboard -> <http://host.docker.internal:15672>**   -- guest/guest
-- **Portainer -> <http://host.docker.internal:9000>**   -- admin/admin1234
-- **pgAdmin PostgreSQL -> <http://host.docker.internal:5050>**   -- <admin@aspnetrun.com>/admin1234
-- **Elasticsearch -> <http://host.docker.internal:9200>**
-- **Kibana -> <http://host.docker.internal:5601>**
-
-- **Web Status -> <http://host.docker.internal:8007>**
-- **Web UI -> <http://host.docker.internal:8006>**
-
-5. Launch <http://host.docker.internal:8007> in your browser to view the Web Status. Make sure that every microservices are healthy.
-6. Launch <http://host.docker.internal:8006> in your browser to view the Web UI. You can use Web project in order to **call microservices over API Gateway**. When you **checkout the basket** you can follow **queue record on RabbitMQ dashboard**. -->
-
-# colors
-
-- background - #004b61
-- foreground - #0094b3
-- background2 - #01708b
-- text - #ffffff
-
-# sections
-
-- logo
-- title
-- description
-- TOC - table of contents
-- features
-- requirements
-- usage
-- technologies (Build with)
-- architektura
+<!-- - logo -->
+<!-- - title -->
+<!-- - description -->
+<!-- - requirements -->
+<!-- - usage -->
+<!-- - architektura -->
+<!-- - technologies (Build with) -->
+<!-- - features -->
+<!-- - TOC - table of contents
 - folder structure ??
 - app screenshots
-- API (table of api endpoints - swagger)
+- API (table of api endpoints - swagger) -->

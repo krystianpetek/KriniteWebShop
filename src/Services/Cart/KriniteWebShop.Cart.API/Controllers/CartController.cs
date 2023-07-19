@@ -71,7 +71,7 @@ public class CartController : ControllerBase
 		return Accepted();
 	}
 
-	[HttpPut("{userName}")]
+	[HttpPut("{userName}", Name = "UpdateCart")]
 	[Consumes(typeof(RestShoppingCart), "application/json")]
 	[ProducesResponseType(typeof(ShoppingCart), StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
