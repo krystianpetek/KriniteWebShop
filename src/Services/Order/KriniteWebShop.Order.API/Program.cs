@@ -1,10 +1,12 @@
 using KriniteWebShop.EventBus.Common;
-using KriniteWebShop.Order.API;
 using KriniteWebShop.Order.API.EventBusConsumer;
 using KriniteWebShop.Order.Application;
+using KriniteWebShop.Order.Application.Exceptions;
 using KriniteWebShop.Order.Infrastructure;
 using KriniteWebShop.Order.Infrastructure.Persistance;
 using MassTransit;
+using Microsoft.AspNetCore.Diagnostics;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace KriniteWebShop.Order.API;
@@ -54,6 +56,47 @@ public static class Program
 		app.UseAuthorization();
 
 		app.MapControllers();
+		app.UseExceptionHandler(exceptionHandlerApp =>
+            {
+                exceptionHandlerApp.Run(async context =>
+                {
+                    context.Response.ContentType = "application/problem+json";
+                    if (context.RequestServices.GetService<IProblemDetailsService>() is { } problemDetailsService)
+                    {
+                        var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
+                        var exceptionType = exceptionHandlerFeature?.Error;
+                        if (exceptionType is not null)
+                        {
+                            (string? Title, string? Detail, int? StatusCode) = exceptionType switch
+                            {
+								ValidationException validationException => (exceptionType.GetType().Name, validationException.Errors.FirstOrDefault().Value.FirstOrDefault(), context.Response.StatusCode = StatusCodes.Status400BadRequest),
+								_ => ( exceptionType.GetType().Name, exceptionType.Message, context.Response.StatusCode = StatusCodes.Status500InternalServerError )
+                            };
+                            var problem = new ProblemDetailsContext
+                            {
+                                HttpContext = context,
+                                ProblemDetails =
+                                {
+                                    Title = Title,
+                                    Detail = Detail,
+                                    Status = StatusCode,
+                                    Instance = context.Request.Path,
+                                    Extensions =
+                                    {
+                                        ["traceId"] = Activity.Current?.Id ?? context?.TraceIdentifier
+                                    }
+                                },
+                            };
+                            if (builder.Environment.IsDevelopment())
+                            {
+                                problem.ProblemDetails.Extensions.Add("exception", exceptionHandlerFeature?.Error.ToString());
+                            }
+
+                            await problemDetailsService.WriteAsync(problem);
+                        }
+                    }
+                });
+            });
 
 		await app.MigrateDatabaseAsync<OrderContext>(async (context, provider) =>
 		{
